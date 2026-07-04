@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0B0F19" />
+  <title>Smart Note · Product Deck</title>
+  <meta name="description" content="Smart Note — an AI-native markdown workspace. A living note for active STEM learners." />
+  <link rel="stylesheet" href="css/deck.css" />
+  <style>
+    /* EN-only density tweaks — the English copy runs longer than the Korean,
+       so the dense Team grid and the populated Proofreader list need a little
+       less internal spacing to stay within one screen. Scoped to this deck only. */
+    #s-team .section-head { margin-bottom: 10px; }
+    #s-team .team--4 { gap: 12px; }
+    #s-team .team--4 .card { padding: 11px 15px; }
+    #s-team .team--4 .avatar { width: 44px; height: 44px; font-size: 1.05rem; }
+    #s-team .team--4 .profile__top { gap: 11px; }
+    #s-team .team--4 .profile p { margin-top: 6px; line-height: 1.42; font-size: 0.83rem; }
+    #s-team .team--4 .profile .tags { margin-top: 7px; }
+    #s-proof .demo-body { padding: 13px; }
+    #s-proof .demo-hint { margin-bottom: 8px; }
+    #s-proof .proof__doc { padding: 12px 14px; }
+    #s-proof .proof__bar { margin: 10px 0; }
+    #s-proof .proof__list { gap: 7px; }
+    #s-proof .proof__item { padding: 8px 12px; }
+  </style>
+</head>
+<body>
+
+<!-- cosmic backdrop behind every slide -->
+<div class="cosmos" aria-hidden="true"></div>
+
+<!-- progress + chrome -->
+<div class="progress" aria-hidden="true"></div>
+
+<div class="brand">
+  <span class="mark"><span>S</span></span>
+  <span class="t">Smart Note</span>
+</div>
+
+<div class="deck">
+  <div class="stage">
+
+    <!-- ====================================================================
+         SLIDE 1 — COVER
+         ================================================================= -->
+    <section class="slide cover" id="s-cover" data-title="Cover">
+      <canvas id="cover-canvas" aria-hidden="true"></canvas>
+      <div class="slide__inner">
+        <p class="sub reveal" data-d="1">For <b style="color:var(--text)">active STEM learners</b> — including those who gave up on clunky digital&nbsp;note-taking</p>
+        <h1 class="logo grad reveal" data-d="2">Smart&nbsp;Note</h1>
+        <p class="desc reveal" data-d="3"><b>AI</b> bakes equations, graphs, 3D models and simulations into your notes —<br><b>a new kind of markdown workspace</b></p>
+        <div class="tagchips reveal" data-d="4">
+          <span class="pill cy"><span class="dot" style="background:var(--accent)"></span>Proofreading that catches logic</span>
+          <span class="pill vi"><span class="dot" style="background:var(--accent-2)"></span>Living components</span>
+          <span class="pill ok"><span class="dot" style="background:var(--ok)"></span>Context-aware AI</span>
+        </div>
+        <p class="credit reveal" data-d="5">Product Deck · <span class="mono">npluslearnup.win</span> · press <kbd style="font-family:var(--font-mono)">→</kbd> or swipe to advance</p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 2 — PROBLEM
+         ================================================================= -->
+    <section class="slide" id="s-problem" data-title="Problem · The Wall Existing Tools Hit">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">02</span> · Problem</span>
+          <h2>Existing note-taking tools stop right at <span class="hl">the wall of learning</span></h2>
+          <p class="lead">Obsidian, Notion, Word, Docs — all help you <b style="color:var(--text)">write things down</b>, then stop. <br>Exactly where STEM learners get&nbsp;stuck.</p>
+        </div>
+        <div class="vs">
+          <div class="vs__col reveal" data-d="2">
+            <div class="col-label bad">Limits of existing markdown / note tools</div>
+            <div class="painrow bad"><div class="ic">∑</div><div><b>The fatigue of complex equation input</b><span>Memorizing LaTeX character by character breaks your&nbsp;flow</span></div></div>
+            <div class="painrow bad"><div class="ic">🖼️</div><div><b>The limits of static images</b><span>No live graph or 3D structure inside the note&nbsp;itself</span></div></div>
+            <div class="painrow bad"><div class="ic">🔌</div><div><b>Disconnected from your learning context</b><span>Generic AI, blind to your notes and materials, gives soulless&nbsp;answers</span></div></div>
+          </div>
+          <div class="vs__mid reveal" data-d="3"><div class="vs__arrow">→</div></div>
+          <div class="vs__col reveal" data-d="4">
+            <div class="col-label good">What active learners actually want</div>
+            <div class="painrow good"><div class="ic">🗣️</div><div><b>Equations from natural language</b><span>Roughly describe it — get beautiful LaTeX at the&nbsp;cursor</span></div></div>
+            <div class="painrow good"><div class="ic">🧊</div><div><b>Living images &amp; 3D</b><span>Dynamic graphs, 3D models and simulations to rotate and&nbsp;zoom</span></div></div>
+            <div class="painrow good"><div class="ic">🧠</div><div><b>Context-aware AI + logic correction</b><span>Reads your notes, catches "logic errors," not just&nbsp;typos</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 3 — SOLUTION
+         ================================================================= -->
+    <section class="slide" id="s-solution" data-title="Solution · Core Value">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">03</span> · Solution</span>
+          <h2>Not a note-taking tool — a notebook that <span class="hl">breaks through your thinking</span></h2>
+          <p class="lead">Powerful AI, vertically integrated into a markdown workspace <br>— break through a stuck concept inside the&nbsp;note.</p>
+        </div>
+        <div class="grid g-3">
+          <div class="card reveal" data-d="2">
+            <div class="card__icon">✨</div>
+            <h3>AI Generation Engine</h3>
+            <p>One line of natural language → <b style="color:var(--text)">equations, dynamic graphs, diagrams, 3D, simulations, illustrations.</b><br>An AI planner splits and routes ambiguous requests.</p>
+          </div>
+          <div class="card reveal" data-d="3">
+            <div class="card__icon">🛡️</div>
+            <h3>Logic-Aware Proofreading + Context AI</h3>
+            <p>Detects <b style="color:var(--text)">logic errors</b> in real time — beyond typos and grammar. The AI tutor knows your profile, history, and <b style="color:var(--text)">the entire current&nbsp;note</b>.</p>
+          </div>
+          <div class="card reveal" data-d="4">
+            <div class="card__icon">📝</div>
+            <h3>Question Generation · Instant Grading</h3>
+            <p>Generates questions matching the style of your attached materials. Free-response items <b style="color:var(--text)">placed first</b>, so grading finishes while you work the multiple-choice ones — <b style="color:var(--text)">zero perceived wait&nbsp;time</b>.</p>
+          </div>
+        </div>
+        <p class="reveal" data-d="5" style="margin-top:18px;font-size:0.92rem;color:var(--muted)">🎯 Target: active STEM learners from <b style="color:var(--text)">high school to university</b> — including students who never took notes on a computer because it was too uncomfortable. From the next slide on, every core feature is shown as a <b style="color:var(--accent)">live demo you can click yourself</b>.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 4 — Proofreader (proofreader · LOGIC)  [LIVE DEMO]
+         ================================================================= -->
+    <section class="slide" id="s-proof" data-title="Proofreader · Logic Detection">
+      <div class="slide__inner">
+        <div class="feat feat--demo-left">
+          <div class="feat__demo reveal" data-d="2">
+            <div class="demo-frame" id="demo-proof">
+              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> Proofreader · Momentum note <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
+              <div class="demo-body">
+                <p class="demo-hint">💡 Press <b>"Run Proofread"</b> — surfaces typos, grammar, and <b style="color:#c2adff">logic errors</b>. Click <b>Accept</b> to&nbsp;apply.</p>
+                <div class="proof__doc">
+                  <b style="color:var(--text);font-size:1.05rem"># Momentum &amp; Newton's Laws</b><br>
+                  Let's consider <span id="pf-1" class="mark-typo">monentum</span> conservation in a two-body collision.
+                  Since <span id="pf-3" class="mark-logic">momentum is always conserved even when friction acts</span>,
+                  the <span id="pf-2" class="mark-grammar">total momentum of after</span> the collision is exactly the same as before.
+                  Also, from <span class="mono" style="color:var(--accent)">F = ma</span>, we can conclude that
+                  <span id="pf-4" class="mark-logic">acceleration is proportional to velocity</span>.
+                </div>
+                <div class="proof__bar">
+                  <button class="btn proof__scan">🔍 Run Proofread</button>
+                  <button class="btn ghost proof__reset" style="display:none;font-size:0.82rem;padding:9px 14px">↻ Reset</button>
+                  <span class="proof__count" style="margin-left:auto"></span>
+                </div>
+                <div class="proof__list"></div>
+              </div>
+            </div>
+          </div>
+          <div class="feat__copy reveal" data-d="1">
+            <span class="kicker"><span class="num">04</span> · Proofreader</span>
+            <h2>Beyond spelling,<br>it catches<br><span class="hl-v">logic errors</span> too</h2>
+            <ul>
+              <li><div class="b">✓</div><div><b>Typos, grammar + logic</b><p>Real-time <b style="color:var(--text)">conceptual and logic errors</b> a normal checker misses. (e.g. "momentum conserved even with friction," "acceleration ∝ velocity")</p></div></li>
+              <li><div class="b">→</div><div><b>Accept in one click</b><p>Click a suggestion, applied instantly — stopping a wrong concept before it sets&nbsp;in.</p></div></li>
+            </ul>
+            <p class="feat__note">The <b>most praised feature</b> in OBT feedback — <br> "I always figured I'd catch my own typos — turned out it was really&nbsp;convenient."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 5 — AI Generation Engine + Planner  [LIVE DEMO]
+         ================================================================= -->
+    <section class="slide" id="s-gen" data-title="AI Generation Engine">
+      <div class="slide__inner">
+        <div class="feat">
+          <div class="feat__copy reveal" data-d="1">
+            <span class="kicker"><span class="num">05</span> · AI Generation Engine</span>
+            <h2>One-line command →<br><span class="hl">a component inside your note</span></h2>
+            <ul>
+              <li><div class="b">∑</div><div><b>Equations, right at the cursor</b><p>Plain-language description → accurate LaTeX, <b style="color:var(--text)">rendered as real math</b>. Remembers your cursor even if you move blocks&nbsp;mid-generation.</p></div></li>
+              <li><div class="b">📈</div><div><b>Dynamic graphs</b><p>Not a static image — a coordinate graph: <b style="color:var(--text)">drag to pan, scroll to zoom</b>. Attach a photo for extra&nbsp;precision.</p></div></li>
+              <li><div class="b">🔧</div><div><b>Output that never breaks</b><p>Diagrams as <b style="color:var(--text)">Mermaid code</b> — arrows and text never garble. Illustrations found via web search and <b style="color:var(--text)">re-hosted</b> to our own&nbsp;bucket.</p></div></li>
+            </ul>
+            <p class="feat__note">💡 Click a toolbar button on the right — <b>each component drops straight into the note at the cursor</b>.</p>
+          </div>
+          <div class="feat__demo reveal" data-d="3">
+            <div class="demo-frame" id="demo-gen">
+              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> AI Generation · Simple Harmonic Motion note <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
+              <div class="note-toolbar">
+                <span style="font-size:0.78rem;color:var(--accent-2);font-weight:700">✨ Insert:</span>
+                <button class="note-gen" data-kind="formula">∑ Formula</button>
+                <button class="note-gen" data-kind="graph">📈 Graph</button>
+                <button class="note-gen" data-kind="mermaid">🔧 Diagram</button>
+                <button class="note-gen" data-kind="3d">🧊 3D</button>
+                <button class="note-gen" data-kind="sim">🎚️ Sim</button>
+                <button class="note-gen" data-kind="anim">🎞️ Animation</button>
+                <button class="note-gen" data-kind="image">🎨 Image</button>
+              </div>
+              <div class="note-body" aria-live="polite">
+                <div class="note-md"><b># Simple Harmonic Motion Notes</b><br>One coordinate of circular motion behaves just like SHM. Pick a component above and it drops in right at the <span class="note-caret"></span> cursor ↓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 6 — Context-Aware AI Tutor  [LIVE DEMO]
+         ================================================================= -->
+    <section class="slide" id="s-tutor" data-title="Context-Aware AI Tutor">
+      <div class="slide__inner">
+        <div class="feat">
+          <div class="feat__copy reveal" data-d="1">
+            <span class="kicker"><span class="num">08</span> · Context-Aware AI Tutor</span>
+            <h2>AI that's<br><span class="hl">reading your notes</span></h2>
+            <ul>
+              <li><div class="b">📄</div><div><b>Full context, understood</b><p>Profile (age, education, goals, occupation) + learning history + <b style="color:var(--text)">the entire current note</b> — a pasted <b style="color:var(--text)">URL is crawled instantly</b>. One&nbsp;shortcut.</p></div></li>
+              <li><div class="b">🔗</div><div><b>Connects and builds on its own</b><p>Surfaces links to prior concepts ("τ=Iα relates to the vector cross product you learned earlier!"), and when you're stuck <b style="color:var(--text)">generates equations, 3D models, and simulations</b> for the a-ha moment.</p></div></li>
+              <li><div class="b">🧭</div><div><b>When you don't know what you don't know</b><p>Draws on a database of other learners' questions to ask the right one and let you find the answer yourself — and drafts a <b style="color:var(--text)">weekly study curriculum</b>, added to your planner on approval.</p></div></li>
+            </ul>
+            <p class="feat__note">＋ No pure-Socratic mode that only fires back questions — it breaks note-taking flow. Instead: a <b>warm, clear, direct-explanation mode</b>.</p>
+          </div>
+          <div class="feat__demo reveal" data-d="3">
+            <div class="demo-frame" id="demo-tutor">
+              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> AI Tutor · Torque &amp; Rotational Motion note <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
+              <div class="demo-body">
+                <p class="demo-hint">💬 A conversation from the <b>tutor that speaks up first</b> plays automatically — click the options to steer it yourself. (Press <b>↻ Replay</b> to run it again.)</p>
+                <div class="chat">
+                  <div class="chat__head">
+                    <span class="chat__mode on">💬 Direct Explanation Mode</span>
+                    <span class="chat__ctx"><span class="dot"></span>📄 'Torque &amp; Rotational Motion' note context</span>
+                  </div>
+                  <div class="chat__log" aria-live="polite"></div>
+                  <button class="btn ghost chat__restart">↻ Replay</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 9 — 3D Note Universe  [LIVE DEMO]
+         ================================================================= -->
+    <section class="slide" id="s-universe" data-title="3D Note Universe">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">09</span> · 3D Note Universe</span>
+          <h2><span class="hl">Knowledge Universe</span></h2>
+          <p class="lead">Your file directory becomes a universe, as-is. Drag to explore, or search a title to jump straight to the&nbsp;note.</p>
+        </div>
+        <div class="feat feat--wide" style="align-items:stretch">
+          <div class="universe-wrap reveal" data-d="2" id="demo-universe">
+            <div class="uni-search">
+              <input type="text" placeholder="Search by note title…" aria-label="Search notes" />
+              <button class="btn">🔎 Find</button>
+            </div>
+            <div class="chips" style="margin:0 0 8px 0">
+              <button class="chip">Fourier</button>
+              <button class="chip">Electrochemistry</button>
+              <button class="chip">CNN</button>
+            </div>
+            <div class="uni-stage">
+              <span class="uni-tip">🖱️ Drag to rotate · hover a planet</span>
+              <canvas id="uni-canvas"></canvas>
+            </div>
+            <div class="uni-legend">
+              <span><span class="dot" style="background:var(--d-physics)"></span>Physics</span>
+              <span><span class="dot" style="background:var(--d-math)"></span>Math</span>
+              <span><span class="dot" style="background:var(--d-chemistry)"></span>Chemistry</span>
+              <span><span class="dot" style="background:var(--d-biology)"></span>Biology</span>
+              <span><span class="dot" style="background:var(--d-other)"></span>AI · Other</span>
+            </div>
+          </div>
+          <div class="uni-side reveal" data-d="3">
+            <div class="mech"><b><span class="em">⭐</span>Folder = star · Note = planet</b><p>Built on the directory you already have — color marks the subject&nbsp;domain.</p></div>
+            <div class="mech"><b><span class="em">🌌</span>Citations = gravity lines</b><p>Notes that <span class="mono" style="color:var(--accent-2)">[[cite]]</span> each other get gravity lines, orbiting closer&nbsp;together.</p></div>
+            <div class="mech"><b><span class="em">🔎</span>Search → jump straight in</b><p>Type a title, the matching planet pulses, one click to the&nbsp;workspace.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 8 — TRACTION (OBT)
+         ================================================================= -->
+    <section class="slide" id="s-traction" data-title="Traction · OBT">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">11</span> · Traction</span>
+          <h2>Not just a vision — <span class="hl">people already using it</span></h2>
+          <p class="lead">OBT launched 2026-06-22 — real learners in week&nbsp;one, <br>feedback landing in the next build.</p>
+        </div>
+        <div class="tr-stats reveal" data-d="2">
+          <div class="tr-stat"><div class="n">11</div><div class="c">OBT sign-ups (week one)</div></div>
+          <div class="tr-stat"><div class="n">2h 30m</div><div class="c">Longest first session</div></div>
+          <div class="tr-stat"><div class="n">3</div><div class="c">UX research sessions in week one</div></div>
+          <div class="tr-stat"><div class="n">2</div><div class="c">Feedback items → shipped immediately</div></div>
+        </div>
+        <div class="tr-feedback reveal" data-d="3">
+          <div class="fb">
+            <div class="fb__top"><span class="fb__av">A</span><span class="fb__time">First session 2h30m</span></div>
+            <p class="fb__q">"Like Hangul word processor, but <b>the proofreader is great.</b> Add background customization and I'd switch to this&nbsp;platform."</p>
+            <div class="fb__tags"><span class="pill ok">✅ Background customization shipped</span></div>
+          </div>
+          <div class="fb">
+            <div class="fb__top"><span class="fb__av">B</span><span class="fb__time">First session 50m · returned ✓</span></div>
+            <p class="fb__q">"<b>Proofreading and AI generation are useful.</b> Fix the lag and I'd use this over Obsidian. Running both for now."</p>
+            <div class="fb__tags"><span class="pill cy">Currently running both in parallel</span><span class="pill warn">Lag → being optimized</span></div>
+          </div>
+          <div class="fb">
+            <div class="fb__top"><span class="fb__av">C</span><span class="fb__time">First session 2h30m · returned ✓</span></div>
+            <p class="fb__q">"Comfortable overall. <b>Ready to switch from Google Docs.</b> (Shame PDF import didn't work.)"</p>
+            <div class="fb__tags"><span class="pill ok">✅ PDF import fixed</span></div>
+          </div>
+        </div>
+        <div class="tr-note reveal" data-d="4">✍️ <b>Strongest signal</b> — a <b>2.5-hour</b> first session of immersion says this is already "usable" for active learners. (Honest weakness: lag/performance is our top priority — fixing it now.)</div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 12 — MARKET & ROADMAP
+         ================================================================= -->
+    <section class="slide" id="s-market" data-title="Market &amp; Roadmap">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">12</span> · Market &amp; Roadmap</span>
+          <h2>Our beachhead is STEM students, <span class="hl">our market is every student</span></h2>
+          Every student takes notes. We validate in the beachhead, then evolve from editor into a full learning-support&nbsp;platform.
+        </div>
+        <div class="market" id="demo-market">
+          <div class="reveal" data-d="2">
+            <div class="rings">
+              <svg viewBox="0 0 200 200" role="img" aria-label="Market concentric ring chart">
+                <circle id="ring-tam" class="ring-c" cx="100" cy="100" r="0" fill="#9D7AF0" stroke="#9D7AF0" />
+                <circle id="ring-sam" class="ring-c" cx="100" cy="100" r="0" fill="#00E5FF" stroke="#00E5FF" />
+                <circle id="ring-som" class="ring-c" cx="100" cy="100" r="0" fill="#2ECC71" stroke="#2ECC71" />
+                <g class="ring-grp"><text class="ring-lbl" x="100" y="27" text-anchor="middle" font-size="13">TAM</text><text class="ring-sub" x="100" y="41" text-anchor="middle" font-size="11">$348B</text></g>
+                <g class="ring-grp"><text class="ring-lbl" x="100" y="59" text-anchor="middle" font-size="12">SAM</text><text class="ring-sub" x="100" y="72" text-anchor="middle" font-size="10">$32B</text></g>
+                <g class="ring-grp"><text class="ring-lbl" x="100" y="97" text-anchor="middle" font-size="11" fill="#06121a">SOM</text><text x="100" y="109" text-anchor="middle" font-size="9" fill="#06121a">$0.5B</text></g>
+              </svg>
+            </div>
+          </div>
+          <div class="reveal" data-d="3">
+            <div class="market__legend">
+              <div class="mk tam-row"><div class="bar tam"></div><div><h4>TAM <small>· total</small></h4><p>Global EdTech (2030)</p></div><div class="val"><div class="n">$348B</div><div class="cagr">CAGR 13.3%</div></div></div>
+              <div class="mk sam-row"><div class="bar sam"></div><div><h4>SAM <small>· serviceable</small></h4><p>AI education — fastest-growing segment</p></div><div class="val"><div class="n">$32B</div><div class="cagr">CAGR 31.2% ⚡</div></div></div>
+              <div class="mk som-row"><div class="bar som"></div><div><h4>SOM <small>· obtainable, beachhead</small></h4><p>STEM self-directed learners → $22.6B digital note-app&nbsp;market</p></div><div class="val"><div class="n">$0.5B</div><div class="cagr">≈ 1.5% of SAM</div></div></div>
+              <p class="market__note">* TAM/SAM = <a href="https://www.grandviewresearch.com/press-release/global-education-technology-market" target="_blank" rel="noopener">GVR EdTech $348B</a> · <a href="https://www.grandviewresearch.com/press-release/global-artificial-intelligence-ai-education-market" target="_blank" rel="noopener">GVR AI Education $32B</a>. SOM = conservative 1.5% of AI-education SAM, grounded in <a href="https://www.maximizemarketresearch.com/market-report/note-taking-app-market/148234/" target="_blank" rel="noopener">note-taking apps $22.6B (2030)</a> · <a href="https://www.marknteladvisors.com/research-library/south-korea-edtech-market.html" target="_blank" rel="noopener">South Korea EdTech $10.4B&nbsp;(2030)</a>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-strip reveal" data-d="4">
+          <span class="rs-lbl">Roadmap</span>
+          <span class="pill ok">NOW · OBT live</span>
+          <span class="rs-arr">→</span>
+          <span class="pill cy">Near-term · Science-high-school network, marketing, question generation/autocomplete</span>
+          <span class="rs-arr">→</span>
+          <span class="pill vi">Mid-term · Editor → learning-support (RAG) pivot</span>
+          <span class="rs-arr">→</span>
+          <span class="pill">Long-term · Next-gen system beyond markdown</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 13 — TEAM & VISION (closing)
+         ================================================================= -->
+    <section class="slide" id="s-team" data-title="Team &amp; Vision">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">13</span> · Team</span>
+          <h2>A solo founder, and <span class="hl">a team joining in</span></h2>
+          <p class="lead">Product, backend, and AI built solo — with two <span style="white-space:nowrap">Co-Founder</span> candidates and one Advisor now&nbsp;validating.</p>
+        </div>
+        <div class="team team--4">
+          <div class="card profile reveal" data-d="2">
+            <div class="profile__top">
+              <div class="avatar">SQ</div>
+              <div><h3>Sean Channie Quinn</h3><div class="role">Founder · Full-stack Builder</div></div>
+            </div>
+            <p>Changwon Science High School — <b style="color:var(--text)">the target user himself</b>. Built Smart Note's FE, BE, and AI <b style="color:var(--text)">solo</b>. (Next two&nbsp;slides.)</p>
+            <div class="tags"><span class="pill cy">8 years full-stack</span><span class="pill ok">Built the demo solo</span></div>
+          </div>
+          <div class="card profile reveal" data-d="3">
+            <div class="profile__top">
+              <div class="avatar" style="background:linear-gradient(135deg,#9D7AF0,#EA8FC7)">204</div>
+              <div><h3>Baek Kang-hyun</h3><div class="role">Advisor · Brand &amp; Growth</div></div>
+            </div>
+            <p>IQ <b style="color:var(--text)">204 (Mensa-verified)</b>; on <b style="color:var(--text)">national broadcasts</b> (YTN, SBS) since childhood as a prodigy — proven credibility and buzz in education. After leaving science high school, still applied to Oxford and solo-shipped a strategy puzzle RPG game (2026-04) — buzz backed by&nbsp;execution.</p>
+            <div class="tags"><span class="pill vi">Multiple national broadcast appearances</span><span class="pill">Education-market buzz</span><span class="pill ok">Shipped a game solo</span></div>
+          </div>
+          <div class="card profile reveal" data-d="4">
+            <div class="profile__top">
+              <div class="avatar" style="background:linear-gradient(135deg,#2ECC71,#00E5FF)">ST</div>
+              <div><h3>Stelios <span class="profile__en">19 · UK/Greece</span></h3><div class="role">Co-Founder · Product &amp; Growth</div></div>
+            </div>
+            <p>Greece to the UK; first startup at 15, <b style="color:var(--text)">futures trader</b> since 2024 — proven risk management. Leads Product, Sales, and&nbsp;Operations.</p>
+            <div class="tags"><span class="pill warn">2-week trial</span><span class="pill">Product / GTM</span></div>
+          </div>
+          <div class="card profile reveal" data-d="5">
+            <div class="profile__top">
+              <div class="avatar" style="background:linear-gradient(135deg,#D8B46A,#EA8FC7)">OM</div>
+              <div><h3>Olzhas Mukhtarov <span class="profile__en">Kazakhstan</span></h3><div class="role">Co-Founder · Technical</div></div>
+            </div>
+            <p><b style="color:var(--text)">$200k+ revenue</b> from an internet-cafe networking business at 13; founded an academy, published multiple papers. Built <b style="color:var(--text)">vLLM from scratch</b> (no libraries); computer vision research at NU (GSB). Security researcher who found Cursor/Windsurf editor vulnerabilities and <b style="color:var(--text)">responsibly disclosed</b>&nbsp;them.</p>
+            <div class="tags"><span class="pill warn">2-week trial</span><span class="pill">AI / Eng</span><span class="pill ok">$200k+ revenue business</span><span class="pill cy">Security research</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 14 — FOUNDER DEEP-DIVE 1 · Engineer
+         ================================================================= -->
+    <section class="slide" id="s-founder-eng" data-title="Founder · Engineer">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">14</span> · Founder Deep-Dive</span>
+          <h2>The <span class="hl">engineer</span> who built this demo alone</h2>
+          <p class="lead">Programming since 2018 — 8 years spanning game engines, hardware optimization, and full-stack. He built Smart Note's <b style="color:var(--text)">FE, BE, and AI all himself</b>.</p>
+        </div>
+        <div class="grid g-3">
+          <div class="card reveal" data-d="2">
+            <div class="card__icon">🧰</div>
+            <h3>8 years full-stack</h3>
+            <p>Games in <b style="color:var(--text)">UE5·C++</b> →<br>web in <b style="color:var(--text)">React·Next</b> →<br>server in <b style="color:var(--text)">Nest·PostgreSQL</b> →<br>infra in <b style="color:var(--text)">CI/CD·AWS</b>.<br>One person building the entire stack&nbsp;directly.</p>
+          </div>
+          <div class="card reveal" data-d="3">
+            <div class="card__icon">🧠</div>
+            <h3>Depth down to the hardware</h3>
+            <p>Reads a single line of CNN code down to <b style="color:var(--text)">memory layout, cache, and GPU tensor cores</b>.<br>Never stops at the abstraction layer.</p>
+          </div>
+          <div class="card reveal" data-d="4">
+            <div class="card__icon">∑</div>
+            <h3>CS theory · Mathematics</h3>
+            <p>Breaks down Quake III's "fast inverse square root" to the bit level and Newton's method.<br>Proves iterative convergence via the <b style="color:var(--text)">Banach fixed-point theorem</b>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 15 — FOUNDER DEEP-DIVE 2 · Builder & Operator
+         ================================================================= -->
+    <section class="slide" id="s-founder-ops" data-title="Founder · Operator">
+      <div class="slide__inner">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">15</span> · Founder Deep-Dive</span>
+          <h2>A builder who's <span class="hl">led teams<br>non-stop for 6 years</span></h2>
+          <p class="lead">Leading projects since 2020 with 70-80 collaborators, <br>Smart Note is his <b style="color:var(--text)">ninth</b> — and he already runs his own venture as&nbsp;CEO.</p>
+        </div>
+        <div class="grid g-3">
+          <div class="card reveal" data-d="2">
+            <div class="card__icon">🚀</div>
+            <h3>6 years · 9 projects</h3>
+            <p><b style="color:var(--text)">70-80 people</b> cumulatively (avg. team ~10). When exam season scattered a team, he regrouped and <b style="color:var(--text)">shipped&nbsp;anyway</b>.</p>
+          </div>
+          <div class="card reveal" data-d="3">
+            <div class="card__icon">🌏</div>
+            <h3>Running global teams</h3>
+            <p>Teams of mostly foreign members, run via <b style="color:var(--text)">English-language meetings</b> — communication built for remote, async collaboration.</p>
+          </div>
+          <div class="card reveal" data-d="4">
+            <div class="card__icon">🎯</div>
+            <h3>All in on the startup, over school</h3>
+            <p><b style="color:var(--text)">Leave of absence</b> from science high school, December 2025 — an <b style="color:var(--text)">all-in founder</b> betting his time on product, team, and fundraising over&nbsp;grades.</p>
+          </div>
+        </div>
+        <p class="reveal" data-d="5" style="margin-top:18px;font-size:0.92rem;color:var(--muted)">＋ Outside validation: a <b style="color:var(--text)">six-figure salary offer via YC Co-founder Matching</b> · a $2,450 UE5 contract offer · a <b style="color:var(--text)">Shark Tank Korea</b> invite. Via that same YC matching, two joined — Olzhas (<b style="color:var(--text)">$200k+ revenue business, from-scratch vLLM</b>) and Baek Kang-hyun (nationwide recognition). The market noticed&nbsp;first.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 16 — THE ASK (interactive raise slider)  [LIVE DEMO]
+         ================================================================= -->
+    <section class="slide" id="s-ask" data-title="The Ask">
+      <div class="slide__inner" id="demo-ask">
+        <div class="section-head reveal" data-d="1">
+          <span class="kicker"><span class="num">16</span> · The Ask &nbsp;<span class="pill ok" style="padding:3px 9px;font-size:0.68rem">▶ Drag the slider</span></span>
+          <h2>Pre-seed round —<br><span class="hl">set the investment amount</span> yourself</h2>
+        </div>
+        <div class="ask" style="align-items:start">
+          <div class="card ask__amount reveal" data-d="2">
+            <div class="lbl">Raising · Pre-seed (SAFE)</div>
+            <div class="n grad" id="ask-amount" style="font-size:clamp(2.4rem,7vw,3.6rem)">$150k</div>
+            <div class="sub">Est. equity <b id="ask-equity" style="color:var(--accent)">7.5%</b> · Runway <b id="ask-runway" style="color:var(--text)">18 mo</b></div>
+            <div class="askslider">
+              <input type="range" id="ask-range" min="100" max="200" step="10" value="150" aria-label="Adjust investment amount ($100k-$200k)" />
+              <div class="askslider__lbl"><span>$100k</span><span>$200k</span></div>
+            </div>
+            <p style="font-size:0.72rem;color:var(--faint);margin-top:8px">* Post-money SAFE cap $2.0M · ~$8.3k/mo burn (illustrative, negotiable). Slider updates amount, equity, runway &amp; use-of-funds&nbsp;bars.</p>
+          </div>
+          <div class="reveal" data-d="3">
+            <h3 style="font-size:0.95rem;color:var(--muted);margin-bottom:10px">Use of Funds</h3>
+            <div class="use">
+              <div class="use__row"><div class="top"><b>Engineering &amp; AI Infrastructure</b><span class="amt" data-share="45">$67.5k</span></div><div class="use__bar"><div class="use__fill" data-pct="45" style="background:linear-gradient(90deg,#00E5FF,#2bd3ea)"></div></div></div>
+              <div class="use__row"><div class="top"><b>Product &amp; UX</b><span class="amt" data-share="25">$37.5k</span></div><div class="use__bar"><div class="use__fill" data-pct="25" style="background:linear-gradient(90deg,#9D7AF0,#c2adff)"></div></div></div>
+              <div class="use__row"><div class="top"><b>GTM &amp; Marketing</b><span class="amt" data-share="20">$30k</span></div><div class="use__bar"><div class="use__fill" data-pct="20" style="background:linear-gradient(90deg,#2ECC71,#74e3a3)"></div></div></div>
+              <div class="use__row"><div class="top"><b>Operations &amp; Legal</b><span class="amt" data-share="10">$15k</span></div><div class="use__bar"><div class="use__fill" data-pct="10" style="background:linear-gradient(90deg,#D8B46A,#ecd29a)"></div></div></div>
+            </div>
+            <h3 style="margin:18px 0 10px;font-size:0.95rem;color:var(--muted)">Milestones to next round (Seed)</h3>
+            <div class="miles">
+              <div class="mile"><div class="n">5,000 MAU</div><div class="c">Active&nbsp;learners</div></div>
+              <div class="mile"><div class="n">40%+ retention</div><div class="c">at&nbsp;30&nbsp;days</div></div>
+              <div class="mile"><div class="n">Paid-conversion validated</div><div class="c">Willingness&nbsp;to&nbsp;pay</div></div>
+            </div>
+          </div>
+        </div>
+        <p class="reveal" data-d="4" style="text-align:center;margin-top:16px;font-size:clamp(1rem,2.4vw,1.2rem)">$100k-200k buys <span class="grad" style="font-weight:800">12-24 months of runway</span> to prove PMF in our beachhead — <b>seeking a partner to join&nbsp;us.</b></p>
+      </div>
+    </section>
+
+  </div><!-- /stage -->
+</div><!-- /deck -->
+
+<!-- navigation chrome -->
+<div class="nav" role="navigation" aria-label="Slide navigation">
+  <button class="nav__btn nav__prev" aria-label="Previous slide">‹</button>
+  <span class="nav__count" title="Open outline (M)"><b>01</b> / 13</span>
+  <button class="nav__btn nav__next" aria-label="Next slide">›</button>
+</div>
+
+<div class="hint">
+  <span><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
+  <span><kbd>M</kbd> Outline</span>
+  <span><kbd>F</kbd> Fullscreen</span>
+</div>
+
+<!-- agenda overlay -->
+<div class="agenda" role="dialog" aria-label="Outline">
+  <button class="agenda__close" aria-label="Close">×</button>
+  <h3>Outline · Contents</h3>
+  <div class="agenda__grid"></div>
+</div>
+
+<!-- scripts: classic (non-module) so file:// works on every browser -->
+<script src="js/universe.en.js"></script>
+<script src="js/demos.en.js"></script>
+<script src="js/deck.js"></script>
+<script>
+  /* Initialise the note-universe canvases.
+     Cover is a dim, non-interactive backdrop; slide 9 is the live, searchable one. */
+  (function () {
+    if (!window.SNUniverse) return;
+    var cover = document.getElementById("cover-canvas");
+    var uni = document.getElementById("uni-canvas");
+    if (cover) SNUniverse.create(cover, { interactive: false, showLabels: false, dim: 0.7 });
+    if (uni) window.__snUni = SNUniverse.create(uni, { interactive: true, showLabels: true, dim: 1 });
+    // canvases inside hidden slides start at 0×0; re-measure once active
+    document.addEventListener("slide:enter", function () {
+      window.dispatchEvent(new Event("resize"));
+    });
+  })();
+</script>
+</body>
+</html>
