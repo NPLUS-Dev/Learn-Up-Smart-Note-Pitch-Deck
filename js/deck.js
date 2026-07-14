@@ -100,8 +100,6 @@
     var dy = e.changedTouches[0].clientY - tsy;
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) {
       if (dx < 0) next(); else prev();
-    } else if (Math.abs(dy) > 70 && Math.abs(dy) > Math.abs(dx) * 1.4) {
-      if (dy < 0) next(); else prev();
     }
   }, { passive: true });
 
