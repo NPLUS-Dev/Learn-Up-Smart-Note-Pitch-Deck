@@ -2,11 +2,9 @@
 
 Interactive, dependency-free HTML pitch deck for **Smart Note**, an AI-native markdown workspace. 13 slides, several with live interactive demos.
 
-- `index_en.html` — English
+## View it live
 
-## Run it
-
-Just double-click either file to open it in a browser. No build step, no internet connection, no CDN.
+**https://nplus-dev.github.io/Learn-Up-Smart-Note-Pitch-Deck/**
 
 ## Controls
 

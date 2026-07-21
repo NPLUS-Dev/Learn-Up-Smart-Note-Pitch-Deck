@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="theme-color" content="#0B0F19" />
   <title>Smart Note · Product Deck</title>
-  <meta name="description" content="Smart Note — AI 네이티브 마크다운 워크스페이스. 이공계 능동 학습자를 위한 살아있는 노트." />
+  <meta name="description" content="Smart Note — an AI-native markdown workspace. A living note for active STEM learners." />
   <link rel="stylesheet" href="css/deck.css" />
+  <style>
+    /* EN-only density tweaks — the English copy runs longer than the Korean,
+       so the dense Team grid and the populated Proofreader list need a little
+       less internal spacing to stay within one screen. Scoped to this deck only. */
+    #s-team .section-head { margin-bottom: 10px; }
+    #s-team .team--4 { gap: 12px; }
+    #s-team .team--4 .card { padding: 11px 15px; }
+    #s-team .team--4 .avatar { width: 44px; height: 44px; font-size: 1.05rem; }
+    #s-team .team--4 .profile__top { gap: 11px; }
+    #s-team .team--4 .profile p { margin-top: 6px; line-height: 1.42; font-size: 0.83rem; }
+    #s-team .team--4 .profile .tags { margin-top: 7px; }
+    #s-proof .demo-body { padding: 13px; }
+    #s-proof .demo-hint { margin-bottom: 8px; }
+    #s-proof .proof__doc { padding: 12px 14px; }
+    #s-proof .proof__bar { margin: 10px 0; }
+    #s-proof .proof__list { gap: 7px; }
+    #s-proof .proof__item { padding: 8px 12px; }
+  </style>
 </head>
 <body>
 
@@ -30,41 +48,41 @@
     <section class="slide cover" id="s-cover" data-title="Cover">
       <canvas id="cover-canvas" aria-hidden="true"></canvas>
       <div class="slide__inner">
-        <p class="sub reveal" data-d="1">컴퓨터 필기가 불편해서 안 하던 사람까지 — <b style="color:var(--text)">이과 능동 학습자</b>를 위한</p>
+        <p class="sub reveal" data-d="1">For <b style="color:var(--text)">active STEM learners</b> — including those who gave up on clunky digital&nbsp;note-taking</p>
         <h1 class="logo grad reveal" data-d="2">Smart&nbsp;Note</h1>
-        <p class="desc reveal" data-d="3" style="white-space: nowrap"><b>AI</b>가 수식·그래프·3D·시뮬레이션을 노트에 직접 구워주는<br><b>완전히 새로운 마크다운 워크스페이스</b></p>
+        <p class="desc reveal" data-d="3"><b>AI</b> bakes equations, graphs, 3D models and simulations into your notes —<br><b>a new kind of markdown workspace</b></p>
         <div class="tagchips reveal" data-d="4">
-          <span class="pill cy"><span class="dot" style="background:var(--accent)"></span>논리까지 잡는 교정</span>
-          <span class="pill vi"><span class="dot" style="background:var(--accent-2)"></span>살아있는 컴포넌트</span>
-          <span class="pill ok"><span class="dot" style="background:var(--ok)"></span>맥락형 AI</span>
+          <span class="pill cy"><span class="dot" style="background:var(--accent)"></span>Proofreading that catches logic</span>
+          <span class="pill vi"><span class="dot" style="background:var(--accent-2)"></span>Living components</span>
+          <span class="pill ok"><span class="dot" style="background:var(--ok)"></span>Context-aware AI</span>
         </div>
-        <p class="credit reveal" data-d="5">Product Deck · <span class="mono">npluslearnup.win</span> · 키보드 <kbd style="font-family:var(--font-mono)">→</kbd> 또는 화면을 넘겨보세요</p>
+        <p class="credit reveal" data-d="5">Product Deck · <span class="mono">npluslearnup.win</span> · press <kbd style="font-family:var(--font-mono)">→</kbd> or swipe to advance</p>
       </div>
     </section>
 
     <!-- ====================================================================
          SLIDE 2 — PROBLEM
          ================================================================= -->
-    <section class="slide" id="s-problem" data-title="Problem · 기존 도구의 벽">
+    <section class="slide" id="s-problem" data-title="Problem · The Wall Existing Tools Hit">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">02</span> · Problem</span>
-          <h2>기존 필기 도구는 <span class="hl">학습의 벽</span>에서 멈춥니다</h2>
-          <p class="lead">Obsidian·Notion·한글·docs 모두 <b style="color:var(--text)">‘적는 것’</b>까지만 돕습니다. <br>이과 학습자가 막히는 지점은 그 다음입니다.</p>
+          <h2>Existing note-taking tools stop right at <span class="hl">the wall of learning</span></h2>
+          <p class="lead">Obsidian, Notion, Word, Docs — all help you <b style="color:var(--text)">write things down</b>, then stop. <br>Exactly where STEM learners get&nbsp;stuck.</p>
         </div>
         <div class="vs">
           <div class="vs__col reveal" data-d="2">
-            <div class="col-label bad">기존 마크다운·필기 도구의 한계</div>
-            <div class="painrow bad"><div class="ic">∑</div><div><b>복잡한 수식 입력의 피로</b><span>LaTeX 문법을 외우고 한 글자씩 — 흐름이 끊긴다</span></div></div>
-            <div class="painrow bad"><div class="ic">🖼️</div><div><b>정적 이미지의 한계</b><span>그래프·3D 구조를 노트 안에서 만들 수 없다</span></div></div>
-            <div class="painrow bad"><div class="ic">🔌</div><div><b>학습 맥락과의 단절</b><span>내 노트·자료를 모르는 범용 AI의 영혼 없는 답변</span></div></div>
+            <div class="col-label bad">Limits of existing markdown / note tools</div>
+            <div class="painrow bad"><div class="ic">∑</div><div><b>The fatigue of complex equation input</b><span>Memorizing LaTeX character by character breaks your&nbsp;flow</span></div></div>
+            <div class="painrow bad"><div class="ic">🖼️</div><div><b>The limits of static images</b><span>No live graph or 3D structure inside the note&nbsp;itself</span></div></div>
+            <div class="painrow bad"><div class="ic">🔌</div><div><b>Disconnected from your learning context</b><span>Generic AI, blind to your notes and materials, gives soulless&nbsp;answers</span></div></div>
           </div>
           <div class="vs__mid reveal" data-d="3"><div class="vs__arrow">→</div></div>
           <div class="vs__col reveal" data-d="4">
-            <div class="col-label good">능동 학습자가 진짜 원하는 것</div>
-            <div class="painrow good"><div class="ic">🗣️</div><div><b>자연어로 수식을</b><span>“대충 설명”해도 아름다운 LaTeX로, 커서 위치에 바로</span></div></div>
-            <div class="painrow good"><div class="ic">🧊</div><div><b>살아있는 그림·3D</b><span>돌려보고 확대하는 동적 그래프·3D·시뮬레이션</span></div></div>
-            <div class="painrow good"><div class="ic">🧠</div><div><b>맥락을 아는 AI + 논리 교정</b><span>내 노트를 읽고, 오타를 넘어 ‘논리 오류’까지 잡는다</span></div></div>
+            <div class="col-label good">What active learners actually want</div>
+            <div class="painrow good"><div class="ic">🗣️</div><div><b>Equations from natural language</b><span>Roughly describe it — get beautiful LaTeX at the&nbsp;cursor</span></div></div>
+            <div class="painrow good"><div class="ic">🧊</div><div><b>Living images &amp; 3D</b><span>Dynamic graphs, 3D models and simulations to rotate and&nbsp;zoom</span></div></div>
+            <div class="painrow good"><div class="ic">🧠</div><div><b>Context-aware AI + logic correction</b><span>Reads your notes, catches "logic errors," not just&nbsp;typos</span></div></div>
           </div>
         </div>
       </div>
@@ -73,56 +91,56 @@
     <!-- ====================================================================
          SLIDE 3 — SOLUTION
          ================================================================= -->
-    <section class="slide" id="s-solution" data-title="Solution · 핵심 가치">
+    <section class="slide" id="s-solution" data-title="Solution · Core Value">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">03</span> · Solution</span>
-          <h2>적는 도구가 아니라, <span class="hl">생각을 돌파하는</span> 노트</h2>
-          <p class="lead">강력한 AI를 마크다운 워크스페이스에 수직 통합<div class=""></div> <br> 막힌 개념을 노트 안에서 바로 뚫습니다.</p>
+          <h2>Not a note-taking tool — a notebook that <span class="hl">breaks through your thinking</span></h2>
+          <p class="lead">Powerful AI, vertically integrated into a markdown workspace <br>— break through a stuck concept inside the&nbsp;note.</p>
         </div>
         <div class="grid g-3">
           <div class="card reveal" data-d="2">
             <div class="card__icon">✨</div>
-            <h3>AI 생성 엔진</h3>
-            <p>자연어 한 줄 → <b style="color:var(--text)">수식·동적 그래프·구조도·3D·시뮬레이션·일러스트.</b><br>모호한 명령은 AI 플래너가 분할·라우팅합니다.</p>
+            <h3>AI Generation Engine</h3>
+            <p>One line of natural language → <b style="color:var(--text)">equations, dynamic graphs, diagrams, 3D, simulations, illustrations.</b><br>An AI planner splits and routes ambiguous requests.</p>
           </div>
           <div class="card reveal" data-d="3">
             <div class="card__icon">🛡️</div>
-            <h3>논리까지 잡는 교정 + 맥락형 AI</h3>
-            <p>오타·문법을 넘어 문단의 <b style="color:var(--text)">논리 오류</b>를 실시간 검출. AI 튜터는 내 프로필·이력·<b style="color:var(--text)">현재 노트 전체</b>를 이해합니다.</p>
+            <h3>Logic-Aware Proofreading + Context AI</h3>
+            <p>Detects <b style="color:var(--text)">logic errors</b> in real time — beyond typos and grammar. The AI tutor knows your profile, history, and <b style="color:var(--text)">the entire current&nbsp;note</b>.</p>
           </div>
           <div class="card reveal" data-d="4">
             <div class="card__icon">📝</div>
-            <h3>문제 생성 · 즉시 채점</h3>
-            <p>첨부 자료의 스타일까지 반영해 문제를 생성. 서술형·주관식을 <b style="color:var(--text)">먼저 풀게 배치</b>해 객관식을 푸는 동안 채점을 끝내는 <b style="color:var(--text)">체감 대기시간 0초</b> 설계.</p>
+            <h3>Question Generation · Instant Grading</h3>
+            <p>Generates questions matching the style of your attached materials. Free-response items <b style="color:var(--text)">placed first</b>, so grading finishes while you work the multiple-choice ones — <b style="color:var(--text)">zero perceived wait&nbsp;time</b>.</p>
           </div>
         </div>
-        <p class="reveal" data-d="5" style="margin-top:18px;font-size:0.92rem;color:var(--muted)">🎯 타깃: 컴퓨터 필기가 불편해 안 하던 학생까지 포함한 <b style="color:var(--text)">이공계 고등학생 ~ 대학생</b> 능동 학습자. 다음 장부터 모든 핵심 기능을 <b style="color:var(--accent)">직접 눌러볼 수 있는 라이브 데모</b>로 보여드립니다.</p>
+        <p class="reveal" data-d="5" style="margin-top:18px;font-size:0.92rem;color:var(--muted)">🎯 Target: active STEM learners from <b style="color:var(--text)">high school to university</b> — including students who never took notes on a computer because it was too uncomfortable. From the next slide on, every core feature is shown as a <b style="color:var(--accent)">live demo you can click yourself</b>.</p>
       </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 4 — 교정 도우미 (proofreader · LOGIC)  [LIVE DEMO]
+         SLIDE 4 — Proofreader (proofreader · LOGIC)  [LIVE DEMO]
          ================================================================= -->
-    <section class="slide" id="s-proof" data-title="교정 도우미 · 논리 검출">
+    <section class="slide" id="s-proof" data-title="Proofreader · Logic Detection">
       <div class="slide__inner">
         <div class="feat feat--demo-left">
           <div class="feat__demo reveal" data-d="2">
             <div class="demo-frame" id="demo-proof">
-              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> 교정 도우미 · 운동량 노트 <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
+              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> Proofreader · Momentum note <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
               <div class="demo-body">
-                <p class="demo-hint">💡 <b>“교정 실행”</b>을 누르면 오타·문법뿐 아니라 <b style="color:#c2adff">논리 오류</b>까지 표시됩니다. 각 항목의 <b>수락</b>을 눌러 본문에 반영해 보세요.</p>
+                <p class="demo-hint">💡 Press <b>"Run Proofread"</b> — surfaces typos, grammar, and <b style="color:#c2adff">logic errors</b>. Click <b>Accept</b> to&nbsp;apply.</p>
                 <div class="proof__doc">
-                  <b style="color:var(--text);font-size:1.05rem"># 운동량·뉴턴 법칙 정리</b><br>
-                  두 물체의 충돌에서 <span id="pf-1" class="mark-typo">운동양</span> 보존을 생각해 보자.
-                  <span id="pf-3" class="mark-logic">마찰이 있어도 운동량은 항상 보존되므로</span>,
-                  <span id="pf-2" class="mark-grammar">충돌 후에 의 총</span> 운동량은 충돌 전과 정확히 같다.
-                  또한 <span class="mono" style="color:var(--accent)">F = ma</span> 에서
-                  <span id="pf-4" class="mark-logic">가속도는 속도에 비례한다</span>고 정리할 수 있다.
+                  <b style="color:var(--text);font-size:1.05rem"># Momentum &amp; Newton's Laws</b><br>
+                  Let's consider <span id="pf-1" class="mark-typo">monentum</span> conservation in a two-body collision.
+                  Since <span id="pf-3" class="mark-logic">momentum is always conserved even when friction acts</span>,
+                  the <span id="pf-2" class="mark-grammar">total momentum of after</span> the collision is exactly the same as before.
+                  Also, from <span class="mono" style="color:var(--accent)">F = ma</span>, we can conclude that
+                  <span id="pf-4" class="mark-logic">acceleration is proportional to velocity</span>.
                 </div>
                 <div class="proof__bar">
-                  <button class="btn proof__scan">🔍 교정 실행</button>
-                  <button class="btn ghost proof__reset" style="display:none;font-size:0.82rem;padding:9px 14px">↻ 초기화</button>
+                  <button class="btn proof__scan">🔍 Run Proofread</button>
+                  <button class="btn ghost proof__reset" style="display:none;font-size:0.82rem;padding:9px 14px">↻ Reset</button>
                   <span class="proof__count" style="margin-left:auto"></span>
                 </div>
                 <div class="proof__list"></div>
@@ -130,49 +148,49 @@
             </div>
           </div>
           <div class="feat__copy reveal" data-d="1">
-            <span class="kicker"><span class="num">04</span> · 교정 도우미</span>
-            <h2>맞춤법을 넘어<br><span class="hl-v">논리 오류</span>까지 <br>잡는다</h2>
+            <span class="kicker"><span class="num">04</span> · Proofreader</span>
+            <h2>Beyond spelling,<br>it catches<br><span class="hl-v">logic errors</span> too</h2>
             <ul>
-              <li><div class="b">✓</div><div><b>오타·문법 + 논리</b><p>일반 검사기가 못 잡는 <b style="color:var(--text)">개념·논리 오류</b>를 실시간 검출. (예: “마찰이 있어도 운동량 보존”, “가속도 ∝ 속도”)</p></div></li>
-              <li><div class="b">→</div><div><b>한 번에 수락</b><p>제안을 누르면 본문에 즉시 반영 — <br>틀린 개념이 노트에 굳어지기 전에 차단.</p></div></li>
+              <li><div class="b">✓</div><div><b>Typos, grammar + logic</b><p>Real-time <b style="color:var(--text)">conceptual and logic errors</b> a normal checker misses. (e.g. "momentum conserved even with friction," "acceleration ∝ velocity")</p></div></li>
+              <li><div class="b">→</div><div><b>Accept in one click</b><p>Click a suggestion, applied instantly — stopping a wrong concept before it sets&nbsp;in.</p></div></li>
             </ul>
-            <p class="feat__note">OBT 유저 피드백에서 <b>가장 호평받은 기능</b> — <br> “당연히 오타는 스스로 수정해야 한다고 생각했지만, 막상 있으니 매우 편했다.”</p>
+            <p class="feat__note">The <b>most praised feature</b> in OBT feedback — <br> "I always figured I'd catch my own typos — turned out it was really&nbsp;convenient."</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 5 — AI 생성 엔진 + 플래너  [LIVE DEMO]
+         SLIDE 5 — AI Generation Engine + Planner  [LIVE DEMO]
          ================================================================= -->
-    <section class="slide" id="s-gen" data-title="AI 생성 엔진">
+    <section class="slide" id="s-gen" data-title="AI Generation Engine">
       <div class="slide__inner">
         <div class="feat">
           <div class="feat__copy reveal" data-d="1">
-            <span class="kicker"><span class="num">05</span> · AI 생성 엔진</span>
-            <h2>한 줄 명령 →<br><span class="hl">노트 안의 컴포넌트</span></h2>
+            <span class="kicker"><span class="num">05</span> · AI Generation Engine</span>
+            <h2>One-line command →<br><span class="hl">a component inside your note</span></h2>
             <ul>
-              <li><div class="b">∑</div><div><b>수식은 커서 위치에</b><p>자연어 묘사 → 정확한 LaTeX를 <b style="color:var(--text)">실제 수식으로 렌더링</b>. 생성 중 다른 블록으로 이동해도 원래 커서 위치를 기억해 삽입.</p></div></li>
-              <li><div class="b">📈</div><div><b>동적 그래프</b><p>정적 이미지가 아니라 <b style="color:var(--text)">격자를 드래그해 축을 옮기고 휠로 확대</b>하는 좌표 그래프 — 사진을 첨부·참조해 더 정교하게.</p></div></li>
-              <li><div class="b">🔧</div><div><b>깨지지 않는 출력</b><p>구조도는 <b style="color:var(--text)">mermaid 코드</b>로 생성해 화살표·글자 깨짐이 없고, 일러스트는 웹 검색 후 자체 버킷에 <b style="color:var(--text)">재호스팅</b>합니다.</p></div></li>
+              <li><div class="b">∑</div><div><b>Equations, right at the cursor</b><p>Plain-language description → accurate LaTeX, <b style="color:var(--text)">rendered as real math</b>. Remembers your cursor even if you move blocks&nbsp;mid-generation.</p></div></li>
+              <li><div class="b">📈</div><div><b>Dynamic graphs</b><p>Not a static image — a coordinate graph: <b style="color:var(--text)">drag to pan, scroll to zoom</b>. Attach a photo for extra&nbsp;precision.</p></div></li>
+              <li><div class="b">🔧</div><div><b>Output that never breaks</b><p>Diagrams as <b style="color:var(--text)">Mermaid code</b> — arrows and text never garble. Illustrations found via web search and <b style="color:var(--text)">re-hosted</b> to our own&nbsp;bucket.</p></div></li>
             </ul>
-            <p class="feat__note">💡 오른쪽 툴바의 버튼을 눌러 <b>각 컴포넌트가 노트 커서 위치에 바로 삽입</b>되는 걸 직접 해보세요.</p>
+            <p class="feat__note">💡 Click a toolbar button on the right — <b>each component drops straight into the note at the cursor</b>.</p>
           </div>
           <div class="feat__demo reveal" data-d="3">
             <div class="demo-frame" id="demo-gen">
-              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> AI 생성 · 단순조화진동 노트 <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
+              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> AI Generation · Simple Harmonic Motion note <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
               <div class="note-toolbar">
-                <span style="font-size:0.78rem;color:var(--accent-2);font-weight:700">✨ 삽입:</span>
-                <button class="note-gen" data-kind="formula">∑ 수식</button>
-                <button class="note-gen" data-kind="graph">📈 그래프</button>
-                <button class="note-gen" data-kind="mermaid">🔧 구조도</button>
+                <span style="font-size:0.78rem;color:var(--accent-2);font-weight:700">✨ Insert:</span>
+                <button class="note-gen" data-kind="formula">∑ Formula</button>
+                <button class="note-gen" data-kind="graph">📈 Graph</button>
+                <button class="note-gen" data-kind="mermaid">🔧 Diagram</button>
                 <button class="note-gen" data-kind="3d">🧊 3D</button>
-                <button class="note-gen" data-kind="sim">🎚️ 시뮬</button>
-                <button class="note-gen" data-kind="anim">🎞️ 애니메이션</button>
-                <button class="note-gen" data-kind="image">🎨 그림</button>
+                <button class="note-gen" data-kind="sim">🎚️ Sim</button>
+                <button class="note-gen" data-kind="anim">🎞️ Animation</button>
+                <button class="note-gen" data-kind="image">🎨 Image</button>
               </div>
               <div class="note-body" aria-live="polite">
-                <div class="note-md"><b># 단순조화진동 정리</b><br>원운동의 한 좌표는 SHM과 같다. 위 툴바에서 컴포넌트를 고르면 <span class="note-caret"></span> 커서 위치에 바로 삽입됩니다 ↓</div>
+                <div class="note-md"><b># Simple Harmonic Motion Notes</b><br>One coordinate of circular motion behaves just like SHM. Pick a component above and it drops in right at the <span class="note-caret"></span> cursor ↓</div>
               </div>
             </div>
           </div>
@@ -181,33 +199,33 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 6 — 맥락형 AI 튜터  [LIVE DEMO]
+         SLIDE 6 — Context-Aware AI Tutor  [LIVE DEMO]
          ================================================================= -->
-    <section class="slide" id="s-tutor" data-title="맥락형 AI 튜터">
+    <section class="slide" id="s-tutor" data-title="Context-Aware AI Tutor">
       <div class="slide__inner">
         <div class="feat">
           <div class="feat__copy reveal" data-d="1">
-            <span class="kicker"><span class="num">08</span> · 맥락형 AI 튜터</span>
-            <h2>내 노트를 <span class="hl">읽고 있는</span> AI</h2>
+            <span class="kicker"><span class="num">08</span> · Context-Aware AI Tutor</span>
+            <h2>AI that's<br><span class="hl">reading your notes</span></h2>
             <ul>
-              <li><div class="b">📄</div><div><b>완벽한 맥락 이해</b><p>프로필(나이·학력·목적·직업)+과거 학습 이력+<b style="color:var(--text)">현재 노트 전체</b>, 붙여넣은 <b style="color:var(--text)">URL까지 즉시 크롤링</b>해 단축키 한 번으로 파악.</p></div></li>
-              <li><div class="b">🔗</div><div><b>스스로 연결하고, 스스로 만든다</b><p>이전에 배운 개념과의 연결점을 먼저 짚어주고(“τ=Iα는 전에 배운 벡터 외적과 관계있어요!”), 막히는 지점에선 수식·3D·시뮬레이션을 <b style="color:var(--text)">자발적으로 생성</b>해 a-ha 순간을 만듭니다.</p></div></li>
-              <li><div class="b">🧭</div><div><b>뭘 모르는지도 모를 때</b><p>다른 학습자들의 누적 질문 DB로 핵심 질문을 던져 스스로 답을 찾게 돕고, 한 번의 답으로 부족하면 <b style="color:var(--text)">주차별 학습 커리큘럼</b>을 짜 승인 시 플래너에 반영.</p></div></li>
+              <li><div class="b">📄</div><div><b>Full context, understood</b><p>Profile (age, education, goals, occupation) + learning history + <b style="color:var(--text)">the entire current note</b> — a pasted <b style="color:var(--text)">URL is crawled instantly</b>. One&nbsp;shortcut.</p></div></li>
+              <li><div class="b">🔗</div><div><b>Connects and builds on its own</b><p>Surfaces links to prior concepts ("τ=Iα relates to the vector cross product you learned earlier!"), and when you're stuck <b style="color:var(--text)">generates equations, 3D models, and simulations</b> for the a-ha moment.</p></div></li>
+              <li><div class="b">🧭</div><div><b>When you don't know what you don't know</b><p>Draws on a database of other learners' questions to ask the right one and let you find the answer yourself — and drafts a <b style="color:var(--text)">weekly study curriculum</b>, added to your planner on approval.</p></div></li>
             </ul>
-            <p class="feat__note">＋ 꼬리 질문만 던지는 소크라테스 모드는 필기 흐름을 끊는다고 판단해 의도적으로 배제 — 대신 <b>다정하고 명확한 직접 설명 모드</b>로 작동합니다.</p>
+            <p class="feat__note">＋ No pure-Socratic mode that only fires back questions — it breaks note-taking flow. Instead: a <b>warm, clear, direct-explanation mode</b>.</p>
           </div>
           <div class="feat__demo reveal" data-d="3">
             <div class="demo-frame" id="demo-tutor">
-              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> AI 튜터 · 토크·회전운동 노트 <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
+              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> AI Tutor · Torque &amp; Rotational Motion note <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
               <div class="demo-body">
-                <p class="demo-hint">💬 <b>먼저 말을 거는 튜터</b>의 대화가 자동 재생됩니다 — 선택지를 눌러 직접 진행해 보세요. (<b>↻ 다시</b>로 재생)</p>
+                <p class="demo-hint">💬 A conversation from the <b>tutor that speaks up first</b> plays automatically — click the options to steer it yourself. (Press <b>↻ Replay</b> to run it again.)</p>
                 <div class="chat">
                   <div class="chat__head">
-                    <span class="chat__mode on">💬 직접 설명 모드</span>
-                    <span class="chat__ctx"><span class="dot"></span>📄 ‘토크와 회전운동’ 노트 맥락</span>
+                    <span class="chat__mode on">💬 Direct Explanation Mode</span>
+                    <span class="chat__ctx"><span class="dot"></span>📄 'Torque &amp; Rotational Motion' note context</span>
                   </div>
                   <div class="chat__log" aria-live="polite"></div>
-                  <button class="btn ghost chat__restart">↻ 다시</button>
+                  <button class="btn ghost chat__restart">↻ Replay</button>
                 </div>
               </div>
             </div>
@@ -217,42 +235,42 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 9 — 3D 노트 우주  [LIVE DEMO]
+         SLIDE 9 — 3D Note Universe  [LIVE DEMO]
          ================================================================= -->
-    <section class="slide" id="s-universe" data-title="3D 노트 우주">
+    <section class="slide" id="s-universe" data-title="3D Note Universe">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
-          <span class="kicker"><span class="num">09</span> · 3D 노트 우주</span>
-          <h2><span class="hl">지식 우주</span></h2>
-          <p class="lead">파일 디렉토리가 그대로 우주가 됩니다. 드래그로 탐색하고, 검색창에 제목을 넣어 원하는 노트로 즉시 진입하세요.</p>
+          <span class="kicker"><span class="num">09</span> · 3D Note Universe</span>
+          <h2><span class="hl">Knowledge Universe</span></h2>
+          <p class="lead">Your file directory becomes a universe, as-is. Drag to explore, or search a title to jump straight to the&nbsp;note.</p>
         </div>
         <div class="feat feat--wide" style="align-items:stretch">
           <div class="universe-wrap reveal" data-d="2" id="demo-universe">
             <div class="uni-search">
-              <input type="text" placeholder="노트 제목으로 검색…" aria-label="노트 검색" />
-              <button class="btn">🔎 찾기</button>
+              <input type="text" placeholder="Search by note title…" aria-label="Search notes" />
+              <button class="btn">🔎 Find</button>
             </div>
             <div class="chips" style="margin:0 0 8px 0">
-              <button class="chip">푸리에</button>
-              <button class="chip">전기화학</button>
+              <button class="chip">Fourier</button>
+              <button class="chip">Electrochemistry</button>
               <button class="chip">CNN</button>
             </div>
             <div class="uni-stage">
-              <span class="uni-tip">🖱️ 드래그 회전 · 행성 호버</span>
+              <span class="uni-tip">🖱️ Drag to rotate · hover a planet</span>
               <canvas id="uni-canvas"></canvas>
             </div>
             <div class="uni-legend">
-              <span><span class="dot" style="background:var(--d-physics)"></span>물리</span>
-              <span><span class="dot" style="background:var(--d-math)"></span>수학</span>
-              <span><span class="dot" style="background:var(--d-chemistry)"></span>화학</span>
-              <span><span class="dot" style="background:var(--d-biology)"></span>생물</span>
-              <span><span class="dot" style="background:var(--d-other)"></span>AI·기타</span>
+              <span><span class="dot" style="background:var(--d-physics)"></span>Physics</span>
+              <span><span class="dot" style="background:var(--d-math)"></span>Math</span>
+              <span><span class="dot" style="background:var(--d-chemistry)"></span>Chemistry</span>
+              <span><span class="dot" style="background:var(--d-biology)"></span>Biology</span>
+              <span><span class="dot" style="background:var(--d-other)"></span>AI · Other</span>
             </div>
           </div>
           <div class="uni-side reveal" data-d="3">
-            <div class="mech"><b><span class="em">⭐</span>폴더 = 항성 · 노트 = 행성</b><p>유저가 만든 디렉토리 시스템과 연동 — 색은 과목 도메인으로 구분됩니다.</p></div>
-            <div class="mech"><b><span class="em">🌌</span>인용 = 만유인력 선</b><p>서로 <span class="mono" style="color:var(--accent-2)">[[인용]]</span>한 노트끼리 중력선이 시각화되어 가까이 공전합니다.</p></div>
-            <div class="mech"><b><span class="em">🔎</span>검색 → 즉시 진입</b><p>제목을 입력하면 해당 행성이 펄스로 표시되고, 클릭 한 번에 워크스페이스로 다이렉트.</p></div>
+            <div class="mech"><b><span class="em">⭐</span>Folder = star · Note = planet</b><p>Built on the directory you already have — color marks the subject&nbsp;domain.</p></div>
+            <div class="mech"><b><span class="em">🌌</span>Citations = gravity lines</b><p>Notes that <span class="mono" style="color:var(--accent-2)">[[cite]]</span> each other get gravity lines, orbiting closer&nbsp;together.</p></div>
+            <div class="mech"><b><span class="em">🔎</span>Search → jump straight in</b><p>Type a title, the matching planet pulses, one click to the&nbsp;workspace.</p></div>
           </div>
         </div>
       </div>
@@ -265,50 +283,50 @@
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">11</span> · Traction</span>
-          <h2>비전이 아니라, <span class="hl">이미 쓰는 사람들</span>이 있습니다</h2>
-          <p class="lead">2026-06-22 OBT 시작 — 첫 주에 실제 능동 학습자들이 들어와, <br>피드백이 곧바로 다음 빌드로 반영되고 있습니다.</p>
+          <h2>Not just a vision — <span class="hl">people already using it</span></h2>
+          <p class="lead">OBT launched 2026-06-22 — real learners in week&nbsp;one, <br>feedback landing in the next build.</p>
         </div>
         <div class="tr-stats reveal" data-d="2">
-          <div class="tr-stat"><div class="n">11명</div><div class="c">OBT 가입 유저 (첫 주)</div></div>
-          <div class="tr-stat"><div class="n">2h 30m</div><div class="c">최장 첫 세션 사용 시간</div></div>
-          <div class="tr-stat"><div class="n">3회</div><div class="c">1주간 UX 리서치</div></div>
-          <div class="tr-stat"><div class="n">2건</div><div class="c">피드백 → 즉시 출시 반영</div></div>
+          <div class="tr-stat"><div class="n">11</div><div class="c">OBT sign-ups (week one)</div></div>
+          <div class="tr-stat"><div class="n">2h 30m</div><div class="c">Longest first session</div></div>
+          <div class="tr-stat"><div class="n">3</div><div class="c">UX research sessions in week one</div></div>
+          <div class="tr-stat"><div class="n">2</div><div class="c">Feedback items → shipped immediately</div></div>
         </div>
         <div class="tr-feedback reveal" data-d="3">
           <div class="fb">
-            <div class="fb__top"><span class="fb__av">A</span><span class="fb__time">첫 세션 2h30m</span></div>
-            <p class="fb__q">“한글과 비슷한데, <b>교정 도우미가 좋다.</b> 배경 커스텀이 되면 이 플랫폼으로 갈아타겠다.”</p>
-            <div class="fb__tags"><span class="pill ok">✅ 배경 커스텀 출시됨</span></div>
+            <div class="fb__top"><span class="fb__av">A</span><span class="fb__time">First session 2h30m</span></div>
+            <p class="fb__q">"Like Hangul word processor, but <b>the proofreader is great.</b> Add background customization and I'd switch to this&nbsp;platform."</p>
+            <div class="fb__tags"><span class="pill ok">✅ Background customization shipped</span></div>
           </div>
           <div class="fb">
-            <div class="fb__top"><span class="fb__av">B</span><span class="fb__time">첫 세션 50분 · 재접속 ✓</span></div>
-            <p class="fb__q">“<b>교정·AI 생성이 유용하다.</b> 렉만 잡히면 Obsidian 대신 이걸 쓸 것 같다. 지금은 병행 중.”</p>
-            <div class="fb__tags"><span class="pill cy">현재 병행 사용</span><span class="pill warn">렉 → 최적화 중</span></div>
+            <div class="fb__top"><span class="fb__av">B</span><span class="fb__time">First session 50m · returned ✓</span></div>
+            <p class="fb__q">"<b>Proofreading and AI generation are useful.</b> Fix the lag and I'd use this over Obsidian. Running both for now."</p>
+            <div class="fb__tags"><span class="pill cy">Currently running both in parallel</span><span class="pill warn">Lag → being optimized</span></div>
           </div>
           <div class="fb">
-            <div class="fb__top"><span class="fb__av">C</span><span class="fb__time">첫 세션 2h30m · 재접속 ✓</span></div>
-            <p class="fb__q">“전체적으로 편하다. <b>Google Docs 쓰다가 이걸로 넘어와야겠다.</b> (PDF가 안 되던 점은 조금 아쉬웠다.)”</p>
-            <div class="fb__tags"><span class="pill ok">✅ PDF 가져오기 수정됨</span></div>
+            <div class="fb__top"><span class="fb__av">C</span><span class="fb__time">First session 2h30m · returned ✓</span></div>
+            <p class="fb__q">"Comfortable overall. <b>Ready to switch from Google Docs.</b> (Shame PDF import didn't work.)"</p>
+            <div class="fb__tags"><span class="pill ok">✅ PDF import fixed</span></div>
           </div>
         </div>
-        <div class="tr-note reveal" data-d="4">✍️ <b>가장 강한 증거</b>첫 세션 <b>2시간 30분</b>이라는 몰입 시간은, 능동 학습자에게 이미 ‘쓸 만한’ 도구라는 신호입니다. (정직한 약점: 렉/최적화는 최우선 과제로 해결 중)</div>
+        <div class="tr-note reveal" data-d="4">✍️ <b>Strongest signal</b> — a <b>2.5-hour</b> first session of immersion says this is already "usable" for active learners. (Honest weakness: lag/performance is our top priority — fixing it now.)</div>
       </div>
     </section>
 
     <!-- ====================================================================
          SLIDE 12 — MARKET & ROADMAP
          ================================================================= -->
-    <section class="slide" id="s-market" data-title="Market &amp; 로드맵">
+    <section class="slide" id="s-market" data-title="Market &amp; Roadmap">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">12</span> · Market &amp; Roadmap</span>
-          <h2>거점은 이과 학생, <span class="hl">시장은 모든 학생</span></h2>
-          <p class="lead">노트는 모든 학생의 필수 도구 — 거점에서 검증 후, 에디터를 넘어 학습 보조 플랫폼으로 진화합니다.</p>
+          <h2>Our beachhead is STEM students, <span class="hl">our market is every student</span></h2>
+          Every student takes notes. We validate in the beachhead, then evolve from editor into a full learning-support&nbsp;platform.
         </div>
         <div class="market" id="demo-market">
           <div class="reveal" data-d="2">
             <div class="rings">
-              <svg viewBox="0 0 200 200" role="img" aria-label="시장 동심원 차트">
+              <svg viewBox="0 0 200 200" role="img" aria-label="Market concentric ring chart">
                 <circle id="ring-tam" class="ring-c" cx="100" cy="100" r="0" fill="#9D7AF0" stroke="#9D7AF0" />
                 <circle id="ring-sam" class="ring-c" cx="100" cy="100" r="0" fill="#00E5FF" stroke="#00E5FF" />
                 <circle id="ring-som" class="ring-c" cx="100" cy="100" r="0" fill="#2ECC71" stroke="#2ECC71" />
@@ -320,22 +338,22 @@
           </div>
           <div class="reveal" data-d="3">
             <div class="market__legend">
-              <div class="mk tam-row"><div class="bar tam"></div><div><h4>TAM <small>· 전체</small></h4><p>글로벌 에듀테크 (2030 전망)</p></div><div class="val"><div class="n">$348B</div><div class="cagr">CAGR 13.3%</div></div></div>
-              <div class="mk sam-row"><div class="bar sam"></div><div><h4>SAM <small>· 유효</small></h4><p>AI 교육 시장 — 가장 빠른 성장</p></div><div class="val"><div class="n">$32B</div><div class="cagr">CAGR 31.2% ⚡</div></div></div>
-              <div class="mk som-row"><div class="bar som"></div><div><h4>SOM <small>· 거점 획득가능</small></h4><p>이공계 자기주도 학습자(거점) → 디지털 노트앱 $22.6B 시장으로 확장</p></div><div class="val"><div class="n">$0.5B</div><div class="cagr">≈ SAM의 1.5%</div></div></div>
-              <p class="market__note">* TAM·SAM = <a href="https://www.grandviewresearch.com/press-release/global-education-technology-market" target="_blank" rel="noopener">GVR 에듀테크 $348B</a> · <a href="https://www.grandviewresearch.com/press-release/global-artificial-intelligence-ai-education-market" target="_blank" rel="noopener">GVR AI교육 $32B</a>. SOM = AI교육 SAM의 보수적 1.5% 획득 가정 — 근거: <a href="https://www.maximizemarketresearch.com/market-report/note-taking-app-market/148234/" target="_blank" rel="noopener">글로벌 노트앱 $22.6B(2030)</a> · <a href="https://www.marknteladvisors.com/research-library/south-korea-edtech-market.html" target="_blank" rel="noopener">한국 EdTech $10.4B(2030)</a>.</p>
+              <div class="mk tam-row"><div class="bar tam"></div><div><h4>TAM <small>· total</small></h4><p>Global EdTech (2030)</p></div><div class="val"><div class="n">$348B</div><div class="cagr">CAGR 13.3%</div></div></div>
+              <div class="mk sam-row"><div class="bar sam"></div><div><h4>SAM <small>· serviceable</small></h4><p>AI education — fastest-growing segment</p></div><div class="val"><div class="n">$32B</div><div class="cagr">CAGR 31.2% ⚡</div></div></div>
+              <div class="mk som-row"><div class="bar som"></div><div><h4>SOM <small>· obtainable, beachhead</small></h4><p>STEM self-directed learners → $22.6B digital note-app&nbsp;market</p></div><div class="val"><div class="n">$0.5B</div><div class="cagr">≈ 1.5% of SAM</div></div></div>
+              <p class="market__note">* TAM/SAM = <a href="https://www.grandviewresearch.com/press-release/global-education-technology-market" target="_blank" rel="noopener">GVR EdTech $348B</a> · <a href="https://www.grandviewresearch.com/press-release/global-artificial-intelligence-ai-education-market" target="_blank" rel="noopener">GVR AI Education $32B</a>. SOM = conservative 1.5% of AI-education SAM, grounded in <a href="https://www.maximizemarketresearch.com/market-report/note-taking-app-market/148234/" target="_blank" rel="noopener">note-taking apps $22.6B (2030)</a> · <a href="https://www.marknteladvisors.com/research-library/south-korea-edtech-market.html" target="_blank" rel="noopener">South Korea EdTech $10.4B&nbsp;(2030)</a>.</p>
             </div>
           </div>
         </div>
         <div class="roadmap-strip reveal" data-d="4">
-          <span class="rs-lbl">로드맵</span>
-          <span class="pill ok">NOW · OBT 가동</span>
+          <span class="rs-lbl">Roadmap</span>
+          <span class="pill ok">NOW · OBT live</span>
           <span class="rs-arr">→</span>
-          <span class="pill cy">단기 · 과학고 네트워크 + 마케팅 + 문제생성/자동완성</span>
+          <span class="pill cy">Near-term · Science-high-school network, marketing, question generation/autocomplete</span>
           <span class="rs-arr">→</span>
-          <span class="pill vi">중기 · 에디터 → 학습 보조(RAG) 피벗</span>
+          <span class="pill vi">Mid-term · Editor → learning-support (RAG) pivot</span>
           <span class="rs-arr">→</span>
-          <span class="pill">장기 · 마크다운을 넘어선 차세대 시스템</span>
+          <span class="pill">Long-term · Next-gen system beyond markdown</span>
         </div>
       </div>
     </section>
@@ -347,41 +365,41 @@
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">13</span> · Team</span>
-          <h2>단독 창업자, 그리고 <span class="hl">합류 중인 팀</span></h2>
-          <p class="lead">제품·BE·AI는 창업자가 단독으로 빌드했고, 지금은 Co-Founder 후보 2인과 Advisor 1인이 함께 검증 단계를 밟고 있습니다.</p>
+          <h2>A solo founder, and <span class="hl">a team joining in</span></h2>
+          <p class="lead">Product, backend, and AI built solo — with two <span style="white-space:nowrap">Co-Founder</span> candidates and one Advisor now&nbsp;validating.</p>
         </div>
         <div class="team team--4">
           <div class="card profile reveal" data-d="2">
             <div class="profile__top">
               <div class="avatar">SQ</div>
-              <div><h3>권승찬 <span class="profile__en">Sean Channie Quinn</span></h3><div class="role">Founder · 풀스택 빌더</div></div>
+              <div><h3>Sean Channie Quinn</h3><div class="role">Founder · Full-stack Builder</div></div>
             </div>
-            <p>창원과학고 재학 <b style="color:var(--text)">= 타깃 유저 본인</b>. Smart Note FE·BE·AI를 <b style="color:var(--text)">독자 빌드</b>. (다음 2장에서 상세)</p>
-            <div class="tags"><span class="pill cy">8년 풀스택</span><span class="pill ok">독자 데모 빌드</span></div>
+            <p>Changwon Science High School — <b style="color:var(--text)">the target user himself</b>. Built Smart Note's FE, BE, and AI <b style="color:var(--text)">solo</b>. (Next two&nbsp;slides.)</p>
+            <div class="tags"><span class="pill cy">8 years full-stack</span><span class="pill ok">Built the demo solo</span></div>
           </div>
           <div class="card profile reveal" data-d="3">
             <div class="profile__top">
               <div class="avatar" style="background:linear-gradient(135deg,#9D7AF0,#EA8FC7)">204</div>
-              <div><h3>백강현</h3><div class="role">Advisor · Brand &amp; Growth</div></div>
+              <div><h3>Baek Kang-hyun</h3><div class="role">Advisor · Brand &amp; Growth</div></div>
             </div>
-            <p><b style="color:var(--text)">IQ 204(멘사 기준)</b>로 어릴 때부터 YTN·SBS 등 <b style="color:var(--text)">전국 방송에 다수 출연</b>해온 영재 — 교육 시장 화제성·신뢰도가 이미 검증됨. 과학고 자퇴 후에도 옥스퍼드 지원, 전략 퍼즐 RPG 게임을 <b style="color:var(--text)">홀로 개발·출시</b>(2026.04)하며 화제성을 넘는 실행력도 스스로 증명 중.</p>
-            <div class="tags"><span class="pill vi">전국 방송 다수 출연</span><span class="pill">교육 화제성</span><span class="pill ok">게임 자체 개발</span></div>
+            <p>IQ <b style="color:var(--text)">204 (Mensa-verified)</b>; on <b style="color:var(--text)">national broadcasts</b> (YTN, SBS) since childhood as a prodigy — proven credibility and buzz in education. After leaving science high school, still applied to Oxford and solo-shipped a strategy puzzle RPG game (2026-04) — buzz backed by&nbsp;execution.</p>
+            <div class="tags"><span class="pill vi">Multiple national broadcast appearances</span><span class="pill">Education-market buzz</span><span class="pill ok">Shipped a game solo</span></div>
           </div>
           <div class="card profile reveal" data-d="4">
             <div class="profile__top">
               <div class="avatar" style="background:linear-gradient(135deg,#2ECC71,#00E5FF)">ST</div>
               <div><h3>Stelios <span class="profile__en">19 · UK/Greece</span></h3><div class="role">Co-Founder · Product &amp; Growth</div></div>
             </div>
-            <p>그리스→영국 이주 후 15세에 첫 창업, 2024년부터 <b style="color:var(--text)">선물 트레이더</b>로 리스크·실행력 검증. Product·Sales·Operations 담당.</p>
-            <div class="tags"><span class="pill warn">2주 trial 중</span><span class="pill">Product / GTM</span></div>
+            <p>Greece to the UK; first startup at 15, <b style="color:var(--text)">futures trader</b> since 2024 — proven risk management. Leads Product, Sales, and&nbsp;Operations.</p>
+            <div class="tags"><span class="pill warn">2-week trial</span><span class="pill">Product / GTM</span></div>
           </div>
           <div class="card profile reveal" data-d="5">
             <div class="profile__top">
               <div class="avatar" style="background:linear-gradient(135deg,#D8B46A,#EA8FC7)">OM</div>
               <div><h3>Olzhas Mukhtarov <span class="profile__en">Kazakhstan</span></h3><div class="role">Co-Founder · Technical</div></div>
             </div>
-            <p>13세에 PC방 네트워크 사업으로 <b style="color:var(--text)">$20만+ 매출</b>, 이후 자체 아카데미 설립·논문 다수 게재. 라이브러리 없이 <b style="color:var(--text)">vLLM 스크래치 구현</b>, NU(GSB) 컴퓨터비전 연구. Cursor/Windsurf 에디터의 보안 취약점을 발견해 벤더사에 <b style="color:var(--text)">책임감 있게 공개(Responsible Disclosure)</b>한 보안 리서처이기도 함.</p>
-            <div class="tags"><span class="pill warn">2주 trial 중</span><span class="pill">AI / Eng</span><span class="pill ok">$20만+ 매출 사업</span><span class="pill cy">보안 리서치</span></div>
+            <p><b style="color:var(--text)">$200k+ revenue</b> from an internet-cafe networking business at 13; founded an academy, published multiple papers. Built <b style="color:var(--text)">vLLM from scratch</b> (no libraries); computer vision research at NU (GSB). Security researcher who found Cursor/Windsurf editor vulnerabilities and <b style="color:var(--text)">responsibly disclosed</b>&nbsp;them.</p>
+            <div class="tags"><span class="pill warn">2-week trial</span><span class="pill">AI / Eng</span><span class="pill ok">$200k+ revenue business</span><span class="pill cy">Security research</span></div>
           </div>
         </div>
       </div>
@@ -394,24 +412,24 @@
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">14</span> · Founder Deep-Dive</span>
-          <h2>이 데모를 혼자 만든 <span class="hl">엔지니어</span></h2>
-          <p class="lead">2018년 프로그래밍 입문 이후 8년 — 게임 엔진부터 하드웨어 최적화까지 <br>내려가는 풀스택 깊이로, Smart Note를 <b style="color:var(--text)">FE·BE·AI까지 독자 빌드</b>했습니다.</p>
+          <h2>The <span class="hl">engineer</span> who built this demo alone</h2>
+          <p class="lead">Programming since 2018 — 8 years spanning game engines, hardware optimization, and full-stack. He built Smart Note's <b style="color:var(--text)">FE, BE, and AI all himself</b>.</p>
         </div>
         <div class="grid g-3">
           <div class="card reveal" data-d="2">
             <div class="card__icon">🧰</div>
-            <h3>풀스택 8년</h3>
-            <p>게임 <b style="color:var(--text)">UE5·C++</b> → 웹 <b style="color:var(--text)">React·Next</b> <br>→ 서버 <b style="color:var(--text)">Nest·PostgreSQL</b> <br>→ 인프라 <b style="color:var(--text)">CI/CD·AWS</b>.<br>한 사람이 전 스택을 직접 만듭니다.</p>
+            <h3>8 years full-stack</h3>
+            <p>Games in <b style="color:var(--text)">UE5·C++</b> →<br>web in <b style="color:var(--text)">React·Next</b> →<br>server in <b style="color:var(--text)">Nest·PostgreSQL</b> →<br>infra in <b style="color:var(--text)">CI/CD·AWS</b>.<br>One person building the entire stack&nbsp;directly.</p>
           </div>
           <div class="card reveal" data-d="3">
             <div class="card__icon">🧠</div>
-            <h3>하드웨어까지 파는 깊이</h3>
-            <p>CNN 한 줄도 <br><b style="color:var(--text)">메모리 배치·캐시·GPU 텐서코어</b>까지 내려가 이해합니다.<br>추상화에 멈추지 않습니다.</p>
+            <h3>Depth down to the hardware</h3>
+            <p>Reads a single line of CNN code down to <b style="color:var(--text)">memory layout, cache, and GPU tensor cores</b>.<br>Never stops at the abstraction layer.</p>
           </div>
           <div class="card reveal" data-d="4">
             <div class="card__icon">∑</div>
-            <h3>CS 이론 · 수학</h3>
-            <p>Quake III ‘빠른 역제곱근’을 비트·뉴턴법까지 분해.<br>반복 수렴을 <b style="color:var(--text)">바나흐 고정점 정리</b>로 증명한 수학적 깊이.</p>
+            <h3>CS theory · Mathematics</h3>
+            <p>Breaks down Quake III's "fast inverse square root" to the bit level and Newton's method.<br>Proves iterative convergence via the <b style="color:var(--text)">Banach fixed-point theorem</b>.</p>
           </div>
         </div>
       </div>
@@ -424,27 +442,27 @@
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">15</span> · Founder Deep-Dive</span>
-          <h2>6년간 멈추지 않고 <span class="hl">팀을 이끌어 온 빌더</span></h2>
-          <p class="lead">2020년부터 70~80명과 협업하며 프로젝트를 이끌었고, <br>Smart Note가 <b style="color:var(--text)">아홉 번째</b>입니다. 이미 자기 사업체를 운영하는 대표입니다.</p>
+          <h2>A builder who's <span class="hl">led teams<br>non-stop for 6 years</span></h2>
+          <p class="lead">Leading projects since 2020 with 70-80 collaborators, <br>Smart Note is his <b style="color:var(--text)">ninth</b> — and he already runs his own venture as&nbsp;CEO.</p>
         </div>
         <div class="grid g-3">
           <div class="card reveal" data-d="2">
             <div class="card__icon">🚀</div>
-            <h3>6년 · 9 프로젝트</h3>
-            <p>누적 <b style="color:var(--text)">70~80명</b> 협업(평균 팀 ~10명). 입시로 팀이 흩어져도 다시 모아 <br><b style="color:var(--text)">출시까지</b> 끌고 간 실행력.</p>
+            <h3>6 years · 9 projects</h3>
+            <p><b style="color:var(--text)">70-80 people</b> cumulatively (avg. team ~10). When exam season scattered a team, he regrouped and <b style="color:var(--text)">shipped&nbsp;anyway</b>.</p>
           </div>
           <div class="card reveal" data-d="3">
             <div class="card__icon">🌏</div>
-            <h3>글로벌 팀 운영</h3>
-            <p>대부분 외국인으로 구성된 팀을 <br><b style="color:var(--text)">영어 회의</b>로 운영. 원격·비동기 협업에 최적화된 커뮤니케이션.</p>
+            <h3>Running global teams</h3>
+            <p>Teams of mostly foreign members, run via <b style="color:var(--text)">English-language meetings</b> — communication built for remote, async collaboration.</p>
           </div>
           <div class="card reveal" data-d="4">
             <div class="card__icon">🎯</div>
-            <h3>학교 대신 창업에 올인</h3>
-            <p>2025년 12월 과학고 <b style="color:var(--text)">휴학</b>을 결단 — 성적 대신 제품·팀·투자 유치에 전 시간을 건 <b style="color:var(--text)">올인 창업자</b>.</p>
+            <h3>All in on the startup, over school</h3>
+            <p><b style="color:var(--text)">Leave of absence</b> from science high school, December 2025 — an <b style="color:var(--text)">all-in founder</b> betting his time on product, team, and fundraising over&nbsp;grades.</p>
           </div>
         </div>
-        <p class="reveal" data-d="5" style="margin-top:18px;font-size:0.92rem;color:var(--muted)">＋ 외부 검증: <b style="color:var(--text)">YC Co-founder Matching 6자리 연봉 제안</b> · $2,450 UE5 외주 제안 · <b style="color:var(--text)">Shark Tank Korea 출연 제의</b> — 그리고 같은 YC matching에서 만난 <b style="color:var(--text)">$20만+ 매출 사업 + vLLM 스크래치 구현</b>의 Olzhas, 전국구 인지도의 백강현이 합류 — 시장이 먼저 알아본 신호들.</p>
+        <p class="reveal" data-d="5" style="margin-top:18px;font-size:0.92rem;color:var(--muted)">＋ Outside validation: a <b style="color:var(--text)">six-figure salary offer via YC Co-founder Matching</b> · a $2,450 UE5 contract offer · a <b style="color:var(--text)">Shark Tank Korea</b> invite. Via that same YC matching, two joined — Olzhas (<b style="color:var(--text)">$200k+ revenue business, from-scratch vLLM</b>) and Baek Kang-hyun (nationwide recognition). The market noticed&nbsp;first.</p>
       </div>
     </section>
 
@@ -454,37 +472,37 @@
     <section class="slide" id="s-ask" data-title="The Ask">
       <div class="slide__inner" id="demo-ask">
         <div class="section-head reveal" data-d="1">
-          <span class="kicker"><span class="num">16</span> · The Ask &nbsp;<span class="pill ok" style="padding:3px 9px;font-size:0.68rem">▶ 슬라이더 조정</span></span>
-          <h2>Pre-seed 라운드 — <span class="hl">투자금을 직접</span> 맞춰보세요</h2>
+          <span class="kicker"><span class="num">16</span> · The Ask &nbsp;<span class="pill ok" style="padding:3px 9px;font-size:0.68rem">▶ Drag the slider</span></span>
+          <h2>Pre-seed round —<br><span class="hl">set the investment amount</span> yourself</h2>
         </div>
         <div class="ask" style="align-items:start">
           <div class="card ask__amount reveal" data-d="2">
             <div class="lbl">Raising · Pre-seed (SAFE)</div>
             <div class="n grad" id="ask-amount" style="font-size:clamp(2.4rem,7vw,3.6rem)">$150k</div>
-            <div class="sub">예상 지분 <b id="ask-equity" style="color:var(--accent)">7.5%</b> · 런웨이 <b id="ask-runway" style="color:var(--text)">18개월</b></div>
+            <div class="sub">Est. equity <b id="ask-equity" style="color:var(--accent)">7.5%</b> · Runway <b id="ask-runway" style="color:var(--text)">18 mo</b></div>
             <div class="askslider">
-              <input type="range" id="ask-range" min="100" max="200" step="10" value="150" aria-label="투자금 조정 ($100k~$200k)" />
+              <input type="range" id="ask-range" min="100" max="200" step="10" value="150" aria-label="Adjust investment amount ($100k-$200k)" />
               <div class="askslider__lbl"><span>$100k</span><span>$200k</span></div>
             </div>
-            <p style="font-size:0.72rem;color:var(--faint);margin-top:8px">* post-money SAFE 캡 $2.0M · 월 번레이트 ~$8.3k 가정(예시 · 협의 가능) — 슬라이더로 금액·지분·런웨이·아래 사용 계획 바가 함께 바뀝니다.</p>
+            <p style="font-size:0.72rem;color:var(--faint);margin-top:8px">* Post-money SAFE cap $2.0M · ~$8.3k/mo burn (illustrative, negotiable). Slider updates amount, equity, runway &amp; use-of-funds&nbsp;bars.</p>
           </div>
           <div class="reveal" data-d="3">
-            <h3 style="font-size:0.95rem;color:var(--muted);margin-bottom:10px">자금 사용 계획 (Use of Funds)</h3>
+            <h3 style="font-size:0.95rem;color:var(--muted);margin-bottom:10px">Use of Funds</h3>
             <div class="use">
-              <div class="use__row"><div class="top"><b>엔지니어링 &amp; AI 인프라</b><span class="amt" data-share="45">$67.5k</span></div><div class="use__bar"><div class="use__fill" data-pct="45" style="background:linear-gradient(90deg,#00E5FF,#2bd3ea)"></div></div></div>
-              <div class="use__row"><div class="top"><b>제품 &amp; UX</b><span class="amt" data-share="25">$37.5k</span></div><div class="use__bar"><div class="use__fill" data-pct="25" style="background:linear-gradient(90deg,#9D7AF0,#c2adff)"></div></div></div>
-              <div class="use__row"><div class="top"><b>GTM &amp; 마케팅</b><span class="amt" data-share="20">$30k</span></div><div class="use__bar"><div class="use__fill" data-pct="20" style="background:linear-gradient(90deg,#2ECC71,#74e3a3)"></div></div></div>
-              <div class="use__row"><div class="top"><b>운영 &amp; 법무</b><span class="amt" data-share="10">$15k</span></div><div class="use__bar"><div class="use__fill" data-pct="10" style="background:linear-gradient(90deg,#D8B46A,#ecd29a)"></div></div></div>
+              <div class="use__row"><div class="top"><b>Engineering &amp; AI Infrastructure</b><span class="amt" data-share="45">$67.5k</span></div><div class="use__bar"><div class="use__fill" data-pct="45" style="background:linear-gradient(90deg,#00E5FF,#2bd3ea)"></div></div></div>
+              <div class="use__row"><div class="top"><b>Product &amp; UX</b><span class="amt" data-share="25">$37.5k</span></div><div class="use__bar"><div class="use__fill" data-pct="25" style="background:linear-gradient(90deg,#9D7AF0,#c2adff)"></div></div></div>
+              <div class="use__row"><div class="top"><b>GTM &amp; Marketing</b><span class="amt" data-share="20">$30k</span></div><div class="use__bar"><div class="use__fill" data-pct="20" style="background:linear-gradient(90deg,#2ECC71,#74e3a3)"></div></div></div>
+              <div class="use__row"><div class="top"><b>Operations &amp; Legal</b><span class="amt" data-share="10">$15k</span></div><div class="use__bar"><div class="use__fill" data-pct="10" style="background:linear-gradient(90deg,#D8B46A,#ecd29a)"></div></div></div>
             </div>
-            <h3 style="margin:18px 0 10px;font-size:0.95rem;color:var(--muted)">다음 라운드(Seed)까지 마일스톤</h3>
+            <h3 style="margin:18px 0 10px;font-size:0.95rem;color:var(--muted)">Milestones to next round (Seed)</h3>
             <div class="miles">
-              <div class="mile"><div class="n">MAU 5,000</div><div class="c">월간 활성 학습자</div></div>
-              <div class="mile"><div class="n">리텐션 40%+</div><div class="c">30일 잔존</div></div>
-              <div class="mile"><div class="n">유료전환 검증</div><div class="c">결제 의향 → 매출</div></div>
+              <div class="mile"><div class="n">5,000 MAU</div><div class="c">Active&nbsp;learners</div></div>
+              <div class="mile"><div class="n">40%+ retention</div><div class="c">at&nbsp;30&nbsp;days</div></div>
+              <div class="mile"><div class="n">Paid-conversion validated</div><div class="c">Willingness&nbsp;to&nbsp;pay</div></div>
             </div>
           </div>
         </div>
-        <p class="reveal" data-d="4" style="text-align:center;margin-top:16px;font-size:clamp(1rem,2.4vw,1.2rem)">$100k–200k로 <span class="grad" style="font-weight:800">12~24개월 런웨이</span>를 확보해 거점 시장에서 PMF를 증명합니다 — <b>함께하실 파트너를 찾습니다.</b></p>
+        <p class="reveal" data-d="4" style="text-align:center;margin-top:16px;font-size:clamp(1rem,2.4vw,1.2rem)">$100k-200k buys <span class="grad" style="font-weight:800">12-24 months of runway</span> to prove PMF in our beachhead — <b>seeking a partner to join&nbsp;us.</b></p>
       </div>
     </section>
 
@@ -492,28 +510,28 @@
 </div><!-- /deck -->
 
 <!-- navigation chrome -->
-<div class="nav" role="navigation" aria-label="슬라이드 탐색">
-  <button class="nav__btn nav__prev" aria-label="이전 슬라이드">‹</button>
-  <span class="nav__count" title="목차 열기 (M)"><b>01</b> / 13</span>
-  <button class="nav__btn nav__next" aria-label="다음 슬라이드">›</button>
+<div class="nav" role="navigation" aria-label="Slide navigation">
+  <button class="nav__btn nav__prev" aria-label="Previous slide">‹</button>
+  <span class="nav__count" title="Open outline (M)"><b>01</b> / 13</span>
+  <button class="nav__btn nav__next" aria-label="Next slide">›</button>
 </div>
 
 <div class="hint">
-  <span><kbd>←</kbd> <kbd>→</kbd> 이동</span>
-  <span><kbd>M</kbd> 목차</span>
-  <span><kbd>F</kbd> 전체화면</span>
+  <span><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
+  <span><kbd>M</kbd> Outline</span>
+  <span><kbd>F</kbd> Fullscreen</span>
 </div>
 
 <!-- agenda overlay -->
-<div class="agenda" role="dialog" aria-label="목차">
-  <button class="agenda__close" aria-label="닫기">×</button>
-  <h3>목차 · Contents</h3>
+<div class="agenda" role="dialog" aria-label="Outline">
+  <button class="agenda__close" aria-label="Close">×</button>
+  <h3>Outline · Contents</h3>
   <div class="agenda__grid"></div>
 </div>
 
 <!-- scripts: classic (non-module) so file:// works on every browser -->
-<script src="js/universe.js"></script>
-<script src="js/demos.js"></script>
+<script src="js/universe.en.js"></script>
+<script src="js/demos.en.js"></script>
 <script src="js/deck.js"></script>
 <script>
   /* Initialise the note-universe canvases.
