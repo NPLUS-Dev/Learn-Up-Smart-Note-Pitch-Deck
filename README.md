@@ -25,9 +25,9 @@ Typing in a demo's input/editor/search box doesn't trigger slide navigation. App
 2. Problem
 3. Solution
 4. Proofreader — logic-error detection *(live demo)*
-5. AI Generation Engine — formula / graph / diagram / 3D / sim / animation / illustration *(live demo)*
+5. AI Generation Engine — 3D / simulation *(live demo)*
 6. Context-Aware AI Tutor *(live demo)*
-7. 3D Note Universe — search *(live demo)*
+7. Handwriting → LaTeX *(live demo)*
 8. Traction (OBT)
 9. Market & Roadmap
 10. Team & Vision
@@ -39,12 +39,17 @@ Typing in a demo's input/editor/search box doesn't trigger slide navigation. App
 
 ```
 smart-note-pitch/
-├─ index_en.html        # English deck
-├─ css/deck.css          # shared design system + layout/demo styles
-└─ js/
-   ├─ deck.js             # navigation / outline / fullscreen (shared by both decks)
-   ├─ universe.js         # 3D Note Universe canvas (Korean)
-   ├─ universe.en.js       # 3D Note Universe canvas (English)
-   ├─ demos.js            # interactive demo logic (Korean)
-   └─ demos.en.js          # interactive demo logic (English)
+├─ index.html                       # the deck (English)
+├─ css/deck.css                     # design system + layout/demo styles
+├─ js/
+│  ├─ deck.js                       # navigation / outline / fullscreen
+│  ├─ universe.en.js                # cover backdrop starfield canvas
+│  ├─ demos.en.js                   # interactive demo logic
+│  ├─ universe.js, demos.js         # unused — leftover from a since-removed Korean deck
+├─ data/traction.json               # Traction slide's sign-up number; overwritten by the workflow below
+├─ scripts/fetch-traction.mjs       # pulls product-usage numbers into data/traction.json
+└─ .github/workflows/update-traction.yml  # daily cron that runs the script above
 ```
+
+The Traction slide's "OBT sign-ups" tile fetches `data/traction.json` at load time and
+falls back to the number baked into `index.html` if that file is missing or unreachable.

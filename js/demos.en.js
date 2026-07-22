@@ -1,12 +1,13 @@
 /* =============================================================================
    Smart Note pitch deck — interactive feature demos (offline, dependency-free)
      · Proofreader        (typo / grammar / LOGIC)                  #demo-proof
-     · AI Generation Engine (formula·graph·mermaid·3D·sim·image)    #demo-gen
+     · AI Generation Engine (3D · sim)                               #demo-gen
      · Adaptive Workspace  (custom markdown + adaptive theme)        #demo-ws
      · Context-Aware AI Tutor (note context + URL crawl)              #demo-tutor
-     · 3D Note Universe search (search → pulse)                       #demo-universe
+     · Handwriting → LaTeX (draw → AI recognizes → typeset math)      #demo-handwriting
      · Import (PDF heading split)                                     #demo-import
      · Market ring chart                                              #demo-market
+     · Traction: time-to-value / AI usage / retention (live via Supabase) #demo-traction
    Wired on DOMContentLoaded + on `slide:enter` events from deck.js.
    ========================================================================== */
 (function () {
@@ -245,37 +246,13 @@
     if (!root) return;
     var body = $(".note-body", root);
     var btns = $$(".note-gen[data-kind]", root);
-    var caret = $(".note-caret", root);
     var busy = false;
-    var plotters = [], cubes = [], anims = [];
+    var plotters = [], cubes = [];
 
     var KIND_META = {
-      formula:  { lab: "∑ Formula",         tip: "Inserted at cursor" },
-      graph:    { lab: "📈 Dynamic Graph",   tip: "Drag to pan · scroll to zoom" },
-      mermaid:  { lab: "🔧 Diagram",         tip: "Mermaid-code based" },
-      "3d":     { lab: "🧊 3D Object",       tip: "Drag to rotate · scroll to zoom" },
-      sim:      { lab: "🎚️ Simulation",      tip: "Live slider control" },
-      anim:     { lab: "🎞️ 2D Animation",    tip: "Live frame playback" },
-      image:    { lab: "🎨 Illustration",    tip: "Web search → self-hosted" }
+      "3d": { lab: "🧊 3D Object",  tip: "Drag to rotate · scroll to zoom" },
+      sim:  { lab: "🎚️ Simulation", tip: "Live slider control" }
     };
-
-    // a simple traveling 2D wave with a dot riding it (the "simple 2D animation" type)
-    function drawWave(c, t) {
-      var ctx = c.getContext("2d"), w = c.width, h = c.height;
-      ctx.clearRect(0, 0, w, h);
-      ctx.strokeStyle = "rgba(148,163,184,0.2)"; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(0, h / 2); ctx.lineTo(w, h / 2); ctx.stroke();
-      ctx.strokeStyle = "#2ECC71"; ctx.lineWidth = 2.6; ctx.beginPath();
-      var amp = (h / 2 - 16) * 0.8;
-      for (var x = 0; x <= w; x++) {
-        var y = h / 2 - Math.sin(x / w * Math.PI * 4 - t * 3) * amp;
-        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-      var dx = (t * 90) % w;
-      var dy = h / 2 - Math.sin(dx / w * Math.PI * 4 - t * 3) * amp;
-      ctx.fillStyle = "#00E5FF"; ctx.beginPath(); ctx.arc(dx, dy, 5, 0, Math.PI * 2); ctx.fill();
-    }
 
     function block(kind, inner) {
       var m = KIND_META[kind];
@@ -287,36 +264,6 @@
     }
 
     var MAKERS = {
-      // formula renders INLINE at the caret as REAL math via native MathML
-      // (browser-built-in — no KaTeX/MathJax, keeps the deck dependency-free)
-      formula: function () {
-        if (!caret) return null;
-        var MATH =
-          "<math xmlns='http://www.w3.org/1998/Math/MathML'>" +
-            "<mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo>" +
-            "<mi>A</mi><mi>sin</mi><mo>&#8289;</mo><mo>(</mo>" +
-              "<mi>&#969;</mi><mi>t</mi><mo>+</mo><mi>&#966;</mi><mo>)</mo>" +
-            "<mo>,</mo><mspace width='0.6em'></mspace>" +
-            "<mi>&#969;</mi><mo>=</mo>" +
-            "<mfrac><mrow><mn>2</mn><mi>&#960;</mi></mrow><mi>T</mi></mfrac>" +
-          "</math>";
-        var f = el("span", "note-formula", " " + MATH + " ");
-        caret.parentNode.insertBefore(f, caret);
-        return "INLINE";
-      },
-      graph: function () {
-        var c = makeCanvas("note-canvas", 520, 170);
-        var b = block("graph", c);
-        plotters.push(attachPlotter(c, function (x) { return Math.sin(x); }));
-        return b;
-      },
-      mermaid: function () {
-        return block("mermaid",
-          "<div class='note-mermaid'>" +
-          "<div class='note-mnode'>Input Image</div><div class='note-marrow'>↓</div>" +
-          "<div class='note-mnode'>Convolution (Conv)</div><div class='note-marrow'>↓</div>" +
-          "<div class='note-mnode'>Pooling → Feature Map</div></div>");
-      },
       "3d": function () {
         var c = makeCanvas("note-canvas", 520, 190);
         var b = block("3d", c);
@@ -331,22 +278,6 @@
         var st = attachPlotter(c, function (x) { return Math.sin(x); });
         function redraw() { var k = parseInt(r.value, 10) / 50; st.fn = function (x) { return Math.sin(x * k); }; st.draw(); }
         r.addEventListener("input", redraw); redraw();
-        return b;
-      },
-      anim: function () {
-        var c = makeCanvas("note-canvas", 520, 140);
-        var b = block("anim", c);
-        c.__t = 0; anims.push(c); drawWave(c, 0);
-        return b;
-      },
-      image: function () {
-        var ATOM = "<svg viewBox='0 0 220 130' class='note-svg' xmlns='http://www.w3.org/2000/svg'>" +
-          "<g fill='none' stroke='#00E5FF' stroke-width='1.6' opacity='0.85'>" +
-          "<ellipse cx='110' cy='65' rx='92' ry='30'/><ellipse cx='110' cy='65' rx='92' ry='30' transform='rotate(60 110 65)'/><ellipse cx='110' cy='65' rx='92' ry='30' transform='rotate(120 110 65)'/></g>" +
-          "<circle cx='110' cy='65' r='11' fill='#9D7AF0'/>" +
-          "<circle cx='202' cy='65' r='4.5' fill='#2ECC71'/><circle cx='64' cy='27' r='4.5' fill='#EA8FC7'/><circle cx='64' cy='103' r='4.5' fill='#D8B46A'/></svg>";
-        var b = block("image", ATOM);
-        b.insertAdjacentHTML("beforeend", "<div class='note-rehost'>🔒 Web images are re-hosted to the <b>illustrations</b> bucket — safe even if the original is deleted</div>");
         return b;
       }
     };
@@ -373,12 +304,11 @@
       var dt = lastTs ? Math.min((ts - lastTs) / 1000, 0.05) : 0.016; lastTs = ts || 0;
       if (slide && slide.classList.contains("is-active")) {
         cubes.forEach(function (s) { if (s.auto) { s.ry += dt * 0.5; s.draw(); } });
-        anims.forEach(function (c) { c.__t += dt; drawWave(c, c.__t); });
       }
       requestAnimationFrame(spin);
     })();
 
-    onEnterOnce(root, function () { setTimeout(function () { add("graph"); }, 350); });
+    onEnterOnce(root, function () { setTimeout(function () { add("3d"); }, 350); });
   }
 
   /* ===========================================================================
@@ -556,24 +486,89 @@
   }
 
   /* ===========================================================================
-     6) 3D Note Universe — wire search box to the canvas pulse
+     6) Handwriting → LaTeX — draw a formula, AI recognizes it as real math
      ======================================================================== */
-  function initUniverseSearch() {
-    var root = $("#demo-universe");
+  function initHandwriting() {
+    var root = $("#demo-handwriting");
     if (!root) return;
-    var input = $(".uni-search input", root);
-    var btn = $(".uni-search button", root);
-    var tip = $(".uni-tip", root);
-    function go() {
-      if (!window.__snUni || !input) return;
-      var hit = window.__snUni.search(input.value);
-      if (tip) tip.textContent = hit ? "🔎 Jumped to \"" + hit.label + "\"" : (input.value ? "No results found" : "🖱️ Drag to rotate · hover a planet");
+    var canvas = $(".hw__canvas", root);
+    var result = $(".hw__result", root);
+    var convertBtn = $(".hw__convert", root);
+    var clearBtn = $(".hw__clear", root);
+    var ctx = canvas.getContext("2d");
+    var drawing = false, hasInk = false;
+
+    var FORMULAS = [
+      "<math xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>b</mi><mo>&#177;</mo><msqrt><msup><mi>b</mi><mn>2</mn></msup><mo>-</mo><mn>4</mn><mi>a</mi><mi>c</mi></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math>",
+      "<math xmlns='http://www.w3.org/1998/Math/MathML'><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></math>",
+      "<math xmlns='http://www.w3.org/1998/Math/MathML'><msup><mi>e</mi><mrow><mi>i</mi><mi>&#960;</mi></mrow></msup><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn></math>"
+    ];
+    var fi = 0;
+
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.lineCap = "round"; ctx.lineJoin = "round";
+      ctx.strokeStyle = "#00E5FF"; ctx.lineWidth = 2.4;
     }
-    if (btn) btn.addEventListener("click", go);
-    if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") go(); });
-    $$(".chips .chip", root).forEach(function (c) {
-      c.addEventListener("click", function () { if (input) input.value = c.textContent; go(); });
-    });
+    resize();
+    window.addEventListener("resize", resize);
+
+    function pos(e) {
+      var rect = canvas.getBoundingClientRect();
+      var t = e.touches ? e.touches[0] : e;
+      return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+    }
+    function start(e) { drawing = true; hasInk = true; var p = pos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); if (e.cancelable) e.preventDefault(); }
+    function move(e) { if (!drawing) return; var p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); if (e.cancelable) e.preventDefault(); }
+    function stop() { drawing = false; }
+    canvas.addEventListener("mousedown", start);
+    canvas.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", stop);
+    canvas.addEventListener("touchstart", start, { passive: false });
+    canvas.addEventListener("touchmove", move, { passive: false });
+    canvas.addEventListener("touchend", stop);
+
+    // simulated pen stroke — plays once on slide entry so the demo has
+    // something to show before the visitor draws their own
+    function autoDraw(cb) {
+      var rect = canvas.getBoundingClientRect();
+      var w = rect.width, h = rect.height, cx = w / 2, cy = h / 2;
+      var steps = 70, i = 0;
+      ctx.beginPath();
+      (function step() {
+        i++;
+        var p = i / steps;
+        var x = cx + (p - 0.5) * w * 0.72 + Math.sin(p * 9) * 6;
+        var y = cy + Math.sin(p * Math.PI * 2.4) * h * 0.22 + (p - 0.5) * 8;
+        if (i === 1) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        ctx.stroke();
+        if (i < steps) requestAnimationFrame(step); else { hasInk = true; setTimeout(cb, 260); }
+      })();
+    }
+
+    function convert() {
+      if (!hasInk) return;
+      result.innerHTML = "<div class='hw__busy'><span class='spark'>✨</span> AI recognizing handwriting…</div>";
+      result.classList.add("show");
+      setTimeout(function () {
+        var f = FORMULAS[fi % FORMULAS.length]; fi++;
+        result.innerHTML = "<div><div class='note-formula'>" + f + "</div><div class='hw__tag'>✓ Inserted as real, editable LaTeX</div></div>";
+      }, 780);
+    }
+    function clear() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      result.classList.remove("show");
+      result.innerHTML = "";
+      hasInk = false;
+    }
+
+    if (convertBtn) convertBtn.addEventListener("click", convert);
+    if (clearBtn) clearBtn.addEventListener("click", clear);
+    onEnterOnce(root, function () { setTimeout(function () { autoDraw(convert); }, 400); });
   }
 
   /* ===========================================================================
@@ -589,6 +584,79 @@
     }
     onEnterOnce(root, animate);
     document.addEventListener("slide:enter", function (e) { if (e.target === root.closest(".slide")) animate(); });
+  }
+
+  /* ===========================================================================
+     8) Traction — time-to-first-value / AI generation usage by type /
+        7-day feature retention, drawn from data/traction.json when
+        reachable (populated by a GitHub Actions cron job that reads
+        product-usage SQL views in Supabase; see
+        .github/workflows/update-traction.yml). No fabricated fallback --
+        these three have never been shown before, so they stay "pending"
+        until real Supabase data lands rather than inventing plausible
+        analytics numbers for an investor deck.
+     ======================================================================== */
+  function initTraction() {
+    var root = $("#demo-traction");
+    if (!root) return;
+    var ttfvN = $("#tr-ttfv", root), ttfvSub = $("#tr-ttfv-sub", root);
+    var genTotal = $("#tr-gen-total", root), genList = $("#tr-gen-list", root), genSub = $("#tr-gen-sub", root);
+    var retList = $("#tr-ret-list", root), retSub = $("#tr-ret-sub", root);
+
+    var KIND_LABEL = {
+      formula: "Formula", image: "Image", diagram: "Diagram", math_graph: "Math graph",
+      sim_2d: "2D sim", sim_3d: "3D sim", animation: "Animation", threed: "3D model"
+    };
+    var FEATURE_LABEL = { ai_generation: "AI Generation", tutor: "AI Tutor", proofread: "Proofreader", note: "Notes" };
+    var FEATURE_ORDER = ["ai_generation", "tutor", "proofread", "note"];
+
+    function barRows(items, max) {
+      return items.map(function (it) {
+        var pct = max > 0 ? Math.max(4, Math.round(it.value / max * 100)) : 0;
+        return "<div class='tr-barrow'><span class='tr-barrow__lbl'>" + it.label + "</span>" +
+          "<div class='tr-barrow__bar'><div class='tr-barrow__fill' style='width:" + pct + "%'></div></div>" +
+          "<span class='tr-barrow__n'>" + it.display + "</span></div>";
+      }).join("");
+    }
+
+    function fmtDuration(s) {
+      if (s == null) return "—";
+      if (s < 90) return Math.round(s) + "s";
+      var m = Math.round(s / 60);
+      if (m < 90) return m + "m";
+      return Math.round(m / 60) + "h";
+    }
+
+    fetch("data/traction.json", { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("no traction data"); return r.json(); })
+      .then(function (d) {
+        if (d.ttfv) {
+          if (ttfvN) ttfvN.textContent = fmtDuration(d.ttfv.avgSeconds);
+          if (ttfvSub) ttfvSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span> — " + d.ttfv.usersWithValue + " users reached it";
+        }
+
+        if (d.generationUsage && d.generationUsage.length) {
+          var sorted = d.generationUsage.slice().sort(function (a, b) { return b.requests - a.requests; });
+          var total = sorted.reduce(function (sum, r) { return sum + r.requests; }, 0);
+          var max = sorted[0].requests;
+          if (genTotal) genTotal.textContent = total;
+          if (genList) genList.innerHTML = barRows(sorted.map(function (r) {
+            return { label: KIND_LABEL[r.kind] || r.kind, value: r.requests, display: r.requests };
+          }), max);
+          if (genSub) genSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span>";
+        }
+
+        if (d.featureRetention && d.featureRetention.length) {
+          var rows = d.featureRetention.slice().sort(function (a, b) {
+            return FEATURE_ORDER.indexOf(a.feature) - FEATURE_ORDER.indexOf(b.feature);
+          });
+          if (retList) retList.innerHTML = barRows(rows.map(function (r) {
+            return { label: FEATURE_LABEL[r.feature] || r.feature, value: r.repeatRate, display: r.repeatRate + "%" };
+          }), 100);
+          if (retSub) retSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span> (returned within 7 days)";
+        }
+      })
+      .catch(function () {});
   }
 
   /* ===========================================================================
@@ -642,8 +710,9 @@
     initProofreader();
     initGenerator();
     initTutor();
-    initUniverseSearch();
+    initHandwriting();
     initMarket();
+    initTraction();
     initAsk();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

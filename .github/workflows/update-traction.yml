@@ -1,0 +1,31 @@
+name: Update Traction Numbers
+
+on:
+  schedule:
+    - cron: "17 3 * * *" # daily
+  workflow_dispatch: {} # manual "Run workflow" button for a refresh right before a meeting
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch product usage numbers from Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/fetch-traction.mjs
+
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(data): refresh traction numbers from Supabase"
+          file_pattern: data/traction.json

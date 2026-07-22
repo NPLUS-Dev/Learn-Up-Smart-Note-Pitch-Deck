@@ -406,9 +406,19 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 }
 .demo-bar .tl { display: flex; gap: 6px; }
 .demo-bar .tl i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.demo-bar .live { margin-left: auto; display: inline-flex; gap: 6px; align-items: center; color: var(--ok); font-weight: 600; }
+.demo-bar .live {
+  margin-left: auto; display: inline-flex; gap: 6px; align-items: center;
+  color: var(--ok); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.03em;
+  padding: 4px 11px; border-radius: 999px;
+  border: 1px solid rgba(46, 204, 113, 0.45); background: rgba(46, 204, 113, 0.14);
+  animation: lu-live-glow 2.2s ease-in-out infinite;
+}
 .demo-bar .live .dot { background: var(--ok); animation: lu-pulse 1.6s infinite; }
 @keyframes lu-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes lu-live-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.3); }
+  50% { box-shadow: 0 0 14px 2px rgba(46, 204, 113, 0.45); }
+}
 .demo-body { padding: clamp(14px, 2vw, 20px); }
 .demo-hint { font-size: 0.84rem; color: var(--faint); margin: 0 0 12px; line-height: 1.5; }
 .demo-hint b { color: var(--accent); }
@@ -530,11 +540,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
    ========================================================================== */
 .chat { display: flex; flex-direction: column; height: 100%; }
 .chat__head { display: flex; gap: 6px; padding: 0 0 12px; align-items: center; }
-.chat__mode {
-  cursor: pointer; font-size: 0.8rem; font-weight: 700; padding: 6px 13px; border-radius: 999px;
-  border: 1px solid var(--line); color: var(--muted); background: rgba(232, 200, 150, 0.035);
-}
-.chat__mode.on { color: #06121a; background: var(--accent); border-color: var(--accent); }
 .chat__ctx { font-size: 0.74rem; color: var(--faint); margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
 .chat__ctx .dot { background: var(--ok); animation: lu-pulse 1.6s infinite; }
 .chat__log {
@@ -573,49 +578,53 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .chat__restart { margin-left: auto; padding: 6px 12px; font-size: 0.78rem; }
 
 /* =============================================================================
-   Note Universe
+   Handwriting → LaTeX
    ========================================================================== */
-.universe-wrap { position: relative; }
-.uni-search { display: flex; gap: 8px; margin-bottom: 10px; }
-.uni-search input { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 999px; padding: 9px 15px; color: var(--text); font-size: 0.88rem; font-family: var(--font-sans); }
-.uni-search input:focus { outline: none; border-color: var(--accent); }
-.uni-search button { flex: none; border-radius: 999px; padding: 9px 16px; }
-.uni-stage {
-  position: relative; width: 100%; height: clamp(330px, 52vh, 520px);
-  border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden;
-  background: radial-gradient(120% 120% at 50% 25%, #1a1340 0%, #0c0a24 60%, #07061a 100%);
-  box-shadow: var(--shadow); cursor: grab;
+.hw__video-wrap { position: relative; border-radius: 14px; overflow: hidden; margin-bottom: 12px; border: 1px solid rgba(232, 178, 112, 0.13); }
+.hw__video { display: block; width: 100%; height: auto; }
+.hw__video-tag {
+  position: absolute; bottom: 8px; left: 8px; font-size: 0.68rem; font-weight: 700;
+  color: var(--text); background: rgba(7, 10, 18, 0.62); border: 1px solid var(--line);
+  padding: 3px 9px; border-radius: 999px; backdrop-filter: blur(6px);
 }
-.uni-stage:active { cursor: grabbing; }
-.uni-stage canvas { display: block; width: 100%; height: 100%; }
-.uni-legend { margin-top: 12px; display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.82rem; color: var(--muted); }
-.uni-legend span { display: inline-flex; gap: 7px; align-items: center; }
-.uni-tip { position: absolute; top: 12px; left: 14px; font-size: 0.76rem; color: var(--muted); background: rgba(7,10,18,0.6); border: 1px solid var(--line); padding: 5px 11px; border-radius: 999px; backdrop-filter: blur(6px); }
-.uni-side { display: flex; flex-direction: column; gap: 14px; }
-.mech { padding: 14px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(255,255,255,0.02); }
-.mech b { display: flex; align-items: center; gap: 8px; }
-.mech p { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
-.mech .em { font-size: 1.1rem; }
-
-/* slide 7 ran too tall on shorter viewports (forced a scrollbar) — tighten it */
-#s-universe .section-head { margin-bottom: 12px; }
-#s-universe .section-head h2 { font-size: clamp(1.5rem, 3.2vw, 2.05rem); margin-top: 8px; }
-#s-universe .section-head .lead { font-size: 0.92rem; line-height: 1.42; margin-top: 6px; }
-#s-universe .uni-search { margin-bottom: 8px; }
-#s-universe .uni-search input, #s-universe .uni-search button { padding-top: 7px; padding-bottom: 7px; }
-#s-universe .uni-stage { height: clamp(260px, 42vh, 440px); }
-#s-universe .uni-legend { margin-top: 8px; }
-#s-universe .uni-side { gap: 10px; }
-#s-universe .mech { padding: 11px 14px; }
-#s-universe .mech p { font-size: 0.85rem; line-height: 1.42; }
+.hw__pad {
+  position: relative; border-radius: 14px; overflow: hidden;
+  height: clamp(130px, 18vh, 170px);
+  border: 1px solid rgba(232, 178, 112, 0.13);
+  background:
+    repeating-linear-gradient(transparent 0, transparent 37px, rgba(232, 178, 112, 0.05) 37px, rgba(232, 178, 112, 0.05) 38px),
+    linear-gradient(180deg, rgba(44, 37, 30, 0.22), rgba(34, 30, 28, 0.16));
+}
+.hw__canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; }
+.hw__result {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+  background: rgba(11, 15, 25, 0.92); backdrop-filter: blur(3px);
+}
+.hw__result.show { opacity: 1; }
+.hw__result .note-formula { font-size: 1.35rem; padding: 0; }
+.hw__result .hw__busy { color: var(--faint); font-style: italic; font-size: 0.9rem; }
+.hw__result .hw__busy .spark { display: inline-block; animation: lu-pulse 1s infinite; }
+.hw__result .hw__tag { position: absolute; bottom: 10px; font-size: 0.72rem; color: var(--ok); display: flex; align-items: center; gap: 6px; }
+.hw__bar { display: flex; gap: 8px; align-items: center; margin-top: 14px; }
 
 /* =============================================================================
    Traction
    ========================================================================== */
-.tr-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.tr-stat { padding: 16px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(255,255,255,0.02); text-align: center; }
-.tr-stat .n { font-size: clamp(1.4rem, 3.4vw, 2rem); font-weight: 900; color: var(--accent); }
-.tr-stat .c { font-size: 0.78rem; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+.tr-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.tr-metric { padding: 16px 18px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(255,255,255,0.02); }
+.tr-metric__head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.tr-metric__lbl { font-size: 0.8rem; color: var(--muted); }
+.tr-metric__n { font-size: clamp(1.1rem, 2.4vw, 1.4rem); font-weight: 900; color: var(--accent); font-family: var(--font-mono); }
+.tr-metric__sub { margin-top: 10px; font-size: 0.72rem; color: var(--faint); }
+.tr-metric--stat { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.tr-metric__big { font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 900; color: var(--accent); font-family: var(--font-mono); margin-top: 6px; }
+.tr-barlist { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.tr-barrow { display: grid; grid-template-columns: 66px 1fr auto; align-items: center; gap: 8px; font-size: 0.72rem; }
+.tr-barrow__lbl { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-barrow__bar { height: 8px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.tr-barrow__fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0; }
+.tr-barrow__n { color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; min-width: 26px; text-align: right; }
 .tr-feedback { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
 .fb { padding: 15px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(255,255,255,0.02); display: flex; flex-direction: column; gap: 8px; }
 .fb__top { display: flex; align-items: center; gap: 9px; }
@@ -684,6 +693,8 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .team--4 .profile h3 { font-size: 1.05rem; }
 .team--4 .profile p { font-size: 0.85rem; line-height: 1.5; margin-top: 10px; }
 .team--4 .profile .tags { margin-top: 10px; }
+/* interim 3-card state (before the 4th teammate lands) — center the odd card out */
+.team--4 .card:nth-child(3):last-child { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: calc(50% - 7px); }
 
 /* =============================================================================
    The Ask — interactive raise slider + use-of-funds
@@ -728,7 +739,7 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
   .vs { grid-template-columns: 1fr; } .vs__mid { display: none; }
   .io__arrow { transform: rotate(90deg); }
   .g-4 { grid-template-columns: repeat(2, 1fr); }
-  .tr-stats { grid-template-columns: repeat(2, 1fr); }
+  .tr-metrics { grid-template-columns: 1fr; }
   .tr-feedback { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -736,7 +747,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
   .slide__inner { padding: 64px 18px 80px; }
   .brand span.t { display: none; }
   .nav__count { min-width: 50px; }
-  .tr-stats { grid-template-columns: 1fr; }
   .io-formats { flex-direction: column; }
 }
 @media (max-height: 560px) and (min-width: 921px) {
