@@ -229,6 +229,13 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
   margin-bottom: 14px;
 }
 .card h3 { font-size: clamp(1.05rem, 2.2vw, 1.3rem); }
+/* Collapsed-by-default detail body — a hover/focus scope elsewhere (e.g.
+   #s-founder) expands max-height/opacity to reveal it. Generic primitive so
+   any card can opt in without new markup conventions. */
+.card__detail {
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.25s ease;
+}
 .card p  { color: var(--muted); line-height: 1.55; margin: 8px 0 0; font-size: 0.97rem; }
 
 .pill {
@@ -665,8 +672,31 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .profile p { color: var(--muted); font-size: 0.92rem; line-height: 1.55; margin: 14px 0 0; }
 .profile .tags { margin-top: 14px; display: flex; gap: 7px; flex-wrap: wrap; }
 .profile__en { font-size: 0.72rem; color: var(--faint); font-weight: 500; }
+/* Collapsed state shows one summary line; hover/focus expands the card in
+   place (align-items:start on .team--4 keeps un-hovered siblings from
+   stretching to match) to reveal the full bio + tags. No transform here —
+   these cards also carry .reveal, whose entrance animation holds `transform`
+   permanently via fill-mode:forwards, so a transform set here would never
+   actually apply. box-shadow/z-index are untouched by that animation. */
+.card.profile {
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.25s ease;
+}
+.card.profile:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.card.profile:hover, .card.profile:focus {
+  box-shadow: var(--shadow), var(--glow-cyan);
+  z-index: 3;
+}
+.profile__detail {
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.25s ease;
+}
+.card.profile:hover .profile__detail, .card.profile:focus .profile__detail {
+  max-height: 320px; opacity: 1;
+}
 /* 4-person team → compact 2×2 grid */
-.team--4 { gap: 14px; }
+.team--4 { gap: 14px; align-items: start; }
 .team--4 .card { padding: 16px 18px; }
 .team--4 .avatar { width: 50px; height: 50px; border-radius: 14px; font-size: 1.15rem; }
 .team--4 .profile__top { gap: 12px; }

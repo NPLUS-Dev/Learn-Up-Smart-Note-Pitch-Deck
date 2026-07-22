@@ -546,12 +546,16 @@
         if (d.generationUsage && d.generationUsage.length) {
           var sorted = d.generationUsage.slice().sort(function (a, b) { return b.requests - a.requests; });
           var total = sorted.reduce(function (sum, r) { return sum + r.requests; }, 0);
-          var max = sorted[0].requests;
+          // Only the top 5 kinds are listed -- keeps the tile scannable even as
+          // more generation kinds ship. genTotal above still counts everything.
+          var top = sorted.slice(0, 5);
+          var max = top[0].requests;
           if (genTotal) genTotal.textContent = total;
-          if (genList) genList.innerHTML = barRows(sorted.map(function (r) {
+          if (genList) genList.innerHTML = barRows(top.map(function (r) {
             return { label: KIND_LABEL[r.kind] || r.kind, value: r.requests, display: r.requests };
           }), max);
-          if (genSub) genSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span>";
+          if (genSub) genSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span>" +
+            (sorted.length > 5 ? " — top 5 of " + sorted.length + " types" : "");
         }
 
         if (d.featureRetention && d.featureRetention.length) {

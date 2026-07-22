@@ -11,13 +11,21 @@
     /* EN-only density tweaks — the English copy runs longer than the Korean,
        so the dense Team grid and the populated Proofreader list need a little
        less internal spacing to stay within one screen. Scoped to this deck only. */
-    #s-team .section-head { margin-bottom: 10px; }
-    #s-team .team--4 { gap: 12px; }
+    #s-team .section-head { margin-bottom: 7px; }
+    #s-team .section-head h2 { font-size: clamp(1.4rem, 2.8vw, 2.1rem); margin-top: 6px; }
+    #s-team .section-head .lead { font-size: 0.88rem; line-height: 1.4; margin-top: 5px; }
+    #s-team .team--4 { gap: 10px; }
     #s-team .team--4 .card { padding: 11px 15px; }
     #s-team .team--4 .avatar { width: 44px; height: 44px; font-size: 1.05rem; }
     #s-team .team--4 .profile__top { gap: 11px; }
     #s-team .team--4 .profile p { margin-top: 6px; line-height: 1.42; font-size: 0.83rem; }
     #s-team .team--4 .profile .tags { margin-top: 7px; }
+    /* Hover/focus-only detail body — trimmed tighter than the always-visible
+       summary line since it's transient content, to keep the expanded card
+       from pushing the slide taller than the viewport. */
+    #s-team .team--4 .profile__detail p { font-size: 0.78rem; line-height: 1.32; margin-top: 5px; }
+    #s-team .team--4 .profile__detail .tags { margin-top: 6px; gap: 5px; }
+    #s-team .team--4 .profile__detail .tags .pill { font-size: 0.68rem; padding: 3px 8px; }
     #s-proof .demo-body { padding: 13px; }
     #s-proof .demo-hint { margin-bottom: 8px; }
     #s-proof .proof__doc { padding: 12px 14px; }
@@ -29,8 +37,15 @@
     #s-founder .section-head { margin-bottom: 14px; }
     #s-founder .section-head h2 { font-size: clamp(1.3rem, 2.6vw, 1.9rem); margin-top: 10px; }
     #s-founder .section-head .lead { font-size: 0.85rem; line-height: 1.45; margin-top: 8px; }
-    #s-founder .grid { gap: 10px; }
-    #s-founder .card { padding: 12px 15px; }
+    #s-founder .grid { gap: 10px; align-items: start; }
+    /* No transform on hover: these cards carry .reveal, whose entrance
+       animation permanently owns `transform` via fill-mode:forwards. */
+    #s-founder .card { padding: 12px 15px; cursor: pointer; position: relative; transition: box-shadow 0.25s ease; }
+    #s-founder .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    #s-founder .card:hover, #s-founder .card:focus {
+      box-shadow: var(--shadow), var(--glow-cyan); z-index: 3;
+    }
+    #s-founder .card:hover .card__detail, #s-founder .card:focus .card__detail { max-height: 200px; opacity: 1; }
     #s-founder .card__icon { width: 34px; height: 34px; font-size: 1.05rem; margin-bottom: 7px; border-radius: 10px; }
     #s-founder .card h3 { font-size: 0.92rem; }
     #s-founder .card p { font-size: 0.79rem; line-height: 1.4; margin-top: 5px; }
@@ -320,7 +335,7 @@
           <div class="fb">
             <div class="fb__top"><span class="fb__av">B</span><span class="fb__time">First session 50m · returned ✓</span></div>
             <p class="fb__q">"<b>Proofreading and AI generation are useful.</b> Fix the lag and I'd use this over Obsidian. Running both for now."</p>
-            <div class="fb__tags"><span class="pill cy">Currently running both in parallel</span><span class="pill warn">Lag → being optimized</span></div>
+            <div class="fb__tags"><span class="pill cy">Currently running both in parallel</span><span class="pill ok">✅ Lag fixed — multiple profiling rounds</span></div>
           </div>
           <div class="fb">
             <div class="fb__top"><span class="fb__av">C</span><span class="fb__time">First session 2h30m · returned ✓</span></div>
@@ -328,7 +343,7 @@
             <div class="fb__tags"><span class="pill ok">✅ PDF import fixed</span></div>
           </div>
         </div>
-        <div class="tr-note reveal" data-d="4">✍️ <b>Strongest signal</b> — a <b>2.5-hour</b> first session of immersion says this is already "usable" for active learners. (Honest weakness: lag/performance is our top priority — fixing it now.)</div>
+        <div class="tr-note reveal" data-d="4">✍️ <b>Strongest signal</b> — a <b>2.5-hour</b> first session of immersion says this is already "usable" for active learners. (Lag was the top piece of honest feedback — since <b>fixed</b> after several rounds of performance profiling.)</div>
       </div>
     </section>
 
@@ -388,37 +403,49 @@
           <p class="lead">Product, backend, and AI built solo — now joined by two&nbsp;Engineers and one Advisor.</p>
         </div>
         <div class="team team--4">
-          <div class="card profile reveal" data-d="2">
+          <div class="card profile reveal" data-d="2" tabindex="0">
             <div class="profile__top">
               <div class="avatar">SQ</div>
               <div><h3>Sean Channie Quinn <span class="profile__en">South Korea</span></h3><div class="role">Founder · Full-stack Builder</div></div>
             </div>
-            <p>Changwon Science High School — <b style="color:var(--text)">the target user himself</b>. Built Smart Note's FE, BE, and AI <b style="color:var(--text)">solo</b>. (Next two&nbsp;slides.)</p>
-            <div class="tags"><span class="pill cy">8 years full-stack</span><span class="pill ok">Built the demo solo</span></div>
+            <p class="profile__summary">The target user himself — built Smart Note's FE, BE, and AI&nbsp;solo.</p>
+            <div class="profile__detail">
+              <p>Changwon Science High School — <b style="color:var(--text)">the target user himself</b>. Built Smart Note's FE, BE, and AI <b style="color:var(--text)">solo</b>. (Next two&nbsp;slides.)</p>
+              <div class="tags"><span class="pill cy">8 years full-stack</span><span class="pill ok">Built the demo solo</span></div>
+            </div>
           </div>
-          <div class="card profile reveal" data-d="3">
+          <div class="card profile reveal" data-d="3" tabindex="0">
             <div class="profile__top">
               <div class="avatar" style="background:linear-gradient(135deg,#9D7AF0,#EA8FC7)">204</div>
               <div><h3>Baek Kang-hyun <span class="profile__en">South Korea</span></h3><div class="role">Advisor · Brand &amp; Growth</div></div>
             </div>
-            <p>IQ <b style="color:var(--text)">204 (Mensa-verified)</b>; on <b style="color:var(--text)">national broadcasts</b> (YTN, SBS) since childhood as a prodigy — proven credibility and buzz in education. After leaving science high school, still applied to Oxford and solo-shipped a strategy puzzle RPG game (2026-04) — buzz backed by&nbsp;execution.</p>
-            <div class="tags"><span class="pill vi">Multiple national broadcast appearances</span><span class="pill">Education-market buzz</span><span class="pill ok">Shipped a game solo</span></div>
+            <p class="profile__summary">Mensa-verified IQ 204, national broadcast prodigy — who also shipped a solo&nbsp;game.</p>
+            <div class="profile__detail">
+              <p>IQ <b style="color:var(--text)">204 (Mensa-verified)</b>; on <b style="color:var(--text)">national broadcasts</b> (YTN, SBS) since childhood as a prodigy — proven credibility and buzz in education. After leaving science high school, still applied to Oxford and solo-shipped a strategy puzzle RPG game (2026-04) — buzz backed by&nbsp;execution.</p>
+              <div class="tags"><span class="pill vi">Multiple national broadcast appearances</span><span class="pill">Education-market buzz</span><span class="pill ok">Shipped a game solo</span></div>
+            </div>
           </div>
-          <div class="card profile reveal" data-d="4">
+          <div class="card profile reveal" data-d="4" tabindex="0">
             <div class="profile__top">
               <div class="avatar" style="background:linear-gradient(135deg,#D8B46A,#EA8FC7)">OM</div>
               <div><h3>Olzhas Mukhtarov <span class="profile__en">Kazakhstan</span></h3><div class="role">Engineer</div></div>
             </div>
-            <p><b style="color:var(--text)">$200k+ revenue</b> from an internet-cafe networking business at 13; founded an academy, published multiple papers. Built <b style="color:var(--text)">vLLM from scratch</b> (no libraries); computer vision research at NU (GSB). Security researcher who found Cursor/Windsurf editor vulnerabilities and <b style="color:var(--text)">responsibly disclosed</b>&nbsp;them.</p>
-            <div class="tags"><span class="pill">AI / Eng</span><span class="pill ok">$200k+ revenue business</span><span class="pill cy">Security research</span></div>
+            <p class="profile__summary">From-scratch vLLM builder with a $200k+ revenue business and security research&nbsp;chops.</p>
+            <div class="profile__detail">
+              <p><b style="color:var(--text)">$200k+ revenue</b> from an internet-cafe networking business at 13; founded an academy, published multiple papers. Built <b style="color:var(--text)">vLLM from scratch</b> (no libraries); computer vision research at NU (GSB). Security researcher who found Cursor/Windsurf editor vulnerabilities and <b style="color:var(--text)">responsibly disclosed</b>&nbsp;them.</p>
+              <div class="tags"><span class="pill">AI / Eng</span><span class="pill ok">$200k+ revenue business</span><span class="pill cy">Security research</span></div>
+            </div>
           </div>
-          <div class="card profile reveal" data-d="5">
+          <div class="card profile reveal" data-d="5" tabindex="0">
             <div class="profile__top">
               <div class="avatar" style="background:linear-gradient(135deg,#5DA7F0,#2ECC71)">SS</div>
               <div><h3>Siddharth S <span class="profile__en">India</span></h3><div class="role">Engineer</div></div>
             </div>
-            <p>A hardware-to-web generalist — <b style="color:var(--text)">Godot·GDScript</b> game-engine background plus <b style="color:var(--text)">Python, Java, C++, JS/TS</b> across <b style="color:var(--text)">React·Next, Processing, Arduino</b>, with <b style="color:var(--text)">machine learning</b> as a focus domain. Spent <b style="color:var(--text)">9 months at NPLUS</b>, serving as a core developer across <b style="color:var(--text)">two shipped projects</b>.</p>
-            <div class="tags"><span class="pill">Full-stack · Game engines</span><span class="pill cy">9 months at NPLUS</span><span class="pill ok">2 projects shipped</span></div>
+            <p class="profile__summary">Hardware-to-web generalist (Godot→React, ML) — 2 projects shipped at&nbsp;NPLUS.</p>
+            <div class="profile__detail">
+              <p>A hardware-to-web generalist — <b style="color:var(--text)">Godot·GDScript</b> game-engine background plus <b style="color:var(--text)">Python, Java, C++, JS/TS</b> across <b style="color:var(--text)">React·Next, Processing, Arduino</b>, with <b style="color:var(--text)">machine learning</b> as a focus domain. Spent <b style="color:var(--text)">9 months at NPLUS</b>, serving as a core developer across <b style="color:var(--text)">two shipped projects</b>.</p>
+              <div class="tags"><span class="pill">Full-stack · Game engines</span><span class="pill cy">9 months at NPLUS</span><span class="pill ok">2 projects shipped</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -435,35 +462,35 @@
           <p class="lead">Programming since 2018 — 8 years across game engines, hardware, and full-stack, building Smart Note's <b style="color:var(--text)">FE, BE, and AI solo</b>. Also leading teams of <b style="color:var(--text)">70-80 people across 9 projects</b> since 2020 — Smart Note is his ninth, and he already runs his own venture as&nbsp;CEO.</p>
         </div>
         <div class="grid g-3">
-          <div class="card reveal" data-d="2">
+          <div class="card reveal" data-d="2" tabindex="0">
             <div class="card__icon">🧰</div>
             <h3>8 years full-stack</h3>
-            <p><b style="color:var(--text)">UE5·C++</b> games → <b style="color:var(--text)">React·Next</b> web → <b style="color:var(--text)">Nest·PostgreSQL</b> servers → <b style="color:var(--text)">CI/CD·AWS</b> infra — one person building the whole&nbsp;stack.</p>
+            <div class="card__detail"><p><b style="color:var(--text)">UE5·C++</b> games → <b style="color:var(--text)">React·Next</b> web → <b style="color:var(--text)">Nest·PostgreSQL</b> servers → <b style="color:var(--text)">CI/CD·AWS</b> infra — one person building the whole&nbsp;stack.</p></div>
           </div>
-          <div class="card reveal" data-d="3">
+          <div class="card reveal" data-d="3" tabindex="0">
             <div class="card__icon">🧠</div>
             <h3>Depth down to the hardware</h3>
-            <p>Reads a line of CNN code down to <b style="color:var(--text)">memory layout, cache, and GPU tensor cores</b> — never stops at the abstraction&nbsp;layer.</p>
+            <div class="card__detail"><p>Reads a line of CNN code down to <b style="color:var(--text)">memory layout, cache, and GPU tensor cores</b> — never stops at the abstraction&nbsp;layer.</p></div>
           </div>
-          <div class="card reveal" data-d="4">
+          <div class="card reveal" data-d="4" tabindex="0">
             <div class="card__icon">∑</div>
             <h3>CS theory · Mathematics</h3>
-            <p>Breaks Quake III's "fast inverse square root" to the bit level, proves convergence via the <b style="color:var(--text)">Banach fixed-point theorem</b>.</p>
+            <div class="card__detail"><p>Breaks Quake III's "fast inverse square root" to the bit level, proves convergence via the <b style="color:var(--text)">Banach fixed-point theorem</b>.</p></div>
           </div>
-          <div class="card reveal" data-d="5">
+          <div class="card reveal" data-d="5" tabindex="0">
             <div class="card__icon">🚀</div>
             <h3>6 years · 9 projects</h3>
-            <p><b style="color:var(--text)">70-80 people</b> cumulatively. When exam season scattered a team, he regrouped and <b style="color:var(--text)">shipped&nbsp;anyway</b>.</p>
+            <div class="card__detail"><p><b style="color:var(--text)">70-80 people</b> cumulatively. When exam season scattered a team, he regrouped and <b style="color:var(--text)">shipped&nbsp;anyway</b>.</p></div>
           </div>
-          <div class="card reveal" data-d="6">
+          <div class="card reveal" data-d="6" tabindex="0">
             <div class="card__icon">🌏</div>
             <h3>Running global teams</h3>
-            <p>Mostly-foreign teams run in <b style="color:var(--text)">English-language meetings</b> — built for remote, async&nbsp;collaboration.</p>
+            <div class="card__detail"><p>Mostly-foreign teams run in <b style="color:var(--text)">English-language meetings</b> — built for remote, async&nbsp;collaboration.</p></div>
           </div>
-          <div class="card reveal" data-d="6">
+          <div class="card reveal" data-d="6" tabindex="0">
             <div class="card__icon">🎯</div>
             <h3>All-in on the startup</h3>
-            <p><b style="color:var(--text)">Leave of absence</b> from science high school, Dec 2025 — betting his time on product and fundraising over&nbsp;grades.</p>
+            <div class="card__detail"><p><b style="color:var(--text)">Leave of absence</b> from science high school, Dec 2025 — betting his time on product and fundraising over&nbsp;grades.</p></div>
           </div>
         </div>
         <p class="reveal" data-d="7" style="margin-top:16px;font-size:0.92rem;color:var(--muted)">＋ Outside validation: a <b style="color:var(--text)">six-figure YC Co-founder Matching offer</b> · a $2,450 UE5 contract · a <b style="color:var(--text)">Shark Tank Korea</b> invite. That same matching brought Olzhas (<b style="color:var(--text)">$200k+ revenue, from-scratch vLLM</b>) and Baek Kang-hyun aboard — the market noticed&nbsp;first.</p>
