@@ -486,92 +486,6 @@
   }
 
   /* ===========================================================================
-     6) Handwriting → LaTeX — draw a formula, AI recognizes it as real math
-     ======================================================================== */
-  function initHandwriting() {
-    var root = $("#demo-handwriting");
-    if (!root) return;
-    var canvas = $(".hw__canvas", root);
-    var result = $(".hw__result", root);
-    var convertBtn = $(".hw__convert", root);
-    var clearBtn = $(".hw__clear", root);
-    var ctx = canvas.getContext("2d");
-    var drawing = false, hasInk = false;
-
-    var FORMULAS = [
-      "<math xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>b</mi><mo>&#177;</mo><msqrt><msup><mi>b</mi><mn>2</mn></msup><mo>-</mo><mn>4</mn><mi>a</mi><mi>c</mi></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math>",
-      "<math xmlns='http://www.w3.org/1998/Math/MathML'><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></math>",
-      "<math xmlns='http://www.w3.org/1998/Math/MathML'><msup><mi>e</mi><mrow><mi>i</mi><mi>&#960;</mi></mrow></msup><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn></math>"
-    ];
-    var fi = 0;
-
-    function resize() {
-      var rect = canvas.getBoundingClientRect();
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.max(1, Math.round(rect.width * dpr));
-      canvas.height = Math.max(1, Math.round(rect.height * dpr));
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.lineCap = "round"; ctx.lineJoin = "round";
-      ctx.strokeStyle = "#00E5FF"; ctx.lineWidth = 2.4;
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    function pos(e) {
-      var rect = canvas.getBoundingClientRect();
-      var t = e.touches ? e.touches[0] : e;
-      return { x: t.clientX - rect.left, y: t.clientY - rect.top };
-    }
-    function start(e) { drawing = true; hasInk = true; var p = pos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); if (e.cancelable) e.preventDefault(); }
-    function move(e) { if (!drawing) return; var p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); if (e.cancelable) e.preventDefault(); }
-    function stop() { drawing = false; }
-    canvas.addEventListener("mousedown", start);
-    canvas.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", stop);
-    canvas.addEventListener("touchstart", start, { passive: false });
-    canvas.addEventListener("touchmove", move, { passive: false });
-    canvas.addEventListener("touchend", stop);
-
-    // simulated pen stroke — plays once on slide entry so the demo has
-    // something to show before the visitor draws their own
-    function autoDraw(cb) {
-      var rect = canvas.getBoundingClientRect();
-      var w = rect.width, h = rect.height, cx = w / 2, cy = h / 2;
-      var steps = 70, i = 0;
-      ctx.beginPath();
-      (function step() {
-        i++;
-        var p = i / steps;
-        var x = cx + (p - 0.5) * w * 0.72 + Math.sin(p * 9) * 6;
-        var y = cy + Math.sin(p * Math.PI * 2.4) * h * 0.22 + (p - 0.5) * 8;
-        if (i === 1) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        ctx.stroke();
-        if (i < steps) requestAnimationFrame(step); else { hasInk = true; setTimeout(cb, 260); }
-      })();
-    }
-
-    function convert() {
-      if (!hasInk) return;
-      result.innerHTML = "<div class='hw__busy'><span class='spark'>✨</span> AI recognizing handwriting…</div>";
-      result.classList.add("show");
-      setTimeout(function () {
-        var f = FORMULAS[fi % FORMULAS.length]; fi++;
-        result.innerHTML = "<div><div class='note-formula'>" + f + "</div><div class='hw__tag'>✓ Inserted as real, editable LaTeX</div></div>";
-      }, 780);
-    }
-    function clear() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      result.classList.remove("show");
-      result.innerHTML = "";
-      hasInk = false;
-    }
-
-    if (convertBtn) convertBtn.addEventListener("click", convert);
-    if (clearBtn) clearBtn.addEventListener("click", clear);
-    onEnterOnce(root, function () { setTimeout(function () { autoDraw(convert); }, 400); });
-  }
-
-  /* ===========================================================================
      7) TAM/SAM/SOM ring chart
      ======================================================================== */
   function initMarket() {
@@ -710,7 +624,6 @@
     initProofreader();
     initGenerator();
     initTutor();
-    initHandwriting();
     initMarket();
     initTraction();
     initAsk();

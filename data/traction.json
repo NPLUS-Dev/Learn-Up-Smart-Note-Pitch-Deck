@@ -1,6 +1,75 @@
 {
-  "ttfv": null,
-  "generationUsage": null,
-  "featureRetention": null,
-  "updatedAt": null
+  "ttfv": {
+    "usersWithValue": 19,
+    "avgSeconds": 211018
+  },
+  "generationUsage": [
+    {
+      "kind": "animation",
+      "requests": 7,
+      "users": 4
+    },
+    {
+      "kind": "diagram",
+      "requests": 11,
+      "users": 2
+    },
+    {
+      "kind": "formula",
+      "requests": 21,
+      "users": 5
+    },
+    {
+      "kind": "image",
+      "requests": 20,
+      "users": 7
+    },
+    {
+      "kind": "math_graph",
+      "requests": 22,
+      "users": 12
+    },
+    {
+      "kind": "sim_2d",
+      "requests": 6,
+      "users": 2
+    },
+    {
+      "kind": "sim_3d",
+      "requests": 4,
+      "users": 1
+    },
+    {
+      "kind": "threed",
+      "requests": 9,
+      "users": 2
+    }
+  ],
+  "featureRetention": [
+    {
+      "feature": "ai_generation",
+      "totalFirstUsers": 20,
+      "repeatUsers": 11,
+      "repeatRate": 55
+    },
+    {
+      "feature": "note",
+      "totalFirstUsers": 9,
+      "repeatUsers": 1,
+      "repeatRate": 11.1
+    },
+    {
+      "feature": "proofread",
+      "totalFirstUsers": 4,
+      "repeatUsers": 3,
+      "repeatRate": 75
+    },
+    {
+      "feature": "tutor",
+      "totalFirstUsers": 16,
+      "repeatUsers": 11,
+      "repeatRate": 68.8
+    }
+  ],
+  "updatedAt": "2026-07-22T08:48:51.882Z"
 }

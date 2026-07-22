@@ -24,6 +24,31 @@
     #s-proof .proof__bar { margin: 10px 0; }
     #s-proof .proof__list { gap: 7px; }
     #s-proof .proof__item { padding: 8px 12px; }
+    /* #s-founder merges two former slides into one 2-row×3 card grid — same
+       density-compaction approach as #s-team/#s-proof above. */
+    #s-founder .section-head { margin-bottom: 14px; }
+    #s-founder .section-head h2 { font-size: clamp(1.3rem, 2.6vw, 1.9rem); margin-top: 10px; }
+    #s-founder .section-head .lead { font-size: 0.85rem; line-height: 1.45; margin-top: 8px; }
+    #s-founder .grid { gap: 10px; }
+    #s-founder .card { padding: 12px 15px; }
+    #s-founder .card__icon { width: 34px; height: 34px; font-size: 1.05rem; margin-bottom: 7px; border-radius: 10px; }
+    #s-founder .card h3 { font-size: 0.92rem; }
+    #s-founder .card p { font-size: 0.79rem; line-height: 1.4; margin-top: 5px; }
+    /* #s-traction: with live Supabase data, the generation-usage bar list can
+       run to 8 rows (vs. 0 in the empty/pending state), overflowing the slide. */
+    #s-traction .section-head { margin-bottom: 10px; }
+    #s-traction .section-head h2 { margin-top: 8px; font-size: clamp(1.3rem, 3vw, 2.05rem); }
+    #s-traction .section-head .lead { margin-top: 6px; font-size: 0.86rem; line-height: 1.4; }
+    #s-traction .tr-metrics { gap: 10px; }
+    #s-traction .tr-metric { padding: 8px 12px; }
+    #s-traction .tr-metric__sub { margin-top: 5px; }
+    #s-traction .tr-barlist { gap: 2px; margin-top: 5px; }
+    #s-traction .tr-barrow { font-size: 0.66rem; }
+    #s-traction .tr-barrow__bar { height: 5px; }
+    #s-traction .tr-feedback { margin-top: 6px; gap: 8px; }
+    #s-traction .fb { padding: 8px 12px; gap: 4px; }
+    #s-traction .fb__q { font-size: 0.77rem; line-height: 1.36; }
+    #s-traction .tr-note { margin-top: 6px; padding: 7px 11px; font-size: 0.78rem; line-height: 1.35; }
   </style>
 </head>
 <body>
@@ -240,26 +265,17 @@
               <li><div class="b">✍️</div><div><b>No LaTeX syntax to memorize</b><p>Draw the formula the way you already do on paper — <b style="color:var(--text)">mouse, trackpad, or&nbsp;stylus</b>.</p></div></li>
               <li><div class="b">∑</div><div><b>Dropped in as real, typeset math</b><p>Not an image — the recognized formula becomes <b style="color:var(--text)">editable, native LaTeX</b> right at the&nbsp;cursor.</p></div></li>
             </ul>
-            <p class="feat__note">💡 Draw your own in the box on the right, or hit <b>↻ Draw another</b> to see it recognize a different&nbsp;formula.</p>
+            <p class="feat__note">▶ Real product footage on the right — the shipped feature, not a&nbsp;mockup.</p>
           </div>
           <div class="feat__demo reveal" data-d="3">
             <div class="demo-frame" id="demo-handwriting">
-              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> Handwriting → LaTeX <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
+              <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> Handwriting → LaTeX</div>
               <div class="demo-body">
-                <p class="demo-hint">▶ <b>The real app</b>, below — then draw your own and press <b>Convert to LaTeX</b> to try it yourself.</p>
                 <div class="hw__video-wrap">
                   <video class="hw__video" autoplay loop muted playsinline preload="auto">
                     <source src="media/formula-demo.mp4" type="video/mp4">
                   </video>
                   <span class="hw__video-tag">Real product footage</span>
-                </div>
-                <div class="hw__pad">
-                  <canvas class="hw__canvas"></canvas>
-                  <div class="hw__result"></div>
-                </div>
-                <div class="hw__bar">
-                  <button class="btn hw__convert">✨ Convert to LaTeX</button>
-                  <button class="btn ghost hw__clear" style="font-size:0.82rem;padding:9px 14px">↻ Draw another</button>
                 </div>
               </div>
             </div>
@@ -409,63 +425,48 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 14 — FOUNDER DEEP-DIVE 1 · Engineer
+         SLIDE 14 — FOUNDER DEEP-DIVE · Engineer + Operator
          ================================================================= -->
-    <section class="slide" id="s-founder-eng" data-title="Founder · Engineer">
+    <section class="slide" id="s-founder" data-title="Founder Deep-Dive">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
           <span class="kicker"><span class="num">14</span> · Founder Deep-Dive</span>
-          <h2>The <span class="hl">engineer</span> who built this demo alone</h2>
-          <p class="lead">Programming since 2018 — 8 years spanning game engines, hardware optimization, and full-stack. He built Smart Note's <b style="color:var(--text)">FE, BE, and AI all himself</b>.</p>
+          <h2>The <span class="hl">engineer</span> who built this alone — <br>and the <span class="hl-v">operator</span> who's led teams for 6&nbsp;years</h2>
+          <p class="lead">Programming since 2018 — 8 years across game engines, hardware, and full-stack, building Smart Note's <b style="color:var(--text)">FE, BE, and AI solo</b>. Also leading teams of <b style="color:var(--text)">70-80 people across 9 projects</b> since 2020 — Smart Note is his ninth, and he already runs his own venture as&nbsp;CEO.</p>
         </div>
         <div class="grid g-3">
           <div class="card reveal" data-d="2">
             <div class="card__icon">🧰</div>
             <h3>8 years full-stack</h3>
-            <p>Games in <b style="color:var(--text)">UE5·C++</b> →<br>web in <b style="color:var(--text)">React·Next</b> →<br>server in <b style="color:var(--text)">Nest·PostgreSQL</b> →<br>infra in <b style="color:var(--text)">CI/CD·AWS</b>.<br>One person building the entire stack&nbsp;directly.</p>
+            <p><b style="color:var(--text)">UE5·C++</b> games → <b style="color:var(--text)">React·Next</b> web → <b style="color:var(--text)">Nest·PostgreSQL</b> servers → <b style="color:var(--text)">CI/CD·AWS</b> infra — one person building the whole&nbsp;stack.</p>
           </div>
           <div class="card reveal" data-d="3">
             <div class="card__icon">🧠</div>
             <h3>Depth down to the hardware</h3>
-            <p>Reads a single line of CNN code down to <b style="color:var(--text)">memory layout, cache, and GPU tensor cores</b>.<br>Never stops at the abstraction layer.</p>
+            <p>Reads a line of CNN code down to <b style="color:var(--text)">memory layout, cache, and GPU tensor cores</b> — never stops at the abstraction&nbsp;layer.</p>
           </div>
           <div class="card reveal" data-d="4">
             <div class="card__icon">∑</div>
             <h3>CS theory · Mathematics</h3>
-            <p>Breaks down Quake III's "fast inverse square root" to the bit level and Newton's method.<br>Proves iterative convergence via the <b style="color:var(--text)">Banach fixed-point theorem</b>.</p>
+            <p>Breaks Quake III's "fast inverse square root" to the bit level, proves convergence via the <b style="color:var(--text)">Banach fixed-point theorem</b>.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         SLIDE 15 — FOUNDER DEEP-DIVE 2 · Builder & Operator
-         ================================================================= -->
-    <section class="slide" id="s-founder-ops" data-title="Founder · Operator">
-      <div class="slide__inner">
-        <div class="section-head reveal" data-d="1">
-          <span class="kicker"><span class="num">15</span> · Founder Deep-Dive</span>
-          <h2>A builder who's <span class="hl">led teams<br>non-stop for 6 years</span></h2>
-          <p class="lead">Leading projects since 2020 with 70-80 collaborators, <br>Smart Note is his <b style="color:var(--text)">ninth</b> — and he already runs his own venture as&nbsp;CEO.</p>
-        </div>
-        <div class="grid g-3">
-          <div class="card reveal" data-d="2">
+          <div class="card reveal" data-d="5">
             <div class="card__icon">🚀</div>
             <h3>6 years · 9 projects</h3>
-            <p><b style="color:var(--text)">70-80 people</b> cumulatively (avg. team ~10). When exam season scattered a team, he regrouped and <b style="color:var(--text)">shipped&nbsp;anyway</b>.</p>
+            <p><b style="color:var(--text)">70-80 people</b> cumulatively. When exam season scattered a team, he regrouped and <b style="color:var(--text)">shipped&nbsp;anyway</b>.</p>
           </div>
-          <div class="card reveal" data-d="3">
+          <div class="card reveal" data-d="6">
             <div class="card__icon">🌏</div>
             <h3>Running global teams</h3>
-            <p>Teams of mostly foreign members, run via <b style="color:var(--text)">English-language meetings</b> — communication built for remote, async collaboration.</p>
+            <p>Mostly-foreign teams run in <b style="color:var(--text)">English-language meetings</b> — built for remote, async&nbsp;collaboration.</p>
           </div>
-          <div class="card reveal" data-d="4">
+          <div class="card reveal" data-d="6">
             <div class="card__icon">🎯</div>
-            <h3>All in on the startup, over school</h3>
-            <p><b style="color:var(--text)">Leave of absence</b> from science high school, December 2025 — an <b style="color:var(--text)">all-in founder</b> betting his time on product, team, and fundraising over&nbsp;grades.</p>
+            <h3>All-in on the startup</h3>
+            <p><b style="color:var(--text)">Leave of absence</b> from science high school, Dec 2025 — betting his time on product and fundraising over&nbsp;grades.</p>
           </div>
         </div>
-        <p class="reveal" data-d="5" style="margin-top:18px;font-size:0.92rem;color:var(--muted)">＋ Outside validation: a <b style="color:var(--text)">six-figure salary offer via YC Co-founder Matching</b> · a $2,450 UE5 contract offer · a <b style="color:var(--text)">Shark Tank Korea</b> invite. Via that same YC matching, two joined — Olzhas (<b style="color:var(--text)">$200k+ revenue business, from-scratch vLLM</b>) and Baek Kang-hyun (nationwide recognition). The market noticed&nbsp;first.</p>
+        <p class="reveal" data-d="7" style="margin-top:16px;font-size:0.92rem;color:var(--muted)">＋ Outside validation: a <b style="color:var(--text)">six-figure YC Co-founder Matching offer</b> · a $2,450 UE5 contract · a <b style="color:var(--text)">Shark Tank Korea</b> invite. That same matching brought Olzhas (<b style="color:var(--text)">$200k+ revenue, from-scratch vLLM</b>) and Baek Kang-hyun aboard — the market noticed&nbsp;first.</p>
       </div>
     </section>
 
@@ -515,7 +516,7 @@
 <!-- navigation chrome -->
 <div class="nav" role="navigation" aria-label="Slide navigation">
   <button class="nav__btn nav__prev" aria-label="Previous slide">‹</button>
-  <span class="nav__count" title="Open outline (M)"><b>01</b> / 13</span>
+  <span class="nav__count" title="Open outline (M)"><b>01</b> / 12</span>
   <button class="nav__btn nav__next" aria-label="Next slide">›</button>
 </div>
 
