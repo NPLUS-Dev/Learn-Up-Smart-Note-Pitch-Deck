@@ -501,19 +501,21 @@
   }
 
   /* ===========================================================================
-     8) Traction — time-to-first-value / AI generation usage by type /
+     8) Traction — signed-up users / AI generation usage by type /
         7-day feature retention, drawn from data/traction.json when
         reachable (populated by a GitHub Actions cron job that reads
         product-usage SQL views in Supabase; see
         .github/workflows/update-traction.yml). No fabricated fallback --
-        these three have never been shown before, so they stay "pending"
-        until real Supabase data lands rather than inventing plausible
-        analytics numbers for an investor deck.
+        these three stay "pending" until real Supabase data lands rather
+        than inventing plausible analytics numbers for an investor deck.
+        Time-to-first-value was pulled from this tile pending a review of
+        v_time_to_first_value_summary's averaging methodology (no session
+        window, straight mean) -- sign-up count is unambiguous meanwhile.
      ======================================================================== */
   function initTraction() {
     var root = $("#demo-traction");
     if (!root) return;
-    var ttfvN = $("#tr-ttfv", root), ttfvSub = $("#tr-ttfv-sub", root);
+    var signupsN = $("#tr-signups", root), signupsSub = $("#tr-signups-sub", root);
     var genTotal = $("#tr-gen-total", root), genList = $("#tr-gen-list", root), genSub = $("#tr-gen-sub", root);
     var retList = $("#tr-ret-list", root), retSub = $("#tr-ret-sub", root);
 
@@ -533,20 +535,12 @@
       }).join("");
     }
 
-    function fmtDuration(s) {
-      if (s == null) return "—";
-      if (s < 90) return Math.round(s) + "s";
-      var m = Math.round(s / 60);
-      if (m < 90) return m + "m";
-      return Math.round(m / 60) + "h";
-    }
-
     fetch("data/traction.json", { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("no traction data"); return r.json(); })
       .then(function (d) {
-        if (d.ttfv) {
-          if (ttfvN) ttfvN.textContent = fmtDuration(d.ttfv.avgSeconds);
-          if (ttfvSub) ttfvSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span> — " + d.ttfv.usersWithValue + " users reached it";
+        if (d.signups) {
+          if (signupsN) signupsN.textContent = d.signups.total;
+          if (signupsSub) signupsSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span>";
         }
 
         if (d.generationUsage && d.generationUsage.length) {

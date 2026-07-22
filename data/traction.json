@@ -1,7 +1,6 @@
 {
-  "ttfv": {
-    "usersWithValue": 19,
-    "avgSeconds": 211018
+  "signups": {
+    "total": 78
   },
   "generationUsage": [
     {
@@ -71,5 +70,5 @@
       "repeatRate": 68.8
     }
   ],
-  "updatedAt": "2026-07-22T08:48:51.882Z"
+  "updatedAt": "2026-07-22T09:10:35.468Z"
 }

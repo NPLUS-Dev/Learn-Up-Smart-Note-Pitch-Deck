@@ -1,16 +1,19 @@
 // Pulls real product-usage numbers from Supabase for the pitch deck's
-// Traction slide: time-to-first-value, AI generation usage by type, and
+// Traction slide: total signed-up users, AI generation usage by type, and
 // 7-day feature retention. These come from SQL views defined in
 // "Spinel Server/migrations/023_analytics_views.sql"
-// (v_time_to_first_value_summary, v_ai_generation_usage, v_feature_retention)
-// -- product-specific numbers, not generic web traffic. Run by
-// .github/workflows/update-traction.yml on a daily cron -- writes
-// data/traction.json, which the deck fetches at load time and shows
-// "pending" (no fabricated numbers) on any failure -- including when the
-// deck is opened via file://, or before this workflow has ever run
+// (v_signups, v_ai_generation_usage, v_feature_retention) -- product-specific
+// numbers, not generic web traffic. Run by .github/workflows/update-traction.yml
+// on a daily cron -- writes data/traction.json, which the deck fetches at load
+// time and shows "pending" (no fabricated numbers) on any failure -- including
+// when the deck is opened via file://, or before this workflow has ever run
 // successfully. No npm dependencies: a plain authenticated REST GET against
 // Supabase's PostgREST API (service-role key), matching this repo's
 // zero-dependency philosophy.
+//
+// Time-to-first-value (v_time_to_first_value_summary) was dropped from here
+// pending a review of that view's averaging methodology -- see the TTFV
+// handoff investigation. Sign-up count is unambiguous in the meantime.
 import { writeFile, mkdir } from "node:fs/promises";
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -30,20 +33,29 @@ async function fetchView(name) {
   return res.json();
 }
 
-const [ttfvRows, genRows, retRows] = await Promise.all([
-  fetchView("v_time_to_first_value_summary"),
+// Exact row count via PostgREST's HEAD + Prefer:count=exact convention --
+// avoids pulling every signup row just to know how many there are.
+async function fetchExactCount(name) {
+  const res = await fetch(SUPABASE_URL + "/rest/v1/" + name + "?select=user_id", {
+    method: "HEAD",
+    headers: {
+      apikey: SERVICE_ROLE_KEY,
+      Authorization: "Bearer " + SERVICE_ROLE_KEY,
+      Prefer: "count=exact",
+    },
+  });
+  if (!res.ok) throw new Error("Supabase count " + name + " error " + res.status + ": " + (await res.text()));
+  const range = res.headers.get("content-range"); // e.g. "*/42"
+  return range ? Number(range.split("/")[1]) : null;
+}
+
+const [signupTotal, genRows, retRows] = await Promise.all([
+  fetchExactCount("v_signups"),
   fetchView("v_ai_generation_usage"),
   fetchView("v_feature_retention"),
 ]);
 
-const ttfvRow = ttfvRows[0] || {};
-const ttfv =
-  ttfvRow.users_with_value != null
-    ? {
-        usersWithValue: Number(ttfvRow.users_with_value),
-        avgSeconds: ttfvRow.avg_ttfv_seconds != null ? Math.round(Number(ttfvRow.avg_ttfv_seconds)) : null,
-      }
-    : null;
+const signups = signupTotal != null ? { total: signupTotal } : null;
 
 const generationUsage = genRows.length
   ? genRows.map((r) => ({ kind: r.kind, requests: Number(r.requests), users: Number(r.users) }))
@@ -62,6 +74,6 @@ const featureRetention = retRows.length
 await mkdir("data", { recursive: true });
 await writeFile(
   "data/traction.json",
-  JSON.stringify({ ttfv, generationUsage, featureRetention, updatedAt: new Date().toISOString() }, null, 2) + "\n"
+  JSON.stringify({ signups, generationUsage, featureRetention, updatedAt: new Date().toISOString() }, null, 2) + "\n"
 );
 console.log("Wrote data/traction.json");
