@@ -1,6 +1,10 @@
 {
   "signups": {
-    "total": 78
+    "total": 77
+  },
+  "timeToValue": {
+    "medianSeconds": 280,
+    "usersWithValue": 18
   },
   "generationUsage": [
     {
@@ -10,65 +14,60 @@
     },
     {
       "kind": "diagram",
-      "requests": 11,
-      "users": 2
+      "requests": 1,
+      "users": 1
     },
     {
       "kind": "formula",
-      "requests": 21,
-      "users": 5
+      "requests": 4,
+      "users": 4
     },
     {
       "kind": "image",
-      "requests": 20,
-      "users": 7
+      "requests": 13,
+      "users": 6
     },
     {
       "kind": "math_graph",
-      "requests": 22,
-      "users": 12
+      "requests": 20,
+      "users": 11
     },
     {
       "kind": "sim_2d",
-      "requests": 6,
-      "users": 2
-    },
-    {
-      "kind": "sim_3d",
-      "requests": 4,
+      "requests": 1,
       "users": 1
     },
     {
       "kind": "threed",
-      "requests": 9,
-      "users": 2
+      "requests": 3,
+      "users": 1
     }
   ],
   "featureRetention": [
     {
       "feature": "ai_generation",
-      "totalFirstUsers": 20,
-      "repeatUsers": 11,
-      "repeatRate": 55
+      "totalFirstUsers": 19,
+      "repeatUsers": 10,
+      "repeatRate": 52.6
     },
     {
       "feature": "note",
-      "totalFirstUsers": 9,
-      "repeatUsers": 1,
-      "repeatRate": 11.1
+      "totalFirstUsers": 8,
+      "repeatUsers": 0,
+      "repeatRate": 0
     },
     {
       "feature": "proofread",
-      "totalFirstUsers": 4,
-      "repeatUsers": 3,
-      "repeatRate": 75
+      "totalFirstUsers": 3,
+      "repeatUsers": 2,
+      "repeatRate": 66.7
     },
     {
       "feature": "tutor",
-      "totalFirstUsers": 16,
-      "repeatUsers": 11,
-      "repeatRate": 68.8
+      "totalFirstUsers": 15,
+      "repeatUsers": 10,
+      "repeatRate": 66.7
     }
   ],
-  "updatedAt": "2026-07-22T09:10:35.468Z"
+  "updatedAt": "2026-07-23T02:26:57.630Z"
 }
