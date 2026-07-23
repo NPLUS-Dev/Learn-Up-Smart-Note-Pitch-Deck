@@ -11,9 +11,11 @@
 // Supabase's PostgREST API (service-role key), matching this repo's
 // zero-dependency philosophy.
 //
-// Time-to-first-value (v_time_to_first_value_summary) was dropped from here
-// pending a review of that view's averaging methodology -- see the TTFV
-// handoff investigation. Sign-up count is unambiguous in the meantime.
+// Time-to-first-value (v_time_to_first_value_summary) is back as the MEDIAN
+// (migration 029) now that migration 028 excludes the founder/dogfood account
+// and floors the cohort at instrumentation go-live (2026-07-05). The old
+// straight-mean ~59h was an artifact of one pre-instrumentation dogfood account
+// plus a couple of genuine late-returners; the median is ~5 min.
 import { writeFile, mkdir } from "node:fs/promises";
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -49,13 +51,27 @@ async function fetchExactCount(name) {
   return range ? Number(range.split("/")[1]) : null;
 }
 
-const [signupTotal, genRows, retRows] = await Promise.all([
+const [signupTotal, genRows, retRows, ttfvRows] = await Promise.all([
   fetchExactCount("v_signups"),
   fetchView("v_ai_generation_usage"),
   fetchView("v_feature_retention"),
+  fetchView("v_time_to_first_value_summary"),
 ]);
 
 const signups = signupTotal != null ? { total: signupTotal } : null;
+
+// Median time to first value (seconds). Guarded so a pre-029 view (no
+// median_ttfv_seconds column) simply yields null -> the tile stays "pending"
+// rather than showing a fabricated or misleading number.
+const ttfvRow = ttfvRows && ttfvRows[0];
+const timeToValue =
+  ttfvRow && ttfvRow.median_ttfv_seconds != null
+    ? {
+        medianSeconds: Number(ttfvRow.median_ttfv_seconds),
+        usersWithValue:
+          ttfvRow.users_with_value != null ? Number(ttfvRow.users_with_value) : null,
+      }
+    : null;
 
 const generationUsage = genRows.length
   ? genRows.map((r) => ({ kind: r.kind, requests: Number(r.requests), users: Number(r.users) }))
@@ -74,6 +90,6 @@ const featureRetention = retRows.length
 await mkdir("data", { recursive: true });
 await writeFile(
   "data/traction.json",
-  JSON.stringify({ signups, generationUsage, featureRetention, updatedAt: new Date().toISOString() }, null, 2) + "\n"
+  JSON.stringify({ signups, timeToValue, generationUsage, featureRetention, updatedAt: new Date().toISOString() }, null, 2) + "\n"
 );
 console.log("Wrote data/traction.json");

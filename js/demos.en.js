@@ -508,13 +508,15 @@
         .github/workflows/update-traction.yml). No fabricated fallback --
         these three stay "pending" until real Supabase data lands rather
         than inventing plausible analytics numbers for an investor deck.
-        Time-to-first-value was pulled from this tile pending a review of
-        v_time_to_first_value_summary's averaging methodology (no session
-        window, straight mean) -- sign-up count is unambiguous meanwhile.
+        Time-to-first-value is back as the MEDIAN (migration 029) after 028
+        excluded the founder/dogfood account and floored the cohort at
+        instrumentation go-live -- the old straight-mean ~59h was an artifact;
+        the median is ~5 min. Sign-up count stays alongside it.
      ======================================================================== */
   function initTraction() {
     var root = $("#demo-traction");
     if (!root) return;
+    var ttfvN = $("#tr-ttfv", root), ttfvSub = $("#tr-ttfv-sub", root);
     var signupsN = $("#tr-signups", root), signupsSub = $("#tr-signups-sub", root);
     var genTotal = $("#tr-gen-total", root), genList = $("#tr-gen-list", root), genSub = $("#tr-gen-sub", root);
     var retList = $("#tr-ret-list", root), retSub = $("#tr-ret-sub", root);
@@ -525,6 +527,14 @@
     };
     var FEATURE_LABEL = { ai_generation: "AI Generation", tutor: "AI Tutor", proofread: "Proofreader", note: "Notes" };
     var FEATURE_ORDER = ["ai_generation", "tutor", "proofread", "note"];
+
+    // Human-readable median duration: seconds -> "45s" / "5 min" / "1.4h".
+    function fmtDur(s) {
+      if (s == null || isNaN(s)) return "—";
+      if (s < 90) return Math.round(s) + "s";
+      if (s < 3600) return Math.round(s / 60) + " min";
+      return (s / 3600).toFixed(1) + "h";
+    }
 
     function barRows(items, max) {
       return items.map(function (it) {
@@ -538,6 +548,11 @@
     fetch("data/traction.json", { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("no traction data"); return r.json(); })
       .then(function (d) {
+        if (d.timeToValue && d.timeToValue.medianSeconds != null) {
+          if (ttfvN) ttfvN.textContent = fmtDur(d.timeToValue.medianSeconds);
+          if (ttfvSub) ttfvSub.innerHTML = "median · <span style='color:var(--ok)'>live via Supabase</span>";
+        }
+
         if (d.signups) {
           if (signupsN) signupsN.textContent = d.signups.total;
           if (signupsSub) signupsSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span>";
