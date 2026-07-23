@@ -599,9 +599,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
    Traction
    ========================================================================== */
 .tr-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-/* First grid column stacks two stat tiles (time-to-value + signups) so the
-   3-column layout is preserved when TTFV returned to the Traction slide. */
-.tr-statcol { display: grid; grid-template-rows: 1fr 1fr; gap: 14px; }
 .tr-metric { padding: 16px 18px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(255,255,255,0.02); }
 .tr-metric__head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .tr-metric__lbl { font-size: 0.8rem; color: var(--muted); }

@@ -501,7 +501,7 @@
   }
 
   /* ===========================================================================
-     8) Traction — signed-up users / AI generation usage by type /
+     8) Traction — median time-to-first-value / AI generation usage by type /
         7-day feature retention, drawn from data/traction.json when
         reachable (populated by a GitHub Actions cron job that reads
         product-usage SQL views in Supabase; see
@@ -511,13 +511,13 @@
         Time-to-first-value is back as the MEDIAN (migration 029) after 028
         excluded the founder/dogfood account and floored the cohort at
         instrumentation go-live -- the old straight-mean ~59h was an artifact;
-        the median is ~5 min. Sign-up count stays alongside it.
+        the median is ~5 min. (The sign-up-count tile was dropped to declutter
+        the slide; fetch-traction still records the number in traction.json.)
      ======================================================================== */
   function initTraction() {
     var root = $("#demo-traction");
     if (!root) return;
     var ttfvN = $("#tr-ttfv", root), ttfvSub = $("#tr-ttfv-sub", root);
-    var signupsN = $("#tr-signups", root), signupsSub = $("#tr-signups-sub", root);
     var genTotal = $("#tr-gen-total", root), genList = $("#tr-gen-list", root), genSub = $("#tr-gen-sub", root);
     var retList = $("#tr-ret-list", root), retSub = $("#tr-ret-sub", root);
 
@@ -551,11 +551,6 @@
         if (d.timeToValue && d.timeToValue.medianSeconds != null) {
           if (ttfvN) ttfvN.textContent = fmtDur(d.timeToValue.medianSeconds);
           if (ttfvSub) ttfvSub.innerHTML = "median · <span style='color:var(--ok)'>live via Supabase</span>";
-        }
-
-        if (d.signups) {
-          if (signupsN) signupsN.textContent = d.signups.total;
-          if (signupsSub) signupsSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span>";
         }
 
         if (d.generationUsage && d.generationUsage.length) {
