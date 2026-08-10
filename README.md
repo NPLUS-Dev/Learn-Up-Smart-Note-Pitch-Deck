@@ -32,7 +32,7 @@ Typing in a demo's input/editor/search box doesn't trigger slide navigation. App
 9. Market & Roadmap
 10. Team & Vision
 11. Founder Deep-Dive
-12. The Ask — investment slider *(live demo)*
+12. The Ask — $300k pre-seed + use of funds
 
 ## Files
 

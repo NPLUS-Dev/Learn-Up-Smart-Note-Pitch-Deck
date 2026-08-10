@@ -582,47 +582,29 @@
   }
 
   /* ===========================================================================
-     9) The Ask — SAFE slider ($100k–$200k) recomputes the headline amount,
-        equity (post-money cap $2.0M), runway (~$8.3k/mo burn) and each
-        use-of-funds amount live.
+     9) The Ask — the raise is fixed at $300k, so the amount / equity / runway
+        and every use-of-funds figure are authored straight into the markup.
+        All that is left here is the bar-growth animation on slide entry.
+        A bar's width is its literal share of the raise: the 70% row fills 70%
+        of the track, never the whole thing. Do not normalise to the largest
+        category — a full bar under a "70.0%" label misreads as 100%.
      ======================================================================== */
   function initAsk() {
     var root = $("#demo-ask");
     if (!root) return;
     var fills = root.querySelectorAll(".use__fill");
-    var range = $("#ask-range", root);
-    var amountEl = $("#ask-amount", root);
-    var equityEl = $("#ask-equity", root);
-    var runwayEl = $("#ask-runway", root);
-    var amts = root.querySelectorAll(".amt[data-share]");
-    var CAP = 2000; // post-money SAFE cap, in $k ($2.0M)
+    if (!fills.length) return;
 
-    function usd(k) { return "$" + (k % 1 === 0 ? k : k.toFixed(1)) + "k"; }
-    // bar width = pct-of-raise * (raise / max-raise) — ratios between bars stay fixed,
-    // but the whole row visibly grows/shrinks with the slider instead of only the numbers.
-    function barWidth(pct) {
-      var v = parseInt(range.value, 10);
-      var min = parseInt(range.min, 10) || 0, max = parseInt(range.max, 10) || v;
-      var scale = 0.5 + 0.5 * ((v - min) / (max - min));
-      return (pct * scale).toFixed(1) + "%";
+    function barWidth(f) {
+      return (parseFloat(f.dataset.pct) || 0).toFixed(1) + "%";
     }
-    function update() {
-      var v = parseInt(range.value, 10);            // $k: 100→$100k … 200→$200k
-      if (amountEl) amountEl.textContent = "$" + v + "k";
-      if (equityEl) equityEl.textContent = (v / CAP * 100).toFixed(1) + "%";
-      if (runwayEl) runwayEl.textContent = Math.round(v * 0.12) + " mo"; // ~$8.3k/mo burn
-      amts.forEach(function (a) {
-        var share = (parseInt(a.dataset.share, 10) || 0) / 100;
-        a.textContent = usd(Math.round(v * share * 10) / 10);
-      });
-      fills.forEach(function (f) { f.style.width = barWidth(parseFloat(f.dataset.pct) || 0); });
-    }
-    if (range) { range.addEventListener("input", update); update(); }
 
     function runBars() {
       fills.forEach(function (f) { f.style.width = "0"; });
-      setTimeout(function () { fills.forEach(function (f) { f.style.width = barWidth(parseFloat(f.dataset.pct) || 0); }); }, 60);
+      setTimeout(function () { fills.forEach(function (f) { f.style.width = barWidth(f); }); }, 60);
     }
+    fills.forEach(function (f) { f.style.width = barWidth(f); });
+
     var mySlide = root.closest(".slide");
     document.addEventListener("slide:enter", function (e) { if (e.target === mySlide) setTimeout(runBars, 350); });
   }

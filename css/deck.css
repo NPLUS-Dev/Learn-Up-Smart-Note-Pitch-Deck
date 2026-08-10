@@ -707,27 +707,13 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .team--4 .card:nth-child(3):last-child { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: calc(50% - 7px); }
 
 /* =============================================================================
-   The Ask — interactive raise slider + use-of-funds
+   The Ask — fixed raise + use-of-funds
    ========================================================================== */
 .ask { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(20px, 3vw, 40px); align-items: center; }
 .ask__amount { text-align: center; padding: clamp(20px, 3.5vw, 36px); }
 .ask__amount .lbl { color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; }
 .ask__amount .n { font-weight: 900; line-height: 1; margin: 10px 0 6px; }
 .ask__amount .sub { color: var(--muted); font-size: 0.95rem; }
-.askslider { margin-top: 16px; }
-.askslider input[type="range"] {
-  width: 100%; -webkit-appearance: none; appearance: none;
-  height: 6px; border-radius: 999px; outline: none; cursor: pointer;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-}
-.askslider input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%;
-  background: #fff; border: 3px solid var(--accent); box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); cursor: pointer;
-}
-.askslider input[type="range"]::-moz-range-thumb {
-  width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 3px solid var(--accent); cursor: pointer;
-}
-.askslider__lbl { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); margin-top: 7px; font-family: var(--font-mono); }
 .use { display: flex; flex-direction: column; gap: 12px; }
 .use__row { display: flex; flex-direction: column; }
 .use__row .top { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; margin-bottom: 6px; }

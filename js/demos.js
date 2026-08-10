@@ -592,47 +592,29 @@
   }
 
   /* ===========================================================================
-     9) The Ask — SAFE slider ($100k–$200k) recomputes the headline amount,
-        equity (post-money cap $2.0M), runway (~$8.3k/mo burn) and each
-        use-of-funds amount live.
+     9) The Ask — 라운드 금액이 $300k로 고정이라 금액 / 지분 / 런웨이와
+        자금 사용처 수치는 전부 마크업에 그대로 박아둔다. 여기 남은 건
+        슬라이드 진입 시 막대가 차오르는 애니메이션뿐.
+        막대 폭은 라운드 대비 실제 비중 그대로다. 70% 항목은 트랙의 70%만
+        채운다. 가장 큰 항목 기준으로 정규화하지 말 것 — "70.0%" 라벨 밑에
+        꽉 찬 막대가 있으면 100%로 잘못 읽힌다.
      ======================================================================== */
   function initAsk() {
     var root = $("#demo-ask");
     if (!root) return;
     var fills = root.querySelectorAll(".use__fill");
-    var range = $("#ask-range", root);
-    var amountEl = $("#ask-amount", root);
-    var equityEl = $("#ask-equity", root);
-    var runwayEl = $("#ask-runway", root);
-    var amts = root.querySelectorAll(".amt[data-share]");
-    var CAP = 2000; // post-money SAFE cap, in $k ($2.0M)
+    if (!fills.length) return;
 
-    function usd(k) { return "$" + (k % 1 === 0 ? k : k.toFixed(1)) + "k"; }
-    // bar width = pct-of-raise * (raise / max-raise) — ratios between bars stay fixed,
-    // but the whole row visibly grows/shrinks with the slider instead of only the numbers.
-    function barWidth(pct) {
-      var v = parseInt(range.value, 10);
-      var min = parseInt(range.min, 10) || 0, max = parseInt(range.max, 10) || v;
-      var scale = 0.5 + 0.5 * ((v - min) / (max - min));
-      return (pct * scale).toFixed(1) + "%";
+    function barWidth(f) {
+      return (parseFloat(f.dataset.pct) || 0).toFixed(1) + "%";
     }
-    function update() {
-      var v = parseInt(range.value, 10);            // $k: 100→$100k … 200→$200k
-      if (amountEl) amountEl.textContent = "$" + v + "k";
-      if (equityEl) equityEl.textContent = (v / CAP * 100).toFixed(1) + "%";
-      if (runwayEl) runwayEl.textContent = Math.round(v * 0.12) + "개월"; // ~$8.3k/mo burn
-      amts.forEach(function (a) {
-        var share = (parseInt(a.dataset.share, 10) || 0) / 100;
-        a.textContent = usd(Math.round(v * share * 10) / 10);
-      });
-      fills.forEach(function (f) { f.style.width = barWidth(parseFloat(f.dataset.pct) || 0); });
-    }
-    if (range) { range.addEventListener("input", update); update(); }
 
     function runBars() {
       fills.forEach(function (f) { f.style.width = "0"; });
-      setTimeout(function () { fills.forEach(function (f) { f.style.width = barWidth(parseFloat(f.dataset.pct) || 0); }); }, 60);
+      setTimeout(function () { fills.forEach(function (f) { f.style.width = barWidth(f); }); }, 60);
     }
+    fills.forEach(function (f) { f.style.width = barWidth(f); });
+
     var mySlide = root.closest(".slide");
     document.addEventListener("slide:enter", function (e) { if (e.target === mySlide) setTimeout(runBars, 350); });
   }
