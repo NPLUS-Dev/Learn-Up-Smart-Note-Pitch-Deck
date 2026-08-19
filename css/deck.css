@@ -661,6 +661,22 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .roadmap-strip .rs-arr { color: var(--faint); font-size: 0.9rem; }
 
 /* =============================================================================
+   Shared node/arrow SVG diagrams (Business Model funnel, Growth Loop, …)
+   ========================================================================== */
+.flow-diagram { width: 100%; max-width: 920px; margin: 0 auto; }
+.flow-diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+/* Business Model — B2C → B2B → B2G funnel */
+#s-bm .section-head { margin-bottom: clamp(12px, 2vh, 18px); }
+#s-bm .grid.g-2 { margin-top: clamp(12px, 2vh, 18px); }
+.bm-tags { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: clamp(10px, 1.6vh, 14px) 0 0; }
+
+/* Growth Loop — peer-referral credit system */
+#s-growth .section-head { margin-bottom: clamp(10px, 1.8vh, 16px); }
+#s-growth .grid.g-4 { margin-top: clamp(12px, 2vh, 18px); }
+#s-growth .mile .n { font-size: clamp(1rem, 2.1vw, 1.25rem); }
+
+/* =============================================================================
    Team
    ========================================================================== */
 .team { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.6vw, 28px); }

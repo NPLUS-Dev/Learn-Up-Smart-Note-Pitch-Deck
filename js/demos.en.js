@@ -550,8 +550,7 @@
       .then(function (d) {
         if (d.timeToValue && d.timeToValue.medianSeconds != null) {
           if (ttfvN) ttfvN.textContent = fmtDur(d.timeToValue.medianSeconds);
-          if (ttfvSub) ttfvSub.innerHTML = "median · <span style='color:var(--ok)'>live via Supabase</span>";
-        }
+        } 
 
         if (d.generationUsage && d.generationUsage.length) {
           var sorted = d.generationUsage.slice().sort(function (a, b) { return b.requests - a.requests; });
@@ -564,8 +563,6 @@
           if (genList) genList.innerHTML = barRows(top.map(function (r) {
             return { label: KIND_LABEL[r.kind] || r.kind, value: r.requests, display: r.requests };
           }), max);
-          if (genSub) genSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span>" +
-            (sorted.length > 5 ? " — top 5 of " + sorted.length + " types" : "");
         }
 
         if (d.featureRetention && d.featureRetention.length) {
@@ -575,7 +572,6 @@
           if (retList) retList.innerHTML = barRows(rows.map(function (r) {
             return { label: FEATURE_LABEL[r.feature] || r.feature, value: r.repeatRate, display: r.repeatRate + "%" };
           }), 100);
-          if (retSub) retSub.innerHTML = "<span style='color:var(--ok)'>· live via Supabase</span> (returned within 7 days)";
         }
       })
       .catch(function () {});

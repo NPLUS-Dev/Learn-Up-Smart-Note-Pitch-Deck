@@ -1,6 +1,6 @@
 # Smart Note — Pitch Deck
 
-Interactive, dependency-free HTML pitch deck for **Smart Note**, an AI-native markdown workspace. 12 slides, several with live interactive demos.
+Interactive, dependency-free HTML pitch deck for **Smart Note**, an AI-native markdown workspace. 14 slides, several with live interactive demos.
 
 ## View it live
 
@@ -30,9 +30,11 @@ Typing in a demo's input/editor/search box doesn't trigger slide navigation. App
 7. Handwriting → LaTeX *(product footage video)*
 8. Traction (OBT)
 9. Market & Roadmap
-10. Team & Vision
-11. Founder Deep-Dive
-12. The Ask — $300k pre-seed + use of funds
+10. Business Model — B2C → B2B → B2G
+11. Growth Loop — peer-referral credits
+12. Team & Vision
+13. Founder Deep-Dive
+14. The Ask — $300k pre-seed + use of funds
 
 ## Files
 
