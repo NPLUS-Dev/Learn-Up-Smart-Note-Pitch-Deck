@@ -9,31 +9,15 @@
   <link rel="stylesheet" href="css/deck.css" />
   <style>
     /* EN-only density tweaks — the English copy runs longer than the Korean,
-       so the dense Team grid and the populated Proofreader list need a little
-       less internal spacing to stay within one screen. Scoped to this deck only. */
-    #s-team .section-head { margin-bottom: 7px; }
-    #s-team .section-head h2 { font-size: clamp(1.4rem, 2.8vw, 2.1rem); margin-top: 6px; }
-    #s-team .section-head .lead { font-size: 0.88rem; line-height: 1.4; margin-top: 5px; }
-    #s-team .team--4 { gap: 10px; }
-    #s-team .team--4 .card { padding: 11px 15px; }
-    #s-team .team--4 .avatar { width: 44px; height: 44px; font-size: 1.05rem; }
-    #s-team .team--4 .profile__top { gap: 11px; }
-    #s-team .team--4 .profile p { margin-top: 6px; line-height: 1.42; font-size: 0.83rem; }
-    #s-team .team--4 .profile .tags { margin-top: 7px; }
-    /* Hover/focus-only detail body — trimmed tighter than the always-visible
-       summary line since it's transient content, to keep the expanded card
-       from pushing the slide taller than the viewport. */
-    #s-team .team--4 .profile__detail p { font-size: 0.78rem; line-height: 1.32; margin-top: 5px; }
-    #s-team .team--4 .profile__detail .tags { margin-top: 6px; gap: 5px; }
-    #s-team .team--4 .profile__detail .tags .pill { font-size: 0.68rem; padding: 3px 8px; }
+       so the populated Proofreader list needs a little less internal spacing
+       to stay within one screen. Scoped to this deck only. */
     #s-proof .demo-body { padding: 13px; }
-    #s-proof .demo-hint { margin-bottom: 8px; }
     #s-proof .proof__doc { padding: 12px 14px; }
     #s-proof .proof__bar { margin: 10px 0; }
     #s-proof .proof__list { gap: 7px; }
     #s-proof .proof__item { padding: 8px 12px; }
     /* #s-founder merges two former slides into one 2-row×3 card grid — same
-       density-compaction approach as #s-team/#s-proof above. */
+       density-compaction approach as #s-proof above. */
     #s-founder .section-head { margin-bottom: 14px; }
     #s-founder .section-head h2 { font-size: clamp(1.3rem, 2.6vw, 1.9rem); margin-top: 10px; }
     #s-founder .section-head .lead { font-size: 0.85rem; line-height: 1.45; margin-top: 8px; }
@@ -49,21 +33,14 @@
     #s-founder .card__icon { width: 34px; height: 34px; font-size: 1.05rem; margin-bottom: 7px; border-radius: 10px; }
     #s-founder .card h3 { font-size: 0.92rem; }
     #s-founder .card p { font-size: 0.79rem; line-height: 1.4; margin-top: 5px; }
-    /* #s-traction: with live Supabase data, the generation-usage bar list can
-       run to 8 rows (vs. 0 in the empty/pending state), overflowing the slide. */
     #s-traction .section-head { margin-bottom: 10px; }
     #s-traction .section-head h2 { margin-top: 8px; font-size: clamp(1.3rem, 3vw, 2.05rem); }
     #s-traction .section-head .lead { margin-top: 6px; font-size: 0.86rem; line-height: 1.4; }
     #s-traction .tr-metrics { gap: 10px; }
     #s-traction .tr-metric { padding: 8px 12px; }
-    #s-traction .tr-metric__sub { margin-top: 5px; }
     #s-traction .tr-barlist { gap: 2px; margin-top: 5px; }
     #s-traction .tr-barrow { font-size: 0.66rem; }
     #s-traction .tr-barrow__bar { height: 5px; }
-    #s-traction .tr-feedback { margin-top: 6px; gap: 8px; }
-    #s-traction .fb { padding: 8px 12px; gap: 4px; }
-    #s-traction .fb__q { font-size: 0.77rem; line-height: 1.36; }
-    #s-traction .tr-note { margin-top: 6px; padding: 7px 11px; font-size: 0.78rem; line-height: 1.35; }
   </style>
 </head>
 <body>
@@ -194,9 +171,12 @@
             <div class="demo-frame" id="demo-gen">
               <div class="demo-bar"><span class="tl"><i style="background:#E67E22"></i><i style="background:#D8B46A"></i><i style="background:#2ECC71"></i></span> AI Generation · Simple Harmonic Motion note <span class="live"><span class="dot"></span>LIVE DEMO</span></div>
               <div class="note-toolbar">
-                <span style="font-size:0.78rem;color:var(--accent-2);font-weight:700">✨ Insert:</span>
-                <button class="note-gen" data-kind="3d">🧊 3D</button>
-                <button class="note-gen" data-kind="sim">🎚️ Sim</button>
+                <input type="text" class="note-prompt" placeholder="Describe what you want — “3D water molecule”, “graph of sin(x)”…" />
+                <button class="btn note-gen-submit" style="padding:8px 16px;font-size:0.82rem">✨ Generate</button>
+              </div>
+              <div class="chips note-examples">
+                <span class="chip" data-fill="3D water molecule">🧊 3D water molecule</span>
+                <span class="chip" data-fill="graph of sin(x), adjustable frequency">🎚️ sin(x) simulation</span>
               </div>
               <div class="note-body" aria-live="polite">
                 <div class="note-md"><b># Simple Harmonic Motion Notes</b><br>One coordinate of circular motion behaves just like SHM. Pick a component above and it drops in right at the <span class="note-caret"></span> cursor ↓</div>
@@ -214,7 +194,7 @@
       <div class="slide__inner">
         <div class="feat">
           <div class="feat__copy reveal" data-d="1">
-            <span class="num">08 · AI tutor</span>
+            <span class="num">06 · AI tutor</span>
             <h2><span class="hl">Personalized Tuturing</span></h2>
             <ul>
               <li><div class="b">📄</div><div><b>Full context, understood</b></div></li>
@@ -238,13 +218,13 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 9 — Handwriting → LaTeX  [LIVE DEMO]
+         SLIDE 7 — Handwriting → LaTeX  [LIVE DEMO]
          ================================================================= -->
     <section class="slide" id="s-handwriting" data-title="Handwriting → LaTeX">
       <div class="slide__inner">
         <div class="feat">
           <div class="feat__copy reveal" data-d="1">
-            <span class="num">09 · Handwriting → LaTeX</span>
+            <span class="num">07 · Handwriting → LaTeX</span>
             <h2><span class="hl">Efficient!</span></h2>
             <ul>
               <li><div class="b">✍️</div><div><b>No LaTeX syntax to memorize</b></div></li>
@@ -274,7 +254,7 @@
     <section class="slide" id="s-traction" data-title="Traction">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
-          <span class="num">11 · Traction</span>
+          <span class="num">08 · Traction</span>
           <h2><span class="hl">I ♥️ it, u 2?</span></h2>
           <p class="lead">OBT launched 2026-06-22</p>
         </div>
@@ -282,32 +262,29 @@
           <div class="tr-metric tr-metric--stat">
             <div class="tr-metric__lbl">TTFV</div>
             <div class="tr-metric__big" id="tr-ttfv">—</div>
-            <div class="tr-metric__sub" id="tr-ttfv-sub">Pending Supabase connection</div>
           </div>
           <div class="tr-metric">
             <div class="tr-metric__head"><span class="tr-metric__lbl">AI generations</span><span class="tr-metric__n" id="tr-gen-total">—</span></div>
             <div class="tr-barlist" id="tr-gen-list"></div>
-            <div class="tr-metric__sub" id="tr-gen-sub">Pending Supabase connection</div>
           </div>
           <div class="tr-metric">
             <div class="tr-metric__head"><span class="tr-metric__lbl">7D feature retention</span></div>
             <div class="tr-barlist" id="tr-ret-list"></div>
-            <div class="tr-metric__sub" id="tr-ret-sub">Pending Supabase connection</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 12 — MARKET & ROADMAP
+         SLIDE 9 — MARKET & ROADMAP
          ================================================================= -->
     <section class="slide" id="s-market" data-title="Market">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
-          <span class="num">12 · Market</span>
+          <span class="num">09 · Market</span>
           <h2><span class="hl">Money, we like</span></h2>
         </div>
-        <div class="market" id="demo-market">
+        <div class="market">
           <div class="reveal" data-d="3">
             <div class="market__legend">
               <div class="mk tam-row"><div class="bar tam"></div><div><h4>TAM </h4><p>Global EdTech (2030)</p></div><div class="val"><div class="n">$348B</div><div class="cagr">CAGR 13.3%</div></div></div>
@@ -321,12 +298,12 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 13 — BUSINESS MODEL (B2C → B2B → B2G funnel)
+         SLIDE 10 — BUSINESS MODEL (B2C → B2B → B2G funnel)
          ================================================================= -->
     <section class="slide" id="s-bm" data-title="BM">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
-          <span class="num">13 · Business Model</span>
+          <span class="num">10 · Business Model</span>
           <h2><span class="hl">B2C</span>→<span class="hl-v">B2B</span></h2>
          </div>
 
@@ -409,12 +386,12 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 14 — GROWTH LOOP (peer-referral credit system)
+         SLIDE 11 — GROWTH LOOP (peer-referral credit system)
          ================================================================= -->
     <section class="slide" id="s-growth" data-title="Growth Loop">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
-          <span class="num">14 · Growth Loop</span>
+          <span class="num">11 · Growth Loop</span>
           <h2><span class="hl">inviting a peer refills&nbsp;them</span></h2>
         </div>
         <div class="flow-diagram reveal" data-d="2">
@@ -481,71 +458,12 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 15 — TEAM & VISION (closing)
-         ================================================================= -->
-    <section class="slide" id="s-team" data-title="Team &amp; Vision">
-      <div class="slide__inner">
-        <div class="section-head reveal" data-d="1">
-          <span class="num">13 · Team</span>
-          <h2>A solo founder, and <span class="hl">a team joining in</span></h2>
-          <p class="lead">Product, backend, and AI built solo — now joined by two&nbsp;Engineers and one Advisor.</p>
-        </div>
-        <div class="team team--4">
-          <div class="card profile reveal" data-d="2" tabindex="0">
-            <div class="profile__top">
-              <div class="avatar">SQ</div>
-              <div><h3>Sean Channie Quinn <span class="profile__en">South Korea</span></h3><div class="role">Founder · Full-stack Builder</div></div>
-            </div>
-            <p class="profile__summary">The target user himself — built Smart Note's FE, BE, and AI&nbsp;solo.</p>
-            <div class="profile__detail">
-              <p>Changwon Science High School — <b style="color:var(--text)">the target user himself</b>. Built Smart Note's FE, BE, and AI <b style="color:var(--text)">solo</b>. (Next two&nbsp;slides.)</p>
-              <div class="tags"><span class="pill cy">8 years full-stack</span><span class="pill ok">Built the demo solo</span></div>
-            </div>
-          </div>
-          <div class="card profile reveal" data-d="3" tabindex="0">
-            <div class="profile__top">
-              <div class="avatar" style="background:linear-gradient(135deg,#9D7AF0,#EA8FC7)">204</div>
-              <div><h3>Baek Kang-hyun <span class="profile__en">South Korea</span></h3><div class="role">Advisor · Brand &amp; Growth</div></div>
-            </div>
-            <p class="profile__summary">Mensa-verified IQ 204, national broadcast prodigy — who also shipped a solo&nbsp;game.</p>
-            <div class="profile__detail">
-              <p>IQ <b style="color:var(--text)">204 (Mensa-verified)</b>; on <b style="color:var(--text)">national broadcasts</b> (YTN, SBS) since childhood as a prodigy — proven credibility and buzz in education. After leaving science high school, still applied to Oxford and solo-shipped a strategy puzzle RPG game (2026-04) — buzz backed by&nbsp;execution.</p>
-              <div class="tags"><span class="pill vi">Multiple national broadcast appearances</span><span class="pill">Education-market buzz</span><span class="pill ok">Shipped a game solo</span></div>
-            </div>
-          </div>
-          <div class="card profile reveal" data-d="4" tabindex="0">
-            <div class="profile__top">
-              <div class="avatar" style="background:linear-gradient(135deg,#D8B46A,#EA8FC7)">OM</div>
-              <div><h3>Olzhas Mukhtarov <span class="profile__en">Kazakhstan</span></h3><div class="role">Engineer</div></div>
-            </div>
-            <p class="profile__summary">From-scratch vLLM builder with a $200k+ revenue business and security research&nbsp;chops.</p>
-            <div class="profile__detail">
-              <p><b style="color:var(--text)">$200k+ revenue</b> from an internet-cafe networking business at 13; founded an academy, published multiple papers. Built <b style="color:var(--text)">vLLM from scratch</b> (no libraries); computer vision research at NU (GSB). Security researcher who found Cursor/Windsurf editor vulnerabilities and <b style="color:var(--text)">responsibly disclosed</b>&nbsp;them.</p>
-              <div class="tags"><span class="pill">AI / Eng</span><span class="pill ok">$200k+ revenue business</span><span class="pill cy">Security research</span></div>
-            </div>
-          </div>
-          <div class="card profile reveal" data-d="5" tabindex="0">
-            <div class="profile__top">
-              <div class="avatar" style="background:linear-gradient(135deg,#5DA7F0,#2ECC71)">SS</div>
-              <div><h3>Siddharth S <span class="profile__en">India</span></h3><div class="role">Engineer</div></div>
-            </div>
-            <p class="profile__summary">Hardware-to-web generalist (Godot→React, ML) — 2 projects shipped at&nbsp;NPLUS.</p>
-            <div class="profile__detail">
-              <p>A hardware-to-web generalist — <b style="color:var(--text)">Godot·GDScript</b> game-engine background plus <b style="color:var(--text)">Python, Java, C++, JS/TS</b> across <b style="color:var(--text)">React·Next, Processing, Arduino</b>, with <b style="color:var(--text)">machine learning</b> as a focus domain. Spent <b style="color:var(--text)">9 months at NPLUS</b>, serving as a core developer across <b style="color:var(--text)">two shipped projects</b>.</p>
-              <div class="tags"><span class="pill">Full-stack · Game engines</span><span class="pill cy">9 months at NPLUS</span><span class="pill ok">2 projects shipped</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         SLIDE 16 — FOUNDER DEEP-DIVE · Engineer + Operator
+         SLIDE 12 — FOUNDER DEEP-DIVE · Engineer + Operator
          ================================================================= -->
     <section class="slide" id="s-founder" data-title="Founder">
       <div class="slide__inner">
         <div class="section-head reveal" data-d="1">
-          <span class="num">14 · Founder Deep-Dive</span>
+          <span class="num">12 · Founder Deep-Dive</span>
           <h2><span class="hl-v">Me</span></h2>
         </div>
         <div class="grid g-3">
@@ -585,7 +503,7 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 17 — THE ASK (fixed $300k raise + use-of-funds)
+         SLIDE 13 — THE ASK (fixed $300k raise + use-of-funds)
          Allocation mirrors the internal 6-month operating budget:
          payroll $210k · infra $36k · marketing $18k · ops/legal $3.7k ·
          buffer $32.3k  =  $300k.
@@ -593,7 +511,7 @@
     <section class="slide" id="s-ask" data-title="The Ask">
       <div class="slide__inner" id="demo-ask">
         <div class="section-head reveal" data-d="1">
-          <span class="num">16 · The Ask</span>
+          <span class="num">13 · The Ask</span>
         </div>
         <div class="ask" style="align-items:start">
           <div class="card ask__amount reveal" data-d="2">

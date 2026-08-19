@@ -56,7 +56,7 @@
   --font-mono: "JetBrains Mono", "D2Coding", "Cascadia Code", ui-monospace,
                "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  --maxw: 1180px;
+  --maxw: 1440px;
 }
 
 * { box-sizing: border-box; }
@@ -187,7 +187,7 @@ body::after {
 /* =============================================================================
    Typography & shared atoms
    ========================================================================== */
-.kicker {
+.num {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: clamp(0.72rem, 1.4vw, 0.82rem);
   letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
@@ -197,7 +197,6 @@ body::after {
   border-radius: 999px;
   background: rgba(0, 229, 255, 0.06);
 }
-.kicker .num { color: var(--muted); }
 
 h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; }
 .slide h2 { font-size: clamp(1.7rem, 4.4vw, 3rem); margin-top: 18px; }
@@ -333,9 +332,9 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 /* =============================================================================
    Cover / Outro
    ========================================================================== */
-.cover, .outro { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
-.cover canvas, .outro canvas { position: absolute !important; inset: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.85; }
-.cover .slide__inner, .outro .slide__inner { display: flex; flex-direction: column; align-items: center; }
+.cover { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.cover canvas { position: absolute !important; inset: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.85; }
+.cover .slide__inner { display: flex; flex-direction: column; align-items: center; }
 .cover .sub { color: var(--muted); font-size: clamp(0.9rem, 2vw, 1.1rem); letter-spacing: 0.02em; }
 .cover .logo {
   font-size: clamp(3rem, 11vw, 6.4rem); font-weight: 900; letter-spacing: -0.04em;
@@ -343,18 +342,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 }
 .cover .desc { color: var(--text); font-size: clamp(1rem, 2.4vw, 1.3rem); max-width: 44ch; margin-top: 6px; }
 .cover .desc b { color: var(--accent); font-weight: 700; }
-.cover .tagchips { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.cover .credit { margin-top: 30px; font-size: 0.82rem; color: var(--faint); }
-.cover .madein {
-  margin-top: 14px; display: inline-flex; align-items: center; gap: 8px;
-  font-size: 0.8rem; color: var(--ok); font-weight: 600;
-  padding: 6px 14px; border-radius: 999px;
-  border: 1px solid rgba(46, 204, 113, 0.35); background: rgba(46, 204, 113, 0.07);
-}
-
-.outro .big { font-size: clamp(1.9rem, 5.2vw, 3.4rem); font-weight: 800; line-height: 1.18; max-width: 22ch; }
-.outro .cta { margin-top: 20px; color: var(--muted); font-size: clamp(1rem, 2.4vw, 1.3rem); }
-.outro .cta b { color: var(--accent); }
 
 /* =============================================================================
    Problem — contrast columns
@@ -428,8 +415,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
   50% { box-shadow: 0 0 14px 2px rgba(46, 204, 113, 0.45); }
 }
 .demo-body { padding: clamp(14px, 2vw, 20px); }
-.demo-hint { font-size: 0.84rem; color: var(--faint); margin: 0 0 12px; line-height: 1.5; }
-.demo-hint b { color: var(--accent); }
 
 .btn {
   border: none; cursor: pointer; padding: 11px 18px; border-radius: 10px;
@@ -515,9 +500,15 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .note-formula { color: var(--accent); }
 .note-formula math { font-size: 1.15em; vertical-align: middle; }
 
-.note-toolbar { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--line-soft); background: rgba(232, 200, 150, 0.028); }
-.note-gen { cursor: pointer; font-size: 0.8rem; font-weight: 700; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); background: rgba(232, 200, 150, 0.035); transition: all 0.15s; font-family: var(--font-sans); }
-.note-gen:hover { color: var(--accent); border-color: var(--accent); background: rgba(0, 229, 255, 0.1); }
+.note-toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--line-soft); background: rgba(232, 200, 150, 0.028); }
+.note-prompt {
+  flex: 1; min-width: 160px; font-family: var(--font-sans); font-size: 0.85rem; color: var(--text);
+  background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); border-radius: 999px;
+  padding: 8px 14px; outline: none; transition: border-color 0.15s, background 0.15s;
+}
+.note-prompt::placeholder { color: var(--faint); }
+.note-prompt:focus { border-color: var(--accent); background: rgba(0, 229, 255, 0.06); }
+.note-examples { padding: 8px 14px 0; margin-top: 0; }
 .note-body { padding: 14px; max-height: clamp(260px, 42vh, 360px); overflow-y: auto; display: flex; flex-direction: column; gap: 10px; scrollbar-width: thin; }
 .note-md { font-size: 0.94rem; line-height: 1.7; color: var(--muted); }
 .note-md b { color: var(--text); font-size: 1.04rem; }
@@ -547,9 +538,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
    DEMO: AI tutor chat (shared)
    ========================================================================== */
 .chat { display: flex; flex-direction: column; height: 100%; }
-.chat__head { display: flex; gap: 6px; padding: 0 0 12px; align-items: center; }
-.chat__ctx { font-size: 0.74rem; color: var(--faint); margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
-.chat__ctx .dot { background: var(--ok); animation: lu-pulse 1.6s infinite; }
 .chat__log {
   flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
   padding: 14px 14px 4px; min-height: 230px; max-height: 300px; scrollbar-width: thin;
@@ -603,7 +591,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .tr-metric__head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .tr-metric__lbl { font-size: 0.8rem; color: var(--muted); }
 .tr-metric__n { font-size: clamp(1.1rem, 2.4vw, 1.4rem); font-weight: 900; color: var(--accent); font-family: var(--font-mono); }
-.tr-metric__sub { margin-top: 10px; font-size: 0.72rem; color: var(--faint); }
 .tr-metric--stat { display: flex; flex-direction: column; justify-content: center; text-align: center; }
 .tr-metric__big { font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 900; color: var(--accent); font-family: var(--font-mono); margin-top: 6px; }
 .tr-barlist { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
@@ -612,31 +599,16 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .tr-barrow__bar { height: 8px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
 .tr-barrow__fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0; }
 .tr-barrow__n { color: var(--text); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; min-width: 26px; text-align: right; }
-.tr-feedback { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
-.fb { padding: 15px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(255,255,255,0.02); display: flex; flex-direction: column; gap: 8px; }
-.fb__top { display: flex; align-items: center; gap: 9px; }
-.fb__av { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-weight: 800; font-size: 0.82rem; background: rgba(157,122,240,0.16); color: #c2adff; border: 1px solid rgba(157,122,240,0.3); }
-.fb__time { margin-left: auto; font-size: 0.72rem; color: var(--faint); font-family: var(--font-mono); }
-.fb__q { font-size: 0.85rem; color: var(--muted); line-height: 1.55; flex: 1; }
-.fb__q b { color: var(--text); }
-.fb__tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.fb__tags .pill { font-size: 0.7rem; padding: 3px 9px; }
 .tr-note { margin-top: 16px; padding: 12px 15px; border-radius: 12px; border: 1px solid rgba(46,204,113,0.3); background: rgba(46,204,113,0.05); font-size: 0.86rem; line-height: 1.5; }
 .tr-note b { color: var(--ok); }
 
 /* =============================================================================
    Market / Roadmap
    ========================================================================== */
-.market { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(18px, 2.6vw, 34px); align-items: center; }
+.market { display: grid; grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; gap: clamp(18px, 2.6vw, 34px); align-items: center; }
 #s-market .section-head { margin-bottom: 16px; }
 #s-market .section-head h2 { font-size: clamp(1.4rem, 3vw, 2.05rem); }
 #s-market .section-head .lead { font-size: 0.94rem; line-height: 1.45; }
-.rings { position: relative; width: 100%; max-width: 220px; margin: 0 auto; aspect-ratio: 1; }
-.rings svg { width: 100%; height: 100%; overflow: visible; }
-.ring-c { fill-opacity: 0.26; stroke-width: 2.5; stroke-opacity: 0.9; transition: r 1.1s cubic-bezier(0.22,0.9,0.3,1); }
-.ring-grp { opacity: 1; }
-.ring-lbl { fill: var(--text); font-weight: 800; }
-.ring-sub { fill: var(--muted); }
 .market__legend { display: flex; flex-direction: column; gap: 10px; }
 .mk { display: grid; grid-template-columns: 12px 1fr auto; gap: 11px; align-items: start; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(255,255,255,0.02); }
 .mk .bar { width: 14px; border-radius: 4px; align-self: stretch; }
@@ -654,12 +626,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 .market__note a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 2px; }
 .market__note a:hover { color: var(--accent); }
 
-/* slide 9 used to split focus with a bulky roadmap timeline — condensed to one strip so TAM/SAM/SOM carries the slide */
-.roadmap-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
-.roadmap-strip .rs-lbl { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
-.roadmap-strip .pill { font-size: 0.78rem; }
-.roadmap-strip .rs-arr { color: var(--faint); font-size: 0.9rem; }
-
 /* =============================================================================
    Shared node/arrow SVG diagrams (Business Model funnel, Growth Loop, …)
    ========================================================================== */
@@ -675,52 +641,6 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
 #s-growth .section-head { margin-bottom: clamp(10px, 1.8vh, 16px); }
 #s-growth .grid.g-4 { margin-top: clamp(12px, 2vh, 18px); }
 #s-growth .mile .n { font-size: clamp(1rem, 2.1vw, 1.25rem); }
-
-/* =============================================================================
-   Team
-   ========================================================================== */
-.team { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.6vw, 28px); }
-.profile { display: flex; flex-direction: column; }
-.profile__top { display: flex; gap: 16px; align-items: center; }
-.avatar { flex: none; width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #06121a; }
-.profile h3 { font-size: 1.2rem; }
-.profile .role { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-top: 2px; }
-.profile p { color: var(--muted); font-size: 0.92rem; line-height: 1.55; margin: 14px 0 0; }
-.profile .tags { margin-top: 14px; display: flex; gap: 7px; flex-wrap: wrap; }
-.profile__en { font-size: 0.72rem; color: var(--faint); font-weight: 500; }
-/* Collapsed state shows one summary line; hover/focus expands the card in
-   place (align-items:start on .team--4 keeps un-hovered siblings from
-   stretching to match) to reveal the full bio + tags. No transform here —
-   these cards also carry .reveal, whose entrance animation holds `transform`
-   permanently via fill-mode:forwards, so a transform set here would never
-   actually apply. box-shadow/z-index are untouched by that animation. */
-.card.profile {
-  cursor: pointer;
-  position: relative;
-  transition: box-shadow 0.25s ease;
-}
-.card.profile:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.card.profile:hover, .card.profile:focus {
-  box-shadow: var(--shadow), var(--glow-cyan);
-  z-index: 3;
-}
-.profile__detail {
-  max-height: 0; opacity: 0; overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.25s ease;
-}
-.card.profile:hover .profile__detail, .card.profile:focus .profile__detail {
-  max-height: 320px; opacity: 1;
-}
-/* 4-person team → compact 2×2 grid */
-.team--4 { gap: 14px; align-items: start; }
-.team--4 .card { padding: 16px 18px; }
-.team--4 .avatar { width: 50px; height: 50px; border-radius: 14px; font-size: 1.15rem; }
-.team--4 .profile__top { gap: 12px; }
-.team--4 .profile h3 { font-size: 1.05rem; }
-.team--4 .profile p { font-size: 0.85rem; line-height: 1.5; margin-top: 10px; }
-.team--4 .profile .tags { margin-top: 10px; }
-/* interim 3-card state (before the 4th teammate lands) — center the odd card out */
-.team--4 .card:nth-child(3):last-child { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: calc(50% - 7px); }
 
 /* =============================================================================
    The Ask — fixed raise + use-of-funds
@@ -746,20 +666,17 @@ h1, h2, h3 { margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.0
    Responsive collapse
    ========================================================================== */
 @media (max-width: 920px) {
-  .feat, .feat--wide, .feat--demo-left, .market, .team, .ask { grid-template-columns: 1fr; }
+  .feat, .feat--wide, .feat--demo-left, .market, .ask { grid-template-columns: 1fr; }
   .miles { grid-template-columns: 1fr; }
   .vs { grid-template-columns: 1fr; } .vs__mid { display: none; }
-  .io__arrow { transform: rotate(90deg); }
   .g-4 { grid-template-columns: repeat(2, 1fr); }
   .tr-metrics { grid-template-columns: 1fr; }
-  .tr-feedback { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .g-3, .g-2 { grid-template-columns: 1fr; }
   .slide__inner { padding: 64px 18px 80px; }
   .brand span.t { display: none; }
   .nav__count { min-width: 50px; }
-  .io-formats { flex-direction: column; }
 }
 @media (max-height: 560px) and (min-width: 921px) {
   .slide__inner { padding: 50px 48px; }

@@ -1,13 +1,11 @@
 /* =============================================================================
    Smart Note pitch deck — interactive feature demos (offline, dependency-free)
-     · Proofreader        (typo / grammar / LOGIC)                  #demo-proof
-     · AI Generation Engine (3D · sim)                               #demo-gen
-     · Adaptive Workspace  (custom markdown + adaptive theme)        #demo-ws
-     · Context-Aware AI Tutor (note context + URL crawl)              #demo-tutor
-     · Handwriting → LaTeX (draw → AI recognizes → typeset math)      #demo-handwriting
-     · Import (PDF heading split)                                     #demo-import
-     · Market ring chart                                              #demo-market
+     · Proofreader          (typo / grammar / LOGIC)                    #demo-proof
+     · AI Generation Engine (planner-routed 3D · sim, from a prompt)    #demo-gen
+     · Context-Aware AI Tutor (note context + URL crawl)                #demo-tutor
+     · Handwriting → LaTeX  (draw → AI recognizes → typeset math)       #demo-handwriting
      · Traction: time-to-value / AI usage / retention (live via Supabase) #demo-traction
+     · The Ask: use-of-funds bar animation                              #demo-ask
    Wired on DOMContentLoaded + on `slide:enter` events from deck.js.
    ========================================================================== */
 (function () {
@@ -245,7 +243,9 @@
     var root = $("#demo-gen");
     if (!root) return;
     var body = $(".note-body", root);
-    var btns = $$(".note-gen[data-kind]", root);
+    var input = $(".note-prompt", root);
+    var submitBtn = $(".note-gen-submit", root);
+    var chips = $$(".note-examples .chip[data-fill]", root);
     var busy = false;
     var plotters = [], cubes = [];
 
@@ -289,12 +289,43 @@
       body.scrollTop = body.scrollHeight;
     }
 
-    btns.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        if (busy) return; busy = true;
-        var sh = el("div", "note-block note-busy", "<span class='spark'>✨</span> AI is generating the block…");
-        body.appendChild(sh); body.scrollTop = body.scrollHeight;
-        setTimeout(function () { sh.remove(); add(btn.dataset.kind); busy = false; }, 620);
+    // Naive planner: routes an ambiguous natural-language request to a block
+    // kind by keyword, the same "planner splits/routes" behavior the deck
+    // claims — just simulated client-side instead of by a real LLM call.
+    function planKind(text) {
+      return /sim|simulat|graph|plot|wave|motion|sin|cos|oscillat/i.test(text) ? "sim" : "3d";
+    }
+
+    function generate(promptText) {
+      promptText = (promptText || "").trim();
+      if (busy || !promptText) return;
+      busy = true;
+      var kind = planKind(promptText);
+      var kindLabel = KIND_META[kind].lab.replace(/^\S+\s/, "");
+      var sh = el("div", "note-block note-busy", "<span class='spark'>🧠</span> Parsing “" + escapeHtml(promptText) + "”…");
+      body.appendChild(sh); body.scrollTop = body.scrollHeight;
+      setTimeout(function () {
+        sh.innerHTML = "<span class='spark'>🧭</span> Planner routing to <b>" + kindLabel + " generator</b>…";
+        body.scrollTop = body.scrollHeight;
+      }, 420);
+      setTimeout(function () {
+        sh.innerHTML = "<span class='spark'>✨</span> Generating the block…";
+        body.scrollTop = body.scrollHeight;
+      }, 820);
+      setTimeout(function () { sh.remove(); add(kind); busy = false; }, 1400);
+    }
+
+    if (submitBtn) submitBtn.addEventListener("click", function () {
+      generate(input && input.value);
+      if (input) input.value = "";
+    });
+    if (input) input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); if (submitBtn) submitBtn.click(); }
+    });
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        if (input) input.value = chip.dataset.fill;
+        generate(chip.dataset.fill);
       });
     });
 
@@ -308,7 +339,7 @@
       requestAnimationFrame(spin);
     })();
 
-    onEnterOnce(root, function () { setTimeout(function () { add("3d"); }, 350); });
+    onEnterOnce(root, function () { setTimeout(function () { generate("3D water molecule"); }, 350); });
   }
 
   /* ===========================================================================
@@ -486,22 +517,7 @@
   }
 
   /* ===========================================================================
-     7) TAM/SAM/SOM ring chart
-     ======================================================================== */
-  function initMarket() {
-    var root = $("#demo-market");
-    if (!root) return;
-    var tam = $("#ring-tam", root), sam = $("#ring-sam", root), som = $("#ring-som", root);
-    function set(circle, r, delay) { if (!circle) return; circle.setAttribute("r", "0"); setTimeout(function () { circle.setAttribute("r", r); }, delay + 60); }
-    function animate() {
-      set(tam, 90, 0); set(sam, 56, 140); set(som, 26, 280);
-    }
-    onEnterOnce(root, animate);
-    document.addEventListener("slide:enter", function (e) { if (e.target === root.closest(".slide")) animate(); });
-  }
-
-  /* ===========================================================================
-     8) Traction — median time-to-first-value / AI generation usage by type /
+     Traction — median time-to-first-value / AI generation usage by type /
         7-day feature retention, drawn from data/traction.json when
         reachable (populated by a GitHub Actions cron job that reads
         product-usage SQL views in Supabase; see
@@ -517,9 +533,9 @@
   function initTraction() {
     var root = $("#demo-traction");
     if (!root) return;
-    var ttfvN = $("#tr-ttfv", root), ttfvSub = $("#tr-ttfv-sub", root);
-    var genTotal = $("#tr-gen-total", root), genList = $("#tr-gen-list", root), genSub = $("#tr-gen-sub", root);
-    var retList = $("#tr-ret-list", root), retSub = $("#tr-ret-sub", root);
+    var ttfvN = $("#tr-ttfv", root);
+    var genTotal = $("#tr-gen-total", root), genList = $("#tr-gen-list", root);
+    var retList = $("#tr-ret-list", root);
 
     var KIND_LABEL = {
       formula: "Formula", image: "Image", diagram: "Diagram", math_graph: "Math graph",
@@ -550,7 +566,7 @@
       .then(function (d) {
         if (d.timeToValue && d.timeToValue.medianSeconds != null) {
           if (ttfvN) ttfvN.textContent = fmtDur(d.timeToValue.medianSeconds);
-        } 
+        }
 
         if (d.generationUsage && d.generationUsage.length) {
           var sorted = d.generationUsage.slice().sort(function (a, b) { return b.requests - a.requests; });
@@ -610,7 +626,6 @@
     initProofreader();
     initGenerator();
     initTutor();
-    initMarket();
     initTraction();
     initAsk();
   }

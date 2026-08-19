@@ -1,6 +1,6 @@
 # Smart Note — Pitch Deck
 
-Interactive, dependency-free HTML pitch deck for **Smart Note**, an AI-native markdown workspace. 14 slides, several with live interactive demos.
+Interactive, dependency-free HTML pitch deck for **Smart Note**, an AI-native markdown workspace. 13 slides, several with live interactive demos.
 
 ## View it live
 
@@ -32,9 +32,8 @@ Typing in a demo's input/editor/search box doesn't trigger slide navigation. App
 9. Market & Roadmap
 10. Business Model — B2C → B2B → B2G
 11. Growth Loop — peer-referral credits
-12. Team & Vision
-13. Founder Deep-Dive
-14. The Ask — $300k pre-seed + use of funds
+12. Founder Deep-Dive
+13. The Ask — $300k pre-seed + use of funds
 
 ## Files
 
@@ -52,5 +51,6 @@ smart-note-pitch/
 └─ .github/workflows/update-traction.yml  # daily cron that runs the script above
 ```
 
-The Traction slide's "OBT sign-ups" tile fetches `data/traction.json` at load time and
-falls back to the number baked into `index.html` if that file is missing or unreachable.
+The Traction slide's metrics (time-to-first-value, AI generation usage, feature retention)
+fetch `data/traction.json` at load time; each tile stays at its placeholder if that file is
+missing or unreachable.

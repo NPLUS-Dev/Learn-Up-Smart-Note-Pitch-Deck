@@ -140,8 +140,8 @@
   buildAgenda();
   fromHash();
   slides.forEach(function (s, i) {
-    var num = s.querySelector(".kicker .num");
-    if (num) num.textContent = pad(i + 1);
+    var num = s.querySelector(".num");
+    if (num) num.textContent = num.textContent.replace(/^\d+/, pad(i + 1));
   });
   slides.forEach(function (s) { s.classList.remove("is-active"); });
   slides[cur].classList.add("is-active");
