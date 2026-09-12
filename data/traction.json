@@ -1,6 +1,6 @@
 {
   "signups": {
-    "total": 77
+    "total": 140
   },
   "timeToValue": {
     "medianSeconds": 280,
@@ -69,5 +69,5 @@
       "repeatRate": 66.7
     }
   ],
-  "updatedAt": "2026-07-23T02:26:57.630Z"
+  "updatedAt": "2026-09-12T00:00:00.000Z"
 }
