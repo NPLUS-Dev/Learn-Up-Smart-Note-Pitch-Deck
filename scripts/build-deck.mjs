@@ -108,7 +108,7 @@ function withPage(src, lang) {
   if (!menu) throw new Error("ko.html: couldn't find the 🌐 language menu on the cover (" + MENU_MARKER + ")");
   src = src.slice(0, menu.start) + languageMenu(lang) + src.slice(menu.end);
   src = withSlideLabels(withoutRail(src));
-  return src.replace(/<html[^>]*>/, `<html lang="${lang}">`).replace(/<head>[\s\S]*?<\/head>/, head(lang));
+  return src.replace(/<html[^>]*>/, () => `<html lang="${lang}">`).replace(/<head>[\s\S]*?<\/head>/, () => head(lang));
 }
 
 function toEnglish(ko) {

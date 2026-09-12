@@ -36,7 +36,7 @@ export const TEXT = [
   // Endgame — the AI tutor
   [`맞춤형 ${HL_VIOLET}AI 튜터</span>`, `Personalized ${HL_VIOLET}AI Tutor</span>`],
   [`근본 원인 진단`, `Root-cause diagnosis`],
-  [`난이도·경로 적응`, `Adaptive difficulty · path`],
+  [`난이도·경로 적응`, `Adapts difficulty &amp; path`],
   [`답이 아닌 소크라테스식 힌트`, `Socratic hints, not answers`],
   [`나에게 맞춰 만들어지는 콘텐츠`, `Content built around you`],
   [`학습 대시보드`, `Learning dashboard`],
@@ -46,14 +46,14 @@ export const TEXT = [
 
   // AI Tutor (live demo)
   [`${HL_GREEN}개인화된</span> 튜터링`, `${HL_GREEN}Personalized</span> tutoring`],
-  [`학습 이력, 수준, 관심사를 고려`, `Knows your history, level, and interests`],
+  [`학습 이력, 수준, 관심사를 고려`, `Knows your learning history, level, and interests`],
   [`파편화된 지식 → 연결 및 확장`, `Scattered knowledge → connected &amp; expanded`],
   [`3D, simulation 등의 도구로 시각적 이해`, `Visual understanding through 3D &amp; simulations`],
   [`돌림힘과 회전 운동.md`, `Torque &amp; Rotational Motion.md`],
   [`↻ 다시 보기 · Replay`, `↻ Replay`],
 
   // Business Model
-  [`개인 유저와 실사용 데이터를 먼저 확보하고, 그 데이터로 학원 B2B 계약을 추진합니다.`, `We win individual users and real usage data first, then use that data to land B2B contracts with private academies.`],
+  [`개인 유저와 실사용 데이터를 먼저 확보하고, 그 데이터로 학원 B2B 계약을 추진합니다.`, `We win individual users and real usage data first, then use that data to pursue B2B contracts with academies.`],
   [`데이터`, `data`],
   [`STEM 학생`, `STEM students`],
   [`개인 유저 확보`, `Win individual users`],
@@ -84,7 +84,7 @@ export const TEXT = [
   [`AI 튜터`, `AI Tutor`],
   [`엔진`, `Engine`],
   [`학원은 도구가 아니라 ${B_VIOLET}운영 방식</b>을 도입합니다`, `Academies adopt an ${B_VIOLET}operating model</b>, not a tool`],
-  [`노트·학습 기록이 쌓여 ${B_VIOLET}바꾸기 어려워집니다</b>`, `Notes &amp; records pile up, so it's ${B_VIOLET}hard to switch</b>`],
+  [`노트·학습 기록이 쌓여 ${B_VIOLET}바꾸기 어려워집니다</b>`, `Notes &amp; study records pile up, so it's ${B_VIOLET}hard to switch</b>`],
   [`모델 원가가 아니라 ${B_VIOLET}성과로 값이 매겨집니다</b>`, `${B_VIOLET}Priced on outcomes</b>, not model cost`],
 
   // Wedge
@@ -100,7 +100,7 @@ export const TEXT = [
   [`상위권이 먼저, 나머지가 따라옵니다`, `Top students first — the rest follow`],
   [`스스로 공부하는 학습자가 먼저 쓰면, 같은 반·같은 학원의 나머지가 따라옵니다. 학습 도구는 위에서 아래로 퍼집니다.`, `When self-driven learners adopt it first, the rest of their class and academy follow. Study tools spread from the top down.`],
   [`비어 있는 타깃`, `An empty target`],
-  [`거의 모든 교육 앱이 “공부 안 하는 학생을 앉히는 것”을 목표로 만들어집니다. 이미 열심히 하는 학습자를 위한 도구는 비어 있습니다.`, `Almost every education app is built to “get students who won't study to sit down.” Tools for learners who already work hard barely exist.`],
+  [`거의 모든 교육 앱이 “공부 안 하는 학생을 앉히는 것”을 목표로 만들어집니다. 이미 열심히 하는 학습자를 위한 도구는 비어 있습니다.`, `Almost every education app is built to “get students who won't study to sit down.” Tools for learners who already work hard just don't exist.`],
   [`STEM은 도구가 결과를 바꿉니다`, `In STEM, the tool changes the outcome`],
   [`수식·3D·시뮬레이션이 필요한 과목이라 제품의 차이가 이해도와 성적으로 바로 드러납니다 — 값을 지불할 이유가 분명합니다.`, `These subjects need equations, 3D, and simulations, so a better tool shows up directly in understanding and grades — a clear reason to pay.`],
   [`왜 지금`, `Why now`],
@@ -116,7 +116,7 @@ export const TEXT = [
   [`Supabase 실시간 데이터`, `Live data from Supabase`],
   [`Signed up users · 누적 가입`, `Signed-up users`],
   [`TTFV · 첫 가치까지 (중앙값)`, `TTFV · median time to first value`],
-  [`7D feature retention · AI 생성·튜터`, `7-day retention · AI generation &amp; tutor`],
+  [`7D feature retention · AI 생성·튜터`, `7D feature retention · AI generation &amp; tutor`],
   [`맞춤형 AI 튜터`, `Personalized AI Tutor`],
   [`작동 중 &amp; 개선 중`, `Live &amp; improving`],
   [`개발 진행 중`, `In development`],
@@ -158,7 +158,7 @@ export const TEXT = [
   [`9년차 풀스택 + AI`, `9 years full-stack + AI`],
   [`${B_INK}UE5·C++</b> 게임 → ${B_INK}React·Next</b> 웹 → ${B_INK}Nest·PostgreSQL</b> 서버 → ${B_INK}CI/CD·AWS</b> 인프라를 한 사람이 만들고, ${B_INK}AI — (특히 RL)</b>까지.`, `${B_INK}UE5·C++</b> games → ${B_INK}React·Next</b> web → ${B_INK}Nest·PostgreSQL</b> servers → ${B_INK}CI/CD·AWS</b> infra, built by one person — and now ${B_INK}AI (especially RL)</b>.`],
   [`로우레벨부터 CS 이론·수학까지`, `Low-level to CS theory &amp; math`],
-  [`CNN 코드 한 줄을 ${B_INK}메모리 레이아웃·캐시·GPU 텐서 코어</b>까지 읽고, Quake III의 fast inverse square root를 비트 단위로 분해하며 ${B_INK}바나흐 고정점 정리</b>로 반복 정책 평가의 수렴성을 증명합니다.`, `I read CNN code down to ${B_INK}memory layout, cache, and GPU tensor cores</b>, take Quake III's fast inverse square root apart bit by bit, and prove iterative policy evaluation converges with the ${B_INK}Banach fixed-point theorem</b>.`],
+  [`CNN 코드 한 줄을 ${B_INK}메모리 레이아웃·캐시·GPU 텐서 코어</b>까지 읽고, Quake III의 fast inverse square root를 비트 단위로 분해하며 ${B_INK}바나흐 고정점 정리</b>로 반복 정책 평가의 수렴성을 증명합니다.`, `I read a single line of CNN code down to ${B_INK}memory layout, cache, and GPU tensor cores</b>, take Quake III's fast inverse square root apart bit by bit, and prove iterative policy evaluation converges with the ${B_INK}Banach fixed-point theorem</b>.`],
   [`7년 · 9개 프로젝트 · 글로벌 팀`, `7 years · 9 projects · global teams`],
   [`누적 ${B_INK}80명 이상</b>. 대부분 외국인으로 구성된 팀을 ${B_INK}영어 회의</b>로 운영하고, 시험 기간에 팀이 흩어졌을 때 다시 모아 ${B_INK}끝까지 출시</b>했습니다.`, `${B_INK}80+ people</b> in total. I run mostly international teams in ${B_INK}English-language meetings</b>, and when exam season scattered one, I pulled it back together and ${B_INK}shipped anyway</b>.`],
   [`혼자서 제품 전체를 만들고, 데모까지 며칠이 아니라 <span style="color:#1c2340">시간 단위</span>로 냅니다`, `I build the whole product solo and ship demos in <span style="color:#1c2340">hours</span>, not days`],
@@ -174,7 +174,7 @@ export const TEXT = [
 export const ATTR = [
   // speaker notes
   [`Smart Note — AI 마크다운 학습 공간. 프리시드 SAFE 라운드.`, `Smart Note — an AI markdown learning space. Pre-seed SAFE round.`],
-  [`교육 시장은 앞으로 이렇게 바뀝니다 — AI가 강의를 맡고, 교사는 조력자가 되고, 학교는 지식 전달에서 함께 사는 법을 가르치는 곳으로 이동합니다. 이 변화가 우리 제품이 서 있는 전제입니다.`, `Here's how education is going to change — AI takes over lecturing, teachers become facilitators, and schools shift from delivering knowledge to teaching how to live with others. That shift is the premise our product stands on.`],
+  [`교육 시장은 앞으로 이렇게 바뀝니다 — AI가 강의를 맡고, 교사는 조력자가 되고, 학교는 지식 전달에서 함께 사는 법을 가르치는 곳으로 이동합니다. 이 변화가 우리 제품이 서 있는 전제입니다.`, `Here's how education is going to change — AI takes over lecturing, teachers become facilitators, and schools shift from delivering knowledge to teaching how to live together. That shift is the premise our product stands on.`],
   [`라이브 데모 — 노트 맥락을 읽고 대화하며, 벡터 외적 3D 시뮬레이션과 돌림힘·회전 운동 시뮬레이션을 대화 중 직접 생성해 보여줍니다.`, `Live demo — the tutor reads the note's context, talks it through, and generates a 3D vector cross product simulation and a torque &amp; rotational motion simulation right inside the conversation.`],
   [`B2C 구독으로 시작, 학원 B2B 라이선스가 최종 목표, 학교·대학 B2G는 확장.`, `Start with B2C subscriptions; academy B2B licenses are the end goal; B2G for schools and universities is the expansion.`],
   [`TAM $348B, SAM $32B (CAGR 31.2%), SOM $0.5B — SAM의 보수적 1.5%.`, `TAM $348B, SAM $32B (CAGR 31.2%), SOM $0.5B — a conservative 1.5% of SAM.`],
@@ -204,7 +204,7 @@ export const RAW = [
   [`title: '상위권이 먼저, 나머지가 따라옵니다'`, `title: 'Top students first — the rest follow'`],
   [`detail: '스스로 공부하는 학습자가 먼저 쓰면, 같은 반·같은 학원의 나머지가 따라옵니다. 학습 도구는 위에서 아래로 퍼집니다.'`, `detail: 'When self-driven learners adopt it first, the rest of their class and academy follow. Study tools spread from the top down.'`],
   [`title: '비어 있는 타깃'`, `title: 'An empty target'`],
-  [`detail: '거의 모든 교육 앱이 “공부 안 하는 학생을 앉히는 것”을 목표로 만들어집니다. 이미 열심히 하는 학습자를 위한 도구는 비어 있습니다.'`, `detail: "Almost every education app is built to “get students who won't study to sit down.” Tools for learners who already work hard barely exist."`],
+  [`detail: '거의 모든 교육 앱이 “공부 안 하는 학생을 앉히는 것”을 목표로 만들어집니다. 이미 열심히 하는 학습자를 위한 도구는 비어 있습니다.'`, `detail: "Almost every education app is built to “get students who won't study to sit down.” Tools for learners who already work hard just don't exist."`],
   [`title: 'STEM은 도구가 결과를 바꿉니다'`, `title: 'In STEM, the tool changes the outcome'`],
   [`detail: '수식·3D·시뮬레이션이 필요한 과목이라 제품의 차이가 성적과 이해도로 바로 드러납니다 — 값을 지불할 이유가 분명합니다.'`, `detail: 'These subjects need equations, 3D, and simulations, so a better tool shows up directly in grades and understanding — a clear reason to pay.'`],
 
