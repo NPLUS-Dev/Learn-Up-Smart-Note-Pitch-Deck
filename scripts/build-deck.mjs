@@ -53,7 +53,7 @@ function menuItem(lang, label, current) {
 
 function languageMenu(lang) {
   return `<div style="position:absolute;top:40px;right:48px;display:inline-flex;flex-direction:column;align-items:flex-end;z-index:6" ${MENU_MARKER} style-focus-within="--lang:1;--langv:visible;--lange:auto">
-    <span role="button" tabindex="0" aria-haspopup="true" aria-label="Language · 언어" style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:#fffcf4;border:1px solid #ece6ee;box-shadow:0 3px 8px -3px rgba(90,62,32,.10);font-size:30px;cursor:pointer">🌐</span>
+    <button type="button" aria-haspopup="true" aria-label="Language · 언어" style="appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;padding:0;border-radius:50%;background:#fffcf4;border:1px solid #ece6ee;box-shadow:0 3px 8px -3px rgba(90,62,32,.10);font-family:inherit;font-size:30px;cursor:pointer">🌐</button>
     <div style="padding-top:10px;opacity:var(--lang,0);visibility:var(--langv,hidden);pointer-events:var(--lange,none);transition:opacity .18s ease,visibility .18s">
       <div style="min-width:200px;padding:10px;background:#fffcf4;border:1px solid #ece6ee;border-radius:12px;box-shadow:0 40px 90px -40px rgba(58,44,104,.45),0 12px 34px -14px rgba(58,44,104,.22);display:flex;flex-direction:column;gap:6px">
         ${menuItem("ko", "한국어", lang === "ko")}
