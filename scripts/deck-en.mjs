@@ -18,31 +18,78 @@ export const TEXT = [
   [`전세계 대상 글로벌 서비스`, `Global service, built for the world`],
   [`맞춤형 AI 학습 공간`, `Personalized AI learning space`],
 
-  // Future of Education
-  [`교육은 ${HL_VIOLET}이렇게 바뀝니다</span>`, `How education ${HL_VIOLET}will change</span>`],
-  [`AI가 가르치는 일을 맡으면, 교사와 학교의 역할이 함께 움직입니다.`, `Once AI takes over the teaching, the roles of teachers and schools shift with it.`],
+  // Problem
+  [`공부가 ${HL_VIOLET}막히는 세 지점</span>`, `Where learning ${HL_VIOLET}gets stuck</span>`],
+  [`그림과 글로는 보이지 않습니다`, `Concepts you can't see`],
+  [`화학 분자, 물리 현상 같은 개념은 ${B_INK}평면 그림과 글만으로는 이해하기 어렵습니다.</b>`, `Molecules and physics are ${B_INK}hard to grasp from flat diagrams and text.</b>`],
+  [`무엇이 부족한지 모릅니다`, `Blind spots before exams`],
+  [`시험 전에 완벽해지고 싶지만 ${B_INK}어디가 약하고 어떻게 채워야 할지 모릅니다.</b>`, `Students want to ace the exam but ${B_INK}can't tell what's weak or how to fix it.</b>`],
+  [`자료 만들다 시간이 끝납니다`, `No time to personalize`],
+  [`선생님은 ${B_INK}자료 만드는 데 시간을 다 써서</b> 학생 한 명 한 명을 챙길 시간이 없습니다.`, `Teachers ${B_INK}spend hours making materials</b>, leaving no time for each student.`],
+
+  // Solution
+  [`맞춤형 ${HL_VIOLET}AI 튜터</span>가 하는 일`, `What a ${HL_VIOLET}personalized AI tutor</span> does`],
+  [`문제 01 해결`, `Solves 01`],
+  [`문제 02 해결`, `Solves 02`],
+  [`문제 03 해결`, `Solves 03`],
+  [`3D로 직접 봅니다`, `See it in 3D`],
+  [`3D 뷰와 시뮬레이션으로 ${B_INK}복잡한 개념이 한눈에 들어옵니다.</b>`, `3D views and simulations ${B_INK}make complex concepts click.</b>`],
+  [`v₀ = 10 m/s · 드래그로 회전`, `v₀ = 10 m/s · drag to rotate`],
+  [`경사각 α`, `Slope α`],
+  [`발사각 θ`, `Launch θ`],
+  [`빗면 따라 R = {{ slR }} m`, `R = {{ slR }} m along slope`],
+  [`약한 부분을 채웁니다`, `Fix the weak spots`],
+  [`학생의 수준과 습관을 읽고 ${B_INK}시험 준비가 끝날 때까지 이끕니다.</b>`, `Reads each student's level and habits, then ${B_INK}guides them to exam-ready.</b>`],
+  [`서연`, `EW`],
+  [`서연의 시험 리포트`, `Emma's exam report`],
+  [`물리 중간고사 · 5일 남음`, `Physics midterm · in 5 days`],
+  [`준비도`, `ready`],
+  [`강점`, `Strong`],
+  [`운동 방정식을 빠르게 세웁니다`, `Sets up motion equations fast`],
+  [`약점`, `Gap`],
+  [`빗면에서 sin / cos를 헷갈립니다`, `Mixes up sin / cos on slopes`],
+  [`계획`, `Plan`],
+  [`빗면 문제 3개 · 15분 → 재시험`, `3 slope drills · 15 min → retest`],
+  [`선생님 관리가 쉬워집니다`, `Easy for teachers`],
+  [`진도 추적과 ${B_INK}교사용 도구</b>로 반 전체를 놓치지 않습니다.`, `Progress tracking and ${B_INK}teacher tools</b> keep every class on track.`],
+  [`2학년 3반 · 물리`, `Class 2-3 · Physics`],
+  [`숙제: 빗면 운동`, `Homework: slope motion`],
+  [`{{ tDone }} 제출`, `{{ tDone }} done`],
+  [`수준`, `Level`],
+  [`숙제`, `HW`],
+  [`💡 지도 팁 · {{ tName }}`, `💡 Teaching tip · {{ tName }}`],
+
+  // Competition
+  [`각자 한 조각뿐입니다. ${HL_VIOLET}저희는 루프를 잇습니다.</span>`, `Everyone owns one piece. ${HL_VIOLET}We connect the loop.</span>`],
+  [`저희의 위치`, `Our position`],
+  [`학습 전용`, `Built for learning`],
+  [`범용`, `General-purpose`],
+  [`개인용`, `Solo use`],
+  [`학원용`, `Academy use`],
+  [`학습 콘텐츠`, `Learning content`],
+  [`문서 도구`, `Doc tool`],
+  [`범용 AI`, `General AI`],
+  [`학생은 배우고, 선생님은 관리합니다 — 한 시스템에서`, `Students learn, teachers manage — in one system`],
+  [`콘텐츠 앱`, `Content apps`],
+  [`내 노트와 ${B_INK}연결되지 않습니다.</b>`, `${B_INK}Doesn't connect</b> to my notes.`],
+  [`노트 앱`, `Note apps`],
+  [`내 학습 맥락을 ${B_INK}모릅니다.</b>`, `${B_INK}Doesn't know</b> my learning context.`],
+  [`똑똑하지만 ${B_INK}내가 뭘 배웠는지 모릅니다.</b>`, `Smart, but ${B_INK}doesn't know what I've learned.</b>`],
+  [`시험지 도구`, `Test-paper tools`],
+  [`학습지 제작 도구`, `Worksheet makers`],
+  [`${B_INK}학생별 맞춤이 없고,</b> 쓰기 번거롭습니다.`, `${B_INK}No per-student fit,</b> clunky to use.`],
+  [`한곳에서`, `One place`],
+  [`노트`, `Note`],
+  [`질문`, `Ask`],
+  [`생성`, `Generate`],
+  [`채점`, `Grade`],
+  [`약점 찾기`, `Find weak spots`],
+  [`→ 학원 운영`, `→ Academy ops`],
+  [`시험 · 커리큘럼 · 학생`, `tests · curriculum · students`],
+
+  // Teacher / school labels (Business Model, Milestone, Growth Loop)
   [`교사`, `Teacher`],
   [`학교`, `School`],
-  [`보조 도구`, `Assistant`],
-  [`강의자`, `Lecturer`],
-  [`조력자`, `Facilitator`],
-  [`지식`, `Knowledge`],
-  [`함께 사는 법`, `Living together`],
-  [`설명하고 문제를 내고 채점하는 일을 AI가 맡습니다. ${B_INK}한 명마다 맞춤형 커리큘럼</b>으로 가르칠 수 있게 됩니다.`, `AI takes over explaining, setting problems, and grading — so every student can be taught with ${B_INK}a curriculum of their own</b>.`],
-  [`같은 내용을 30명에게 반복하는 일에서 벗어나, ${B_INK}막힌 학생을 찾아 붙어주고 동기를 관리하는 역할</b>로 옮겨갑니다.`, `Instead of repeating the same lesson to 30 students, teachers move to ${B_INK}finding the students who are stuck, working with them, and keeping them motivated</b>.`],
-  [`지식 전달은 개인화된 AI가 더 잘합니다. 학교는 ${B_INK}협업·토론·태도처럼 사람 사이에서만 배우는 것</b>을 맡습니다.`, `Personalized AI delivers knowledge better. Schools take on ${B_INK}what can only be learned between people — collaboration, debate, and attitude</b>.`],
-  [`저희의 비전이 아닙니다. ${B_VIOLET}예정된 미래</b>입니다.`, `This isn't our vision. It's ${B_VIOLET}the future that's already coming</b>.`],
-
-  // Endgame — the AI tutor
-  [`맞춤형 ${HL_VIOLET}AI 튜터</span>`, `Personalized ${HL_VIOLET}AI Tutor</span>`],
-  [`근본 원인 진단`, `Root-cause diagnosis`],
-  [`난이도·경로 적응`, `Adapts difficulty &amp; path`],
-  [`답이 아닌 소크라테스식 힌트`, `Socratic hints, not answers`],
-  [`나에게 맞춰 만들어지는 콘텐츠`, `Content built around you`],
-  [`학습 대시보드`, `Learning dashboard`],
-  [`모든 과목을 연결`, `Connects every subject`],
-  [`커리큘럼·일정`, `Curriculum · schedule`],
-  [`노트가 데이터를, 데이터가 튜터를 만듭니다`, `Notes build the data; the data builds the tutor`],
 
   // AI Tutor (live demo)
   [`${HL_GREEN}개인화된</span> 튜터링`, `${HL_GREEN}Personalized</span> tutoring`],
@@ -176,7 +223,6 @@ export const TEXT = [
 export const ATTR = [
   // speaker notes
   [`Smart Note — AI 마크다운 학습 공간. 프리시드 SAFE 라운드.`, `Smart Note — an AI markdown learning space. Pre-seed SAFE round.`],
-  [`교육 시장은 앞으로 이렇게 바뀝니다 — AI가 강의를 맡고, 교사는 조력자가 되고, 학교는 지식 전달에서 함께 사는 법을 가르치는 곳으로 이동합니다. 이 변화가 우리 제품이 서 있는 전제입니다.`, `Here's how education is going to change — AI takes over lecturing, teachers become facilitators, and schools shift from delivering knowledge to teaching how to live together. That shift is the premise our product stands on.`],
   [`라이브 데모 — 노트 맥락을 읽고 대화하며, 벡터 외적 3D 시뮬레이션과 돌림힘·회전 운동 시뮬레이션을 대화 중 직접 생성해 보여줍니다.`, `Live demo — the tutor reads the note's context, talks it through, and generates a 3D vector cross product simulation and a torque &amp; rotational motion simulation right inside the conversation.`],
   [`B2C 구독으로 시작, 학원 B2B 라이선스가 최종 목표, 학교·대학 B2G는 확장.`, `Start with B2C subscriptions; academy B2B licenses are the end goal; B2G for schools and universities is the expansion.`],
   [`TAM 470조원, SAM 43조원 (CAGR 31.2%), SOM 6,750억원 — SAM의 보수적 1.5%.`, `TAM $348B, SAM $32B (CAGR 31.2%), SOM $0.5B — a conservative 1.5% of SAM.`],
@@ -191,6 +237,14 @@ export const ATTR = [
   // chart / diagram descriptions
   [`Smart Note와 Smart Board로 STEM 학생·교사 개인 유저를 확보하고, 그 실사용 데이터를 증거로 학원 B2B 계약을 추진하며, 학교·대학 B2G로 확장합니다`, `Smart Note and Smart Board win individual STEM students and teachers; their real usage data is the evidence for B2B contracts with academies, which then expand to B2G sales to schools and universities`],
   [`성장 루프: 학생과 교사가 서로 유저를 데려오고, 유저가 모이면 학습 데이터가 쌓이고, 그 데이터로 AI가 학습해 서비스가 좋아지며, 다시 더 많은 유저가 모입니다`, `Growth loop: students and teachers bring each other in; as users join, learning data piles up; the AI learns from that data and the service improves, which brings in even more users`],
+
+  // Problem, Solution, Competition
+  [`세 가지 문제 — 복잡한 개념은 단순한 그림과 글로 이해하기 어렵고, 학생은 무엇이 부족한지 모르며, 선생님은 자료 만드는 데 시간을 다 써서 맞춤형 교육을 하지 못합니다.`, `Three problems — complex concepts are hard to grasp from simple pictures and text, students don't know what they're missing, and teachers spend so much time making materials they can't personalize instruction.`],
+  [`그림과 글로는 보이지 않습니다`, `Concepts you can't see`],
+  [`무엇이 부족한지 모릅니다`, `Blind spots before exams`],
+  [`자료 만들다 시간이 끝납니다`, `No time to personalize`],
+  [`맞춤형 AI 튜터가 하는 일 세 가지 — 3D·시뮬레이션으로 개념을 보여주고, 학생을 분석해 부족한 부분을 채우고, 선생님의 관리를 쉽게 합니다.`, `Three things the personalized AI tutor does — shows concepts with 3D and simulations, analyzes each student to fill their gaps, and makes management easy for teachers.`],
+  [`콘텐츠 앱은 내 노트와 연결되지 않고, 노트 앱은 학습 맥락을 모르며, 범용 AI는 내가 무엇을 배웠는지 모르고, 시험지 도구는 학생별 맞춤이 안 됩니다. 저희는 노트 → 질문 → 생성 → 채점 → 약점 분석을 하나의 루프로 잇고, 그 데이터를 학원 운영까지 올려 보냅니다.`, `Content apps don't connect to your notes, note apps don't know your learning context, general AI doesn't know what you've learned, and test-paper tools don't personalize. We join note → ask → generate → grade → weakness analysis in one loop and carry that data up into academy operations.`],
 ];
 
 export const RAW = [
@@ -246,6 +300,24 @@ export const RAW = [
   [`av: isUser ? '나' : 'AI'`, `av: isUser ? 'Me' : 'AI'`],
   // keep formula chips like "τ = Iα" on one line — English wraps them mid-formula
   [`monospace;color:#4a76d6;background:#e8efff;padding:2px 8px;border-radius:6px"`, `monospace;color:#4a76d6;background:#e8efff;padding:2px 8px;border-radius:6px;white-space:nowrap"`],
+
+  // Solution demos: exam report and teacher dashboard data
+  [`label: '포물선 운동'`, `label: 'Projectile motion'`],
+  [`label: '벡터'`, `label: 'Vectors'`],
+  [`label: '돌림힘'`, `label: 'Torque'`],
+  [`'심화'`, `'Advanced'`],
+  [`'정상 진도'`, `'On track'`],
+  [`'보충 필요'`, `'Needs help'`],
+  [`name: '김서연'`, `name: 'Emma Wilson'`],
+  [`name: '이준호'`, `name: 'Jake Miller'`],
+  [`name: '박지민'`, `name: 'Olivia Brown'`],
+  [`name: '최도윤'`, `name: 'Noah Davis'`],
+  [`tip: '빗면 분해가 약합니다. 새 문제를 내기 전에 3D 빗면 시뮬부터 열어 주세요.'`, `tip: 'Weak on slope decomposition. Open the 3D slope sim before assigning new problems.'`],
+  [`tip: '심화 문제를 풀 준비가 됐습니다. 서연이와 짝지어 설명 역할을 맡겨 보세요.'`, `tip: 'Ready for challenge sets. Pair with Emma as a peer explainer.'`],
+  [`tip: '이번 주 숙제 2개를 놓쳤습니다. 10분 요약과 함께 알림을 보내 주세요.'`, `tip: 'Missed 2 assignments this week. Send a nudge with a 10-min recap.'`],
+  [`tip: '벡터는 탄탄합니다. 다음은 돌림힘 부호 규칙을 복습하세요.'`, `tip: 'Solid on vectors. Review torque sign conventions next.'`],
+  [`'✓ 제출' : '✗ 미제출'`, `'✓ Done' : '✗ Missing'`],
+  [`'✓ 최대 사거리' : '최대 사거리 θ = '`, `'✓ Max range' : 'Max at θ = '`],
 ];
 
 export const BLOCKS = [
