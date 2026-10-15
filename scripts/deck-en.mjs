@@ -163,7 +163,6 @@ export const TEXT = [
   [`베타 테스트 {{ trWeeks }}주 — ${B_INK}{{ trSignups }}</b> 가입 ({{ trAsOf }} 기준)`, `{{ trWeeks }} weeks of beta — ${B_INK}{{ trSignups }}</b> sign-ups (as of {{ trAsOf }})`],
   [`누적 가입자`, `Total sign-ups`],
   [`주별 신규 가입`, `New sign-ups per week`],
-  [`Supabase 실시간 데이터`, `Live data from Supabase`],
   [`Signed up users · 누적 가입`, `Signed-up users`],
   [`TTFV · 첫 가치까지 (중앙값)`, `TTFV · median time to first value`],
   [`7D feature retention · AI 생성·튜터`, `7D feature retention · AI generation &amp; tutor`],
