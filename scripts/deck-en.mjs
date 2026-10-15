@@ -113,7 +113,7 @@ export const TEXT = [
 
   // Smart Note — traction
   [`${HL_GREEN}이미 만들었습니다</span>`, `${HL_GREEN}Already built</span>`],
-  [`베타 테스트 13주 — ${B_INK}140명</b> 가입 (9월 12일 기준)`, `13 weeks of beta — ${B_INK}140</b> sign-ups (as of Sep 12)`],
+  [`베타 테스트 {{ trWeeks }}주 — ${B_INK}{{ trSignups }}</b> 가입 ({{ trAsOf }} 기준)`, `{{ trWeeks }} weeks of beta — ${B_INK}{{ trSignups }}</b> sign-ups (as of {{ trAsOf }})`],
   [`누적 가입자`, `Total sign-ups`],
   [`주별 신규 가입`, `New sign-ups per week`],
   [`Supabase 실시간 데이터`, `Live data from Supabase`],
@@ -190,7 +190,6 @@ export const ATTR = [
 
   // chart / diagram descriptions
   [`Smart Note와 Smart Board로 STEM 학생·교사 개인 유저를 확보하고, 그 실사용 데이터를 증거로 학원 B2B 계약을 추진하며, 학교·대학 B2G로 확장합니다`, `Smart Note and Smart Board win individual STEM students and teachers; their real usage data is the evidence for B2B contracts with academies, which then expand to B2G sales to schools and universities`],
-  [`2026년 6월 21일 OBT 시작 이후 주별 신규 가입과 누적 가입자 그래프 — 13주 만에 누적 140명, 7월 둘째 주에 주간 34명이 최고치`, `Weekly new and cumulative sign-ups since the open beta launched on June 21, 2026 — 140 in total after 13 weeks, peaking at 34 in the second week of July`],
   [`성장 루프: 학생과 교사가 서로 유저를 데려오고, 유저가 모이면 학습 데이터가 쌓이고, 그 데이터로 AI가 학습해 서비스가 좋아지며, 다시 더 많은 유저가 모입니다`, `Growth loop: students and teachers bring each other in; as users join, learning data piles up; the AI learns from that data and the service improves, which brings in even more users`],
 ];
 

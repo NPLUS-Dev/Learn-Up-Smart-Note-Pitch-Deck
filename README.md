@@ -47,9 +47,10 @@ smart-note-pitch/
 ├─ ko.html                 # Korean deck — the Claude Design export, patched by the build
 ├─ lang.js                 # picks ko.html or index.html: ?lang= → saved choice → browser/OS language
 ├─ support.js              # Claude Design runtime for the deck template (loads React from unpkg)
+├─ traction.js             # loads live traction numbers from Supabase, falls back to data/traction.json
 ├─ deck-stage.js           # Claude Design <deck-stage> slide component
 ├─ assets/                 # logo and leaf mark
-├─ data/traction.json      # traction numbers; overwritten by the workflow below
+├─ data/traction.json      # daily traction snapshot (fallback); overwritten by the workflow below
 ├─ scripts/
 │  ├─ build-deck.mjs       # patches ko.html and generates index.html
 │  ├─ deck-en.mjs          # the English copy used by the build
@@ -63,4 +64,4 @@ smart-note-pitch/
 2. Run `node scripts/build-deck.mjs`.
 3. If it lists Korean with no English yet, or entries that no longer match, add or fix those entries in `scripts/deck-en.mjs` and run it again. `index.html` is only written once everything is translated.
 
-The live tiles on the Smart Note slide read `data/traction.json` at load time and stay at "—" if the file is missing.
+The live tiles on the Smart Note slide call the `public.pitch_traction()` RPC on Supabase every time the deck opens (`traction.js`, anon key, aggregate counts only — defined in `Spinel Server/migrations/046_pitch_traction_rpc.sql`). If that call fails they use the daily `data/traction.json` snapshot, and stay at "—" if both are missing.

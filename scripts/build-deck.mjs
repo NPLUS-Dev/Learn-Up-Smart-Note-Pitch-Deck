@@ -34,6 +34,7 @@ function head(lang) {
 <link rel="alternate" hreflang="ko" href="ko.html">
 <script src="./lang.js"></script>
 <script src="./support.js"></script>
+<script src="./traction.js"></script>
 </head>`;
 }
 
@@ -103,11 +104,38 @@ function withSlideLabels(src) {
   return src;
 }
 
+// The design reads the daily data/traction.json snapshot and bakes the sign-up
+// chart and its subtitle in as static markup from the day it was exported.
+// Read today's numbers from Supabase instead (traction.js, falling back to the
+// snapshot), and draw the chart and subtitle from them.
+const TRACTION_PATCHES = [
+  // load: live RPC first, snapshot second
+  [/fetch\('data\/traction\.json'[^)]*\)\s*\.then\(\(r\) => \(r\.ok \? r\.json\(\) : null\)\)/, () => "window.loadTraction()"],
+  // draw the chart once the numbers arrive
+  [/this\.setState\(\{ traction: d \}\)/, () => "this.setState({ traction: d }, () => window.drawSignupChart(this.signupChartRef.current, d))"],
+  [/(\n(\s*)torqueRef = React\.createRef\(\);)/, (_, line, pad) => `${line}\n${pad}signupChartRef = React.createRef();`],
+  // subtitle values
+  [/(\n(\s*)let trGen = \[\], [^\n]*\n)/, (_, line, pad) => `${line}${pad}const { weeks: trWeeks, asOf: trAsOf } = window.tractionSummary(d);\n`],
+  [/(\n\s*trTtfv, trGenTotal, [^\n]*trRetTop,)/, (_, line) => `${line} trWeeks, trAsOf, signupChartRef: this.signupChartRef,`],
+  [/베타 테스트 \d+주 — (<b style="color:#1c2340">)\d+명(<\/b>) 가입 \([^)<]*기준\)/, (_, b, eb) => `베타 테스트 {{ trWeeks }}주 — ${b}{{ trSignups }}${eb} 가입 ({{ trAsOf }} 기준)`],
+  // the static chart, replaced by a container traction.js draws into
+  [/<svg viewBox="0 0 1480 330"[\s\S]*?<\/svg>/, () => `<div ref="{{ signupChartRef }}"></div>`],
+];
+
+function withLiveTraction(src) {
+  if (src.includes("window.loadTraction()")) return src;
+  for (const [pattern, to] of TRACTION_PATCHES) {
+    if (!pattern.test(src)) throw new Error("ko.html: traction slide changed shape (" + pattern + ") — update withLiveTraction() in build-deck.mjs");
+    src = src.replace(pattern, to);
+  }
+  return src;
+}
+
 function withPage(src, lang) {
   const menu = divAround(src, MENU_MARKER);
   if (!menu) throw new Error("ko.html: couldn't find the 🌐 language menu on the cover (" + MENU_MARKER + ")");
   src = src.slice(0, menu.start) + languageMenu(lang) + src.slice(menu.end);
-  src = withSlideLabels(withoutRail(src));
+  src = withLiveTraction(withSlideLabels(withoutRail(src)));
   return src.replace(/<html[^>]*>/, () => `<html lang="${lang}">`).replace(/<head>[\s\S]*?<\/head>/, () => head(lang));
 }
 
