@@ -1,6 +1,6 @@
 # Smart Note — Pitch Deck
 
-Interactive HTML pitch deck for **Smart Note**, a personalized AI learning space. 14 slides in Korean and English, designed in Claude Design, with a live AI-tutor demo and traction numbers pulled from the product database.
+Interactive HTML pitch deck for **Smart Note**, a personalized AI learning space. 16 slides in Korean and English, designed in Claude Design, with a live AI-tutor demo and traction numbers pulled from the product database.
 
 ## View it live
 
@@ -29,16 +29,18 @@ The deck has to be served over HTTP (GitHub Pages or any static server): it load
 2. Problem — where learning gets stuck: concepts you can't see, blind spots before exams, no time to personalize
 3. Solution — what the personalized AI tutor does *(interactive: 3D slope simulation, exam report, teacher dashboard)*
 4. AI Tutor — context-aware tutoring *(live demo)*
-5. Business Model — individual users first, then academies (B2B) and schools (B2G)
-6. Market — TAM / SAM / SOM
-7. Competition — everyone owns one piece; we connect the loop
-8. How We Sell — one education system, not an API
-9. Wedge — a note app first, for active STEM learners
-10. Smart Note — beta traction *(live numbers)*
-11. Milestone — 3-year metrics and revenue plan
-12. Growth Loop
-13. Founder
-14. The Ask — $300k pre-seed and use of funds
+5. Focus Data — measuring focus with an EEG headband *(interactive: photos, brain-wave report, 3D free-kick simulation)*
+6. Business Model — individual users first, then academies (B2B) and schools (B2G)
+7. Market — TAM / SAM / SOM
+8. Competition — everyone owns one piece; we connect it in one system
+9. How We Sell — one education system, not an API
+10. Wedge — a note app first, for active STEM learners
+11. Smart Note — beta traction *(live numbers)*
+12. Tech — the engineering behind the AI
+13. Milestone — 3-year metrics and revenue plan
+14. Growth Loop
+15. Founder
+16. The Ask — $300k pre-seed and use of funds
 
 ## Files
 
@@ -50,7 +52,7 @@ smart-note-pitch/
 ├─ support.js              # Claude Design runtime for the deck template (loads React from unpkg)
 ├─ traction.js             # loads live traction numbers from Supabase, falls back to data/traction.json
 ├─ deck-stage.js           # Claude Design <deck-stage> slide component
-├─ assets/                 # logo and leaf mark
+├─ assets/                 # logo, leaf mark, slide images; models/ holds the 3D free-kick sim's goalkeeper and ball
 ├─ data/traction.json      # daily traction snapshot (fallback); overwritten by the workflow below
 ├─ scripts/
 │  ├─ build-deck.mjs       # patches ko.html and generates index.html

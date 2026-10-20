@@ -131,11 +131,36 @@ function withLiveTraction(src) {
   return src;
 }
 
+// Until the pitch_traction() RPC is deployed the tiles show the daily
+// snapshot, so the design's "Supabase 실시간 데이터" label would overstate them.
+const LIVE_LABEL = /\n\s*<div style="[^"]*">\s*<i style="[^"]*"><\/i>\s*<span style="[^"]*">Supabase 실시간 데이터<\/span>\s*<\/div>/;
+
+function withoutLiveLabel(src) {
+  return src.replace(LIVE_LABEL, "");
+}
+
+// The Korean design's animation loop lost the lines that step the slope
+// simulations (Solution, and the Focus Data sim pane), which left them frozen.
+// Put back the English design's loop body if they're missing.
+const SIM_STEPS = `
+    if (this._slope) this._slope.step(dt);
+    if (this.state.simMore && this.state.eegIdx === 2) {
+      if (this._slope2) this._slope2.step(dt);
+      if (this._kick3) this._kick3.step(dt);
+    }`;
+
+function withSimSteps(src) {
+  if (src.includes("this._slope.step(dt)")) return src;
+  const loop = "this._scenes.forEach((s) => { if (s.step) s.step(dt); });";
+  if (!src.includes(loop)) throw new Error("ko.html: the animation loop changed shape — update withSimSteps() in build-deck.mjs");
+  return src.replace(loop, () => loop + SIM_STEPS);
+}
+
 function withPage(src, lang) {
   const menu = divAround(src, MENU_MARKER);
   if (!menu) throw new Error("ko.html: couldn't find the 🌐 language menu on the cover (" + MENU_MARKER + ")");
   src = src.slice(0, menu.start) + languageMenu(lang) + src.slice(menu.end);
-  src = withLiveTraction(withSlideLabels(withoutRail(src)));
+  src = withSimSteps(withoutLiveLabel(withLiveTraction(withSlideLabels(withoutRail(src)))));
   return src.replace(/<html[^>]*>/, () => `<html lang="${lang}">`).replace(/<head>[\s\S]*?<\/head>/, () => head(lang));
 }
 
