@@ -30,7 +30,7 @@ The deck has to be served over HTTP (GitHub Pages or any static server): it load
 3. Solution — what the personalized AI tutor does *(interactive: 3D slope simulation, exam report, teacher dashboard)*
 4. AI Tutor — context-aware tutoring *(live demo)*
 5. Focus Data — measuring focus with an EEG headband *(interactive: photos, brain-wave report, 3D free-kick simulation)*
-6. Business Model — individual users first, then academies (B2B) and schools (B2G)
+6. Business Model — academies first (B2B, $10,000/year per location), then schools and colleges (B2G, $100,000/year per location)
 7. Market — TAM / SAM / SOM
 8. Competition — everyone owns one piece; we connect it in one system
 9. How We Sell — one education system, not an API
