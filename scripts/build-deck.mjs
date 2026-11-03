@@ -156,11 +156,18 @@ function withSimSteps(src) {
   return src.replace(loop, () => loop + SIM_STEPS);
 }
 
+// The design loads the keeper's texture with flipY off, as if its UVs came
+// straight from a glTF. This mesh's UVs need the default flip, or the atlas
+// lands on the wrong body parts and the keeper looks like camouflage.
+function withKeeperTexture(src) {
+  return src.replace("keeperTex.flipY = false; ", "");
+}
+
 function withPage(src, lang) {
   const menu = divAround(src, MENU_MARKER);
   if (!menu) throw new Error("ko.html: couldn't find the 🌐 language menu on the cover (" + MENU_MARKER + ")");
   src = src.slice(0, menu.start) + languageMenu(lang) + src.slice(menu.end);
-  src = withSimSteps(withoutLiveLabel(withLiveTraction(withSlideLabels(withoutRail(src)))));
+  src = withKeeperTexture(withSimSteps(withoutLiveLabel(withLiveTraction(withSlideLabels(withoutRail(src))))));
   return src.replace(/<html[^>]*>/, () => `<html lang="${lang}">`).replace(/<head>[\s\S]*?<\/head>/, () => head(lang));
 }
 
