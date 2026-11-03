@@ -129,16 +129,22 @@ export const TEXT = [
   [`학원의 초기 비용을 낮춥니다`, `Lowers the upfront cost for academies`],
 
   // Market
-  [`가장 빠르게 자라는 ${HL_VIOLET}교육 시장</span>`, `The fastest-growing ${HL_VIOLET}education market</span>`],
-  [`글로벌 에듀테크`, `Global EdTech`],
-  [`470조원`, `$348B`],
-  [`43조원`, `$32B`],
-  [`6,750억원`, `$0.5B`],
-  [`AI 교육 — 가장 빠르게 성장하는 구간`, `AI education — the fastest-growing segment`],
-  [`STEM 자기주도 학습자 → 30.5조원`, `STEM self-directed learners → $22.6B`],
-  [`≈ SAM의 1.5%`, `≈ 1.5% of SAM`],
-  [`노트앱 $22.6B (2030)`, `note-taking apps $22.6B (2030)`],
-  [`한국 에듀테크 $10.4B (2030)`, `South Korea EdTech $10.4B (2030)`],
+  [`${HL_VIOLET}학원 시장</span>부터 공략합니다`, `We start with the ${HL_VIOLET}academy market</span>`],
+  [`글로벌 사교육 시장`, `Global private tutoring market`],
+  [`최신 통계`, `Latest data`],
+  [`한국·일본·미국·인도 학원 약 129,000곳 × 연 $10,000`, `~129,000 academies in South Korea, Japan, the US &amp; India × $10,000/year`],
+  [`연간 라이선스 기준`, `in annual licenses`],
+  [`학원 부문 목표 1,000곳 × 연 $10,000`, `Academies only: goal of 1,000 × $10,000/year`],
+  [`≈ SAM의 0.8%`, `≈ 0.8% of SAM`],
+  [` (발행사별 2030년 추정 `, ` (2030 estimates across publishers: `],
+  [`). SAM = 학원 수 × 곳당 단가: `, `). SAM = academies × price per location: `],
+  [`한국 입시·보습 학원 52,621곳 (2026)`, `South Korea, 52,621 exam-prep &amp; tutoring academies (2026)`],
+  [`일본 18,850곳 (2021, 개인 경영 제외)`, `Japan, 18,850 (2021, excl. sole proprietors)`],
+  [`미국 9,820곳 (2023)`, `US, 9,820 (2023)`],
+  [`인도 등록 학원 48,000곳 (2024, 업계 추정)`, `India, 48,000 registered (2024, industry estimate)`],
+  [`. 중국 제외. 참고: `, `. China excluded. For scale: `],
+  [`Mathnasium 단독 전 세계 1,300곳 이상`, `Mathnasium alone has 1,300+ centers worldwide`],
+  [`. 막대 길이는 실제 비율과 다릅니다.`, `. Bars are not to scale.`],
 
   // How We Sell
   [`그래서 ${HL_VIOLET}어떻게 팔 것인가?</span>`, `So ${HL_VIOLET}how do we sell it?</span>`],
@@ -154,7 +160,7 @@ export const TEXT = [
   [`엔진`, `Engine`],
   [`학원은 도구가 아니라 ${B_VIOLET}운영 방식</b>을 도입합니다`, `Academies adopt an ${B_VIOLET}operating model</b>, not a tool`],
   [`노트·학습 기록이 쌓여 ${B_VIOLET}바꾸기 어려워집니다</b>`, `Notes &amp; study records pile up, so it's ${B_VIOLET}hard to switch</b>`],
-  [`모델 원가가 아니라 ${B_VIOLET}성과로 값이 매겨집니다</b>`, `${B_VIOLET}Priced on outcomes</b>, not model cost`],
+  [`모델 원가가 아니라 ${B_VIOLET}곳당 연간 요금</b>으로 값이 매겨집니다`, `${B_VIOLET}Priced per location per year</b>, not on model cost`],
 
   // Wedge
   [`${HL_GREEN}노트 앱으로 먼저</span> 시장진입`, `Enter the market ${HL_GREEN}with a note app first</span>`],
@@ -250,6 +256,8 @@ export const TEXT = [
   [`캡 ${B_INK}15.0%</b> · 런웨이 ${B_INK}6개월</b>`, `Cap ${B_INK}15.0%</b> · Runway ${B_INK}6 months</b>`],
   [`6개월 목표`, `6-month goal`],
   [`리텐션`, `retention`],
+  [`파일럿 학원 30곳`, `30 pilot academies`],
+  [`파일럿으로 학원 판매를 검증해<br>→ ${B_INK}2027년 학원 100곳 · 매출 $1M</b>`, `Pilots validate academy sales<br>→ ${B_INK}100 academies · $1M revenue in 2027</b>`],
   [`자금 사용 계획`, `Use of funds`],
   [`해낼 수 있다는 걸 증명하게 해주세요.`, `Let me prove I can.`],
 ];
@@ -259,14 +267,14 @@ export const ATTR = [
   [`Smart Note — AI 마크다운 학습 공간. 프리시드 SAFE 라운드.`, `Smart Note — an AI markdown learning space. Pre-seed SAFE round.`],
   [`라이브 데모 — 노트 맥락을 읽고 대화하며, 벡터 외적 3D 시뮬레이션과 돌림힘·회전 운동 시뮬레이션을 대화 중 직접 생성해 보여줍니다.`, `Live demo — the tutor reads the note's context, talks it through, and generates a 3D vector cross product simulation and a torque &amp; rotational motion simulation right inside the conversation.`],
   [`학원 B2B(곳당 연 $10,000)가 주요 타깃입니다 — 예: 인도 Aakash Educational Services, 미국 Mathnasium. 학교·대학 B2G(곳당 연 $100,000)는 추가 타깃이지만, 학교·교육청 계약은 보통 훨씬 오래 걸리므로 학원에 먼저 집중합니다. 기타 수익은 학생당 과금과 EEG 장비 대여입니다.`, `Academy B2B ($10,000/year per location) is the main target — e.g. Aakash Educational Services in India and Mathnasium in the US. School and college B2G ($100,000/year per location) is an additional target, but we focus on academies first because contracts with schools and education offices typically take much longer. Other revenue: per-student pricing and EEG hardware rental.`],
-  [`TAM 470조원, SAM 43조원 (CAGR 31.2%), SOM 6,750억원 — SAM의 보수적 1.5%.`, `TAM $348B, SAM $32B (CAGR 31.2%), SOM $0.5B — a conservative 1.5% of SAM.`],
+  [`TAM은 2030년 글로벌 사교육 시장 $208.9B (CAGR 9.9%)입니다. SAM은 한국·일본·미국·인도의 학원 약 129,000곳 × 곳당 연 $10,000 = $1.3B입니다. SOM은 2029년 목표인 학원 1,000곳 × $10,000 = $10M으로, SAM의 약 0.8%입니다. SAM은 모든 학원을 정가로 계산한 값이고, Milestone의 $11M은 여기에 학교·대학 $1M을 더한 금액입니다.`, `TAM is the global private tutoring market, $208.9B by 2030 (CAGR 9.9%). SAM is about 129,000 academies across South Korea, Japan, the US and India × $10,000/year per location = $1.3B. SOM is the 2029 goal of 1,000 academies × $10,000 = $10M, about 0.8% of SAM. SAM counts every academy at list price, and Milestone's $11M adds $1M from schools and colleges.`],
   [`AI 튜터를 API로 팔지 않습니다. 인터페이스(Smart Note · Smart Board)와 묶어 하나의 교육 시스템으로 판매합니다.`, `We don't sell the AI tutor as an API. We bundle it with the interfaces (Smart Note · Smart Board) and sell it as one education system.`],
   [`노트 앱이 웨지. AI 튜터는 이미 붙어 있고 데이터로 다듬는 중. 타깃은 능동적 STEM 학습자 — 항목에 마우스를 올리면 이유가 펼쳐집니다.`, `The note app is the wedge. The AI tutor is already built in and being refined with data. The target is active STEM learners — hover over the question to reveal the reasons.`],
   [`Smart Note는 이미 11개 기능이 출시됐습니다. Smart Board는 기획 단계.`, `Smart Note has already shipped 11 features. Smart Board is in planning.`],
   [`3개년 계획 — 2027년에는 개인 판매를 중단하고 학원 판매에 집중해 학원 100곳, 매출 $1M을 달성합니다. 2028년에는 학원 500곳, 매출 $5M을 달성합니다. 2029년에는 학원 1,000곳을 확보하고 제휴를 통해 학교·대학으로 확장해 10곳과 계약하며, 총매출 $11M을 달성합니다.`, `3-year plan — in 2027 we discontinue individual sales and focus on academies, reaching 100 academies and $1M in revenue. In 2028 we reach 500 academies and $5M. In 2029 we reach 1,000 academies, expand to schools and colleges through partnerships with 10 contracts, and reach $11M in total revenue.`],
   [`학생과 교사가 서로 유저를 데려옵니다. 유저가 모이면 학습 데이터가 쌓이고, 그 데이터로 AI가 학습해 서비스가 좋아집니다 — 그래서 다시 유저가 모입니다.`, `Students and teachers bring each other in. As users join, learning data piles up, and the AI learns from it to improve the service — which brings in more users again.`],
   [`제가 바로 사용자입니다 — 과학고 재학생, 2025년 12월부터 휴학하고 전념. 외부 검증: YC Co-founder Matching 6자리 오퍼, 10시간 만에 데모를 만들어 $6,500 계약. 8년 풀스택, 로우레벨부터 CS 이론·수학까지, 8년 이상 10개 프로젝트를 글로벌 팀으로 운영.`, `I am the user — a science high school student, on leave since December 2025 to go all-in. Outside validation: a six-figure YC Co-founder Matching offer, and a $6,500 contract from a demo built in 10 hours. 8 years full-stack, from low-level to CS theory and math, and 10 projects over 8+ years with global teams.`],
-  [`$300k 프리시드 SAFE, 캡 15%, 런웨이 6개월. 목표는 5,000 MAU와 40% 이상 리텐션.`, `$300k pre-seed SAFE, 15% cap, 6-month runway. Goals: 5,000 MAU and 40%+ retention.`],
+  [`$300k 프리시드 SAFE, 캡 15%, 런웨이 6개월. 6개월 목표는 파일럿 학원 30곳, 5,000 MAU, 40% 이상 리텐션입니다. 파일럿으로 학원 판매를 검증해 2027년 학원 100곳, 매출 $1M으로 이어갑니다.`, `$300k pre-seed SAFE, 15% cap, 6-month runway. 6-month goals: 30 pilot academies, 5,000 MAU and 40%+ retention. The pilots validate academy sales, leading to 100 academies and $1M in revenue in 2027.`],
 
   // chart / diagram descriptions
   [`성장 루프: 학생과 교사가 서로 유저를 데려오고, 유저가 모이면 학습 데이터가 쌓이고, 그 데이터로 AI가 학습해 서비스가 좋아지며, 다시 더 많은 유저가 모입니다`, `Growth loop: students and teachers bring each other in; as users join, learning data piles up; the AI learns from that data and the service improves, which brings in even more users`],
@@ -288,13 +296,12 @@ export const ATTR = [
 ];
 
 export const RAW = [
+  // Market footnote: a tilde reads as "approximately" in English
+  [`</a>~<a`, `</a> to <a`],
+
   // Milestone row labels are plural here but singular on the Growth Loop diagram
   [`color:#5d6485">학생</div>`, `color:#5d6485">Students</div>`],
   [`color:#5d6485">교사</div>`, `color:#5d6485">Teachers</div>`],
-
-  // Market footnote (the linked source names are in TEXT)
-  [`SOM = AI 교육 SAM의 보수적 1.5%, <a`, `SOM = a conservative 1.5% of the AI-education SAM, grounded in <a`],
-  [`</a> 기준.</p>`, `</a>.</p>`],
 
   // Wedge reasons (script copy of the hover card)
   [`title: '상위권이 먼저, 나머지가 따라옵니다'`, `title: 'Top students first — the rest follow'`],
