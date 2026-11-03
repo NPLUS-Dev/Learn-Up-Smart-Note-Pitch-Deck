@@ -244,7 +244,7 @@ export const TEXT = [
   [`YC Co-founder Matching ${B_GREEN}6자리 오퍼</b>`, `YC Co-founder Matching ${B_GREEN}six-figure offer</b>`],
   [`${B_GREEN}10시간</b> 만에 데모 구현 → ${B_GREEN}$6,500</b> 계약 수주`, `Demo built in ${B_GREEN}10 hours</b> → ${B_GREEN}$6,500</b> contract won`],
   [`$2,450 UE5 제안`, `$2,450 UE5 offer`],
-  [`9년차 풀스택 + AI`, `9 years full-stack + AI`],
+  [`9년차 풀스택 + AI`, `8+ years full-stack + AI`],
   [`${B_INK}UE5·C++</b> 게임 → ${B_INK}React·Next</b> 웹 → ${B_INK}Nest·PostgreSQL</b> 서버 → ${B_INK}CI/CD·AWS</b> 인프라를 한 사람이 만들고, ${B_INK}AI — (특히 RL)</b>까지.`, `${B_INK}UE5·C++</b> games → ${B_INK}React·Next</b> web → ${B_INK}Nest·PostgreSQL</b> servers → ${B_INK}CI/CD·AWS</b> infra, built by one person — and now ${B_INK}AI (especially RL)</b>.`],
   [`로우레벨부터 CS 이론·수학까지`, `Low-level to CS theory &amp; math`],
   [`CNN 코드 한 줄을 ${B_INK}메모리 레이아웃·캐시·GPU 텐서 코어</b>까지 읽고, Quake III의 fast inverse square root를 비트 단위로 분해하며 ${B_INK}바나흐 고정점 정리</b>로 반복 정책 평가의 수렴성을 증명합니다.`, `I read a single line of CNN code down to ${B_INK}memory layout, cache, and GPU tensor cores</b>, take Quake III's fast inverse square root apart bit by bit, and prove iterative policy evaluation converges with the ${B_INK}Banach fixed-point theorem</b>.`],
@@ -273,7 +273,7 @@ export const ATTR = [
   [`Smart Note는 이미 11개 기능이 출시됐습니다. Smart Board는 기획 단계.`, `Smart Note has already shipped 11 features. Smart Board is in planning.`],
   [`3개년 계획 — 2027년에는 개인 판매를 중단하고 학원 판매에 집중해 학원 100곳, 매출 $1M을 달성합니다. 2028년에는 학원 500곳, 매출 $5M을 달성합니다. 2029년에는 학원 1,000곳을 확보하고 제휴를 통해 학교·대학으로 확장해 10곳과 계약하며, 총매출 $11M을 달성합니다.`, `3-year plan — in 2027 we discontinue individual sales and focus on academies, reaching 100 academies and $1M in revenue. In 2028 we reach 500 academies and $5M. In 2029 we reach 1,000 academies, expand to schools and colleges through partnerships with 10 contracts, and reach $11M in total revenue.`],
   [`학생과 교사가 서로 유저를 데려옵니다. 유저가 모이면 학습 데이터가 쌓이고, 그 데이터로 AI가 학습해 서비스가 좋아집니다 — 그래서 다시 유저가 모입니다.`, `Students and teachers bring each other in. As users join, learning data piles up, and the AI learns from it to improve the service — which brings in more users again.`],
-  [`제가 바로 사용자입니다 — 과학고 재학생, 2025년 12월부터 휴학하고 전념. 외부 검증: YC Co-founder Matching 6자리 오퍼, 10시간 만에 데모를 만들어 $6,500 계약. 8년 풀스택, 로우레벨부터 CS 이론·수학까지, 8년 이상 10개 프로젝트를 글로벌 팀으로 운영.`, `I am the user — a science high school student, on leave since December 2025 to go all-in. Outside validation: a six-figure YC Co-founder Matching offer, and a $6,500 contract from a demo built in 10 hours. 8 years full-stack, from low-level to CS theory and math, and 10 projects over 8+ years with global teams.`],
+  [`제가 바로 사용자입니다 — 과학고 재학생, 2026년 7월부터 휴학하고 전념. 외부 검증: YC Co-founder Matching 6자리 오퍼, 10시간 만에 데모를 만들어 $6,500 계약. 9년차 풀스택, 로우레벨부터 CS 이론·수학까지, 8년 이상 10개 프로젝트를 글로벌 팀으로 운영.`, `I am the user — a science high school student, on leave since July 2026 to go all-in. Outside validation: a six-figure YC Co-founder Matching offer, and a $6,500 contract from a demo built in 10 hours. 8+ years full-stack, from low-level to CS theory and math, and 10 projects over 8+ years with global teams.`],
   [`$300k 프리시드 SAFE, 캡 15%, 런웨이 6개월. 6개월 목표는 파일럿 학원 30곳, 5,000 MAU, 40% 이상 리텐션입니다. 파일럿으로 학원 판매를 검증해 2027년 학원 100곳, 매출 $1M으로 이어갑니다.`, `$300k pre-seed SAFE, 15% cap, 6-month runway. 6-month goals: 30 pilot academies, 5,000 MAU and 40%+ retention. The pilots validate academy sales, leading to 100 academies and $1M in revenue in 2027.`],
 
   // chart / diagram descriptions
